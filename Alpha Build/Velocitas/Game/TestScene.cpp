@@ -212,41 +212,41 @@ void CTestScene::CreateBlocks()
 
 void CTestScene::CreatePigs()
 {
-	CGameObject* Pig1 = new CBlocks(10);
-	Pig1->m_name = "Pig1";
-	Pig1->m_tag = "Pig";
-	Pig1->m_transform.position = glm::vec3(8.5f, -6.0f, 0.0f);
-	Pig1->m_transform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
-	Pig1->m_transform.scale = glm::vec3(0.25f, 0.25f, 0.25f);
-	this->m_vGameObj.push_back(Pig1);
-	Pig1->GetComponent<CSpriteRender>()->SetSprite("Pig");
-	Pig1->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 0.5f, 0);
-	Pig1->World = this;
-	m_PigCount++;
+	//CGameObject* Pig1 = new CBlocks(10);
+	//Pig1->m_name = "Pig1";
+	//Pig1->m_tag = "Pig";
+	//Pig1->m_transform.position = glm::vec3(8.5f, -6.0f, 0.0f);
+	//Pig1->m_transform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
+	//Pig1->m_transform.scale = glm::vec3(0.25f, 0.25f, 0.25f);
+	//this->m_vGameObj.push_back(Pig1);
+	//Pig1->GetComponent<CSpriteRender>()->SetSprite("Pig");
+	//Pig1->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 0.5f, 0);
+	//Pig1->World = this;
+	//m_PigCount++;
 
-	CGameObject* Pig2 = new CBlocks(10);
-	Pig2->m_name = "Pig2";
-	Pig2->m_tag = "Pig";
-	Pig2->m_transform.position = glm::vec3(7.0, -9.5f, 0.0f);
-	Pig2->m_transform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
-	Pig2->m_transform.scale = glm::vec3(0.25f, 0.25f, 0.25f);
-	this->m_vGameObj.push_back(Pig2);
-	Pig2->GetComponent<CSpriteRender>()->SetSprite("Pig");
-	Pig2->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 0.5f, 0);
-	Pig2->World = this;
-	m_PigCount++;
+	//CGameObject* Pig2 = new CBlocks(10);
+	//Pig2->m_name = "Pig2";
+	//Pig2->m_tag = "Pig";
+	//Pig2->m_transform.position = glm::vec3(7.0, -9.5f, 0.0f);
+	//Pig2->m_transform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
+	//Pig2->m_transform.scale = glm::vec3(0.25f, 0.25f, 0.25f);
+	//this->m_vGameObj.push_back(Pig2);
+	//Pig2->GetComponent<CSpriteRender>()->SetSprite("Pig");
+	//Pig2->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 0.5f, 0);
+	//Pig2->World = this;
+	//m_PigCount++;
 
-	CGameObject* Pig3 = new CBlocks(10);
-	Pig3->m_name = "Pig3";
-	Pig3->m_tag = "Pig";
-	Pig3->m_transform.position = glm::vec3(10.0, -9.5f, 0.0f);
-	Pig3->m_transform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
-	Pig3->m_transform.scale = glm::vec3(0.25f, 0.25f, 0.25f);
-	this->m_vGameObj.push_back(Pig3);
-	Pig3->GetComponent<CSpriteRender>()->SetSprite("Pig");
-	Pig3->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 0.5f, 0);
-	Pig3->World = this;
-	m_PigCount++;
+	//CGameObject* Pig3 = new CBlocks(10);
+	//Pig3->m_name = "Pig3";
+	//Pig3->m_tag = "Pig";
+	//Pig3->m_transform.position = glm::vec3(10.0, -9.5f, 0.0f);
+	//Pig3->m_transform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
+	//Pig3->m_transform.scale = glm::vec3(0.25f, 0.25f, 0.25f);
+	//this->m_vGameObj.push_back(Pig3);
+	//Pig3->GetComponent<CSpriteRender>()->SetSprite("Pig");
+	//Pig3->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 0.5f, 0);
+	//Pig3->World = this;
+	//m_PigCount++;
 
 }
 

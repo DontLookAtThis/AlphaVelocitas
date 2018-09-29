@@ -14,9 +14,7 @@ public:
 	virtual void UpdateScene(float _tick) override;
 
 
-	void CreateBlocks();
-	void CreatePigs();
-	void CreateBirdies();
+	void CreateBlocks(int iBlockID, std::string Name, std::string Tag, std::string SpriteName, Transform Transform, std::string ShapeOfBody, b2BodyType BodyType, bool bCanRotate = false, bool bHasFixture = true, int iFixtureType = 0, float fDensity = 1.0f, float fFriction = 0.3f);
 
 	bool bSlingLoaded;
 	int CurrentBird;

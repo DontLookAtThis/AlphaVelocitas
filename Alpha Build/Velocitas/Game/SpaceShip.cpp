@@ -15,13 +15,14 @@ CSpaceShip::CSpaceShip(int playerID)
 {
 	m_spriteRenderer = CreateComponent<CSpriteRender>();
 	m_rigidBody = CreateComponent<CRigiBody2D>();
-
+	bInputEnabled = true;
 	m_iPlayerID = playerID;
-	bControllerInput = false;
+	bControllerInput = true;
 	m_fCurrentRotation = 0;
 	bHasBeenFired = false;
 	bIsLoaded = false;
 	bIsHeld = false;
+	fMovementSpeed = 3.0f;
 }
 
 CSpaceShip::~CSpaceShip()
@@ -55,6 +56,7 @@ void CSpaceShip::Update(float _tick)
 
 void CSpaceShip::MovementChecks()
 {
+	if (!bInputEnabled) return;
 	bUpPressed = false;
 	bDownPressed = false;
 	bLeftPressed = false;
@@ -75,12 +77,13 @@ void CSpaceShip::MovementChecks()
 	}
 	else
 	{
-		bLeftPressed = (CInput::GetInstance()->Players[m_iPlayerID]->ControllerButtons[DPAD_LEFT] == INPUT_FIRST_PRESS
-			|| CInput::GetInstance()->Players[m_iPlayerID]->ControllerButtons[DPAD_LEFT] == INPUT_HOLD);
-		bRightPressed = (CInput::GetInstance()->Players[m_iPlayerID]->ControllerButtons[DPAD_RIGHT] == INPUT_FIRST_PRESS
-			|| CInput::GetInstance()->Players[m_iPlayerID]->ControllerButtons[DPAD_RIGHT] == INPUT_HOLD);
+		bLeftPressed = (CInput::GetInstance()->Players[m_iPlayerID - 1]->ControllerButtons[DPAD_LEFT] == INPUT_FIRST_PRESS
+			|| CInput::GetInstance()->Players[m_iPlayerID - 1]->ControllerButtons[DPAD_LEFT] == INPUT_HOLD);
+		bRightPressed = (CInput::GetInstance()->Players[m_iPlayerID - 1]->ControllerButtons[DPAD_RIGHT] == INPUT_FIRST_PRESS
+			|| CInput::GetInstance()->Players[m_iPlayerID - 1]->ControllerButtons[DPAD_RIGHT] == INPUT_HOLD);
 
-		if (CInput::GetInstance()->Players[m_iPlayerID]->GetState().Gamepad.bRightTrigger)
+		if (CInput::GetInstance()->Players[m_iPlayerID -1]->ControllerButtons[BOTTOM_FACE_BUTTON] == INPUT_FIRST_PRESS 
+			|| CInput::GetInstance()->Players[m_iPlayerID - 1]->ControllerButtons[BOTTOM_FACE_BUTTON] == INPUT_HOLD)
 		{
 			bUpPressed = true;
 		}
@@ -88,7 +91,8 @@ void CSpaceShip::MovementChecks()
 		{
 			bUpPressed = false;
 		}
-		if (CInput::GetInstance()->Players[m_iPlayerID]->GetState().Gamepad.bLeftTrigger)
+		if (CInput::GetInstance()->Players[m_iPlayerID - 1]->ControllerButtons[RIGHT_FACE_BUTTON] == INPUT_FIRST_PRESS
+			|| CInput::GetInstance()->Players[m_iPlayerID - 1]->ControllerButtons[RIGHT_FACE_BUTTON] == INPUT_HOLD)
 		{
 			bDownPressed = true;
 		}
@@ -132,7 +136,7 @@ void CSpaceShip::Movement()
 		b2Vec2 direction = b2Vec2(0.0f, 1.0f);
 		RotateVecotr(direction, m_fCurrentRotation);
 		direction.Normalize();
-		direction *= (float)up * 3.5f; // 10.0f;
+		direction *= (float)up * fMovementSpeed; // 10.0f;
 		myBody->ApplyForceToCenter(direction, true);
 		this->m_transform.position = glm::vec3(myBody->GetPosition().x, myBody->GetPosition().y, 0.0f);
 		this->m_transform.rotation.z = m_fCurrentRotation;
@@ -156,7 +160,7 @@ void CSpaceShip::Movement(bool bLeft, bool bRight, bool bUp, bool bDown)
 		b2Vec2 direction = b2Vec2(0.0f, 1.0f);
 		RotateVecotr(direction, m_fCurrentRotation);
 		direction.Normalize();
-		direction *= (float)up * 3.5f; // 10.0f;
+		direction *= (float)up * fMovementSpeed; // 10.0f;
 		myBody->ApplyForceToCenter(direction, true);
 		this->m_transform.position = glm::vec3(myBody->GetPosition().x, myBody->GetPosition().y, 0.0f);
 		this->m_transform.rotation.z = m_fCurrentRotation;

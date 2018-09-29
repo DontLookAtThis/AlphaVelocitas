@@ -20,7 +20,7 @@ public:
 
 	bool bSlingLoaded;
 	int CurrentBird;
-	std::vector<CSpaceShip*> m_vBirds;
+	std::vector<CSpaceShip*> m_vPlayers;
 private:
 
 

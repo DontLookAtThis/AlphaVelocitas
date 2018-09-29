@@ -121,7 +121,7 @@ void CRigiBody2D::CreateBody(b2World* _world, b2BodyType BodyType, bool bCanRota
 			{
 				//fixtureDef.filter.categoryBits = 0x0002;
 				//fixtureDef.filter.maskBits = 0x0004;
-				fixtureDef.filter.groupIndex = -2;
+				//fixtureDef.filter.groupIndex = -2;
 			}
 			// Add the shape to the body.
 			m_body->CreateFixture(&fixtureDef);
@@ -249,19 +249,18 @@ bool CRigiBody2D::GetHasFixture() const
 
 void CRigiBody2D::OnCollisionEnter(CRigiBody2D * collidedRigiBody)
 {
-	if (GetOwner())
-	{
-		if (GetOwner()->m_tag == "Block" || GetOwner()->m_tag == "Pig")
-		{
-			if (collidedRigiBody->GetOwner()->m_tag == "Block" || collidedRigiBody->GetOwner()->m_tag == "Pig" || collidedRigiBody->GetOwner()->m_tag == "Player")
-			{
-				float ForceLength = (collidedRigiBody->GetBody()->GetLinearVelocity() + (-(this->GetBody()->GetLinearVelocity()))).Length();
-				ForceLength *= 10;
-				GetOwner()->TakeDamage(ForceLength);
-			}
-		}
-	}
-
+	//if (GetOwner())
+	//{
+	//	if (GetOwner()->m_tag == "Block" || GetOwner()->m_tag == "Pig")
+	//	{
+	//		if (collidedRigiBody->GetOwner()->m_tag == "Block" || collidedRigiBody->GetOwner()->m_tag == "Pig" || collidedRigiBody->GetOwner()->m_tag == "Player")
+	//		{
+	//			float ForceLength = (collidedRigiBody->GetBody()->GetLinearVelocity() + (-(this->GetBody()->GetLinearVelocity()))).Length();
+	//			ForceLength *= 10;
+	//			GetOwner()->TakeDamage(ForceLength);
+	//		}
+	//	}
+	//}
 }
 
 void CRigiBody2D::OnCollisionExit(CRigiBody2D * collidedRigiBody)

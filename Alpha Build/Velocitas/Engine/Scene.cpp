@@ -18,7 +18,7 @@
 //#include "CubeMap.h"
 //#include "TextLabel.h"
 #include "ContactListener.h"
-
+#include "Engine/Time.h"
 CScene::CScene()
 {
 	m_mainCamera = nullptr;
@@ -104,10 +104,8 @@ void CScene::UpdateScene(float _tick)
 	float32 timeStep = 1.0f / 60.0f;
 	int32 velocityIterations = 6;
 	int32 positionIterations = 2;
-	if (_tick == 0)
-	{
-		m_box2DWorld->Step(timeStep, velocityIterations, positionIterations);
-	}
+	std::cout << CTime::GetInstance()->GetDeltaTime() << std::endl;
+	m_box2DWorld->Step(CTime::GetInstance()->GetDeltaTime() , velocityIterations, positionIterations);
 
 	// Delete the object that should be deleted fron last frame
 	for (auto obj : m_vGameObj)

@@ -25,14 +25,14 @@ void CTime::DestroyInstance()
 
 void CTime::Initialize()
 {
-	oldTime = (float)glutGet(GLUT_ELAPSED_TIME);
+	oldTime = (float)glutGet(GLUT_ELAPSED_TIME) / 1000.0f;
 	TickTime = 0.01666666f;
 	deltaTimeTick = 0.0f;
 }
 
 void CTime::Update()
 {
-	newTime = (float)glutGet(GLUT_ELAPSED_TIME);
+	newTime = (float)glutGet(GLUT_ELAPSED_TIME) / 1000.0f;
 	deltaTime = newTime - oldTime;
 
 	oldTime = newTime;

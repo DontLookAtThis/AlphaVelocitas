@@ -91,6 +91,9 @@
     <Filter Include="Game\ContactListener">
       <UniqueIdentifier>{a6d23dc0-d380-4531-9f39-dee6a00467ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Box2D">
+      <UniqueIdentifier>{a18c2cbc-75d5-4c65-a1ee-9663b53a0394}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Engine\Commenting Header.txt">

@@ -12,7 +12,7 @@ class CSpaceShip : public CGameObject
 public:
 	CSpaceShip(int playerID);
 	~CSpaceShip();
-
+	bool bInputEnabled;
 	bool bHasBeenFired;
 	bool bIsLoaded;
 	bool bIsHeld;
@@ -30,6 +30,8 @@ private:
 	void RotateVecotr(b2Vec2& Vector, float fDeg);
 	CRigiBody2D* m_rigidBody;
 
+
+	float fMovementSpeed;
 	bool bUpPressed;
 	bool bDownPressed;
 	bool bLeftPressed;

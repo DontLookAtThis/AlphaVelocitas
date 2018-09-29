@@ -29,7 +29,7 @@ int main(int argc, char **argv)
 	// Create the window
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA | GL_MULTISAMPLE);
-	glutInitWindowPosition(400, 200);
+	glutInitWindowPosition(100, 100);
 
 	glutInitWindowSize(util::SCR_WIDTH, util::SCR_HEIGHT);
 	glutCreateWindow("Velocitas");

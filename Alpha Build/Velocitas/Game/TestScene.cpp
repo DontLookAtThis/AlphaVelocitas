@@ -54,11 +54,12 @@ void CTestScene::ConfigurateScene()
 	Player1->m_tag = "Player";
 	Player1->m_transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
 	this->m_vGameObj.push_back(Player1);
-	this->m_vBirds.push_back(dynamic_cast<CSpaceShip*>(Player1));
+	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player1));
 	Player1->GetComponent<CSpriteRender>()->SetSprite("Triangle");
 	Player1->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
+	Player1->GetComponent<CRigiBody2D>()->GetBody()->GetFixtureList()->SetRestitution(0.3f);
 
-	CGameObject* Player2 = new CSpaceShip(1);
+	/*CGameObject* Player2 = new CSpaceShip(2);
 	Player2->m_name = "Player2";
 	Player2->m_tag = "Player";
 	Player2->m_transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -67,7 +68,7 @@ void CTestScene::ConfigurateScene()
 	Player2->GetComponent<CSpriteRender>()->SetSprite("Triangle");
 	Player2->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
 
-	CGameObject* Player3 = new CSpaceShip(1);
+	CGameObject* Player3 = new CSpaceShip(3);
 	Player3->m_name = "Player3";
 	Player3->m_tag = "Player";
 	Player3->m_transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -76,14 +77,14 @@ void CTestScene::ConfigurateScene()
 	Player3->GetComponent<CSpriteRender>()->SetSprite("Triangle");
 	Player3->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
 
-	CGameObject* Player4 = new CSpaceShip(1);
+	CGameObject* Player4 = new CSpaceShip(4);
 	Player4->m_name = "Player4";
 	Player4->m_tag = "Player";
 	Player4->m_transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
 	this->m_vGameObj.push_back(Player4);
 	this->m_vBirds.push_back(dynamic_cast<CSpaceShip*>(Player4));
 	Player4->GetComponent<CSpriteRender>()->SetSprite("Triangle");
-	Player4->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
+	Player4->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);*/
 
 	//CreateBlocks();
 	//CreatePigs();
@@ -257,7 +258,7 @@ void CTestScene::CreateBirdies()
 	Bird1->m_tag = "Player";
 	Bird1->m_transform.scale = glm::vec3(0.05f, 0.05f, 0.05f);
 	this->m_vGameObj.push_back(Bird1);
-	this->m_vBirds.push_back(dynamic_cast<CSpaceShip*>(Bird1));
+	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Bird1));
 	Bird1->GetComponent<CSpriteRender>()->SetSprite("Birdie");
 	Bird1->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
 
@@ -266,7 +267,7 @@ void CTestScene::CreateBirdies()
 	Bird2->m_tag = "Player";
 	Bird2->m_transform.scale = glm::vec3(0.05f, 0.05f, 0.05f);
 	this->m_vGameObj.push_back(Bird2);
-	this->m_vBirds.push_back(dynamic_cast<CSpaceShip*>(Bird2));
+	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Bird2));
 	Bird2->GetComponent<CSpriteRender>()->SetSprite("Birdie");
 	Bird2->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
 
@@ -275,7 +276,7 @@ void CTestScene::CreateBirdies()
 	Bird3->m_tag = "Player";
 	Bird3->m_transform.scale = glm::vec3(0.05f, 0.05f, 0.05f);
 	this->m_vGameObj.push_back(Bird3);
-	this->m_vBirds.push_back(dynamic_cast<CSpaceShip*>(Bird3));
+	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Bird3));
 	Bird3->GetComponent<CSpriteRender>()->SetSprite("Birdie");
 	Bird3->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
 

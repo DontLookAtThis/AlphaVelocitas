@@ -96,6 +96,9 @@ void CTestScene::ConfigurateScene()
 	Player4->GetComponent<CSpriteRender>()->SetSprite("Triangle");
 	Player4->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);*/
 
+
+
+
 	//CreateBlocks();
 	//CreatePigs();
 	//CreateBirdies();

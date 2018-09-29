@@ -22,6 +22,7 @@
     <Text Include="Engine\Commenting Header.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CheckPoint.h" />
     <ClInclude Include="ContactListener.h" />
     <ClInclude Include="Engine\AssetMgr.h" />
     <ClInclude Include="Engine\Camera.h" />
@@ -48,6 +49,7 @@
     <ClInclude Include="Game\TestScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CheckPoint.cpp" />
     <ClCompile Include="ContactListener.cpp" />
     <ClCompile Include="Engine\AssetMgr.cpp" />
     <ClCompile Include="Engine\Camera.cpp" />

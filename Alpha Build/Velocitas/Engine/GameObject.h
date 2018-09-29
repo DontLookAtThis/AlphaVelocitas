@@ -21,7 +21,7 @@ public:
 	std::string m_name;
 	Transform m_transform;
 	int m_iHealth = 100;
-	CScene* World;
+	CScene* m_Scene;
 protected:
 	
 	bool m_ShouldDestroyed;
@@ -34,6 +34,7 @@ public:
 	* Initialize the object
 	* Call right after the scene initialize
 	*/
+	void SetWorld(CScene* world);
 	virtual void BeginPlay();
 	/*
 	 * Call every frame

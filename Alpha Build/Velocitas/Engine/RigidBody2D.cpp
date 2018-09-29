@@ -32,6 +32,20 @@ void CRigiBody2D::Update(float _tick)
 	{
 		//std::cout << m_body->GetPosition().x << " :: " << m_body->GetPosition().y << std::endl;
 	}
+	if (m_GravityWell)
+	{
+		m_GravityWell->SetTransform(b2Vec2(GetOwner()->m_transform.position.x, GetOwner()->m_transform.position.y) , 0);
+	}
+	if (GetOwner() && m_GravityWell && m_bHasGravityWell)
+	{
+		for (auto it = BodiesColliding.begin(); it != BodiesColliding.end(); it++)
+		{
+			b2Vec2 direction = b2Vec2(m_GravityWell->GetPosition()) - b2Vec2((*it)->GetPosition());
+			direction.Normalize();
+			direction *= m_GravityStrength;
+			(*it)->ApplyForceToCenter(direction, true);
+		}
+	}
 }
 
 void CRigiBody2D::BeginPlay()
@@ -121,7 +135,7 @@ void CRigiBody2D::CreateBody(b2World* _world, b2BodyType BodyType, bool bCanRota
 			{
 				//fixtureDef.filter.categoryBits = 0x0002;
 				//fixtureDef.filter.maskBits = 0x0004;
-				fixtureDef.filter.groupIndex = -2;
+				//fixtureDef.filter.groupIndex = -2;
 			}
 			// Add the shape to the body.
 			m_body->CreateFixture(&fixtureDef);
@@ -198,6 +212,67 @@ void CRigiBody2D::CreateBodyCircle(b2World * _world, b2BodyType BodyType, bool b
 	}
 }
 
+void CRigiBody2D::CreateGravityWell(b2World * _world, float fRadius, bool bHasFixture, float Strength)
+{
+	m_GravityStrength = Strength;
+	m_transform = GetOwner()->m_transform;
+	//m_transform.position = GetOwner()->m_transform.position;
+	// Define the dynamic body. We set its position and call the body factory.
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_staticBody;
+	bodyDef.position.Set(m_transform.position.x, m_transform.position.y);
+	m_GravityWell = _world->CreateBody(&bodyDef);
+	m_GravityWell->SetTransform(bodyDef.position, (m_transform.rotation.z / 180) * b2_pi);
+	//Setting self pointer
+	m_GravityWell->SetUserData(this);
+	// Define another box shape for our dynamic body.
+	b2CircleShape dynamicCircle;
+	dynamicCircle.m_p.Set(0.0f, 0.0f);
+	dynamicCircle.m_radius = (float)(fRadius);
+	fRadius = dynamicCircle.m_radius;
+	if (bHasFixture)
+	{
+		// Define the dynamic body fixture.
+		b2FixtureDef fixtureDef;
+		fixtureDef.shape = &dynamicCircle;
+		fixtureDef.isSensor = true;
+		// Set the box density to be non-zero, so it will be dynamic.
+		fixtureDef.density = 0;
+		// Override the default friction.
+		fixtureDef.friction = 0;
+		//fixtureDef.filter.categoryBits = 0x0002;
+		//fixtureDef.filter.maskBits = 0x0004;
+		//fixtureDef.filter.groupIndex = -2;
+		// Add the shape to the body.
+		m_GravityWell->CreateFixture(&fixtureDef);
+	}
+	else
+	{
+		m_GravityWell->CreateFixture(&dynamicCircle, 0.0f);
+	}
+	m_bHasGravityWell = true;
+}
+
+void CRigiBody2D::DestroyGravityWell()
+{
+	if (GetOwner())
+	{
+		if (GetOwner()->m_Scene)
+		{
+			if (b2World* b2world = GetOwner()->m_Scene->GetWorld())
+			{
+				if(m_GravityWell)
+				{
+					b2world->DestroyBody(m_GravityWell);
+					m_bHasGravityWell = false;
+					m_GravityWell = nullptr;
+				}
+			}
+
+		}
+	}
+}
+
 void CRigiBody2D::SetBodyType(b2BodyType _bodyType)
 {
 	m_bodyType = _bodyType;
@@ -249,23 +324,31 @@ bool CRigiBody2D::GetHasFixture() const
 
 void CRigiBody2D::OnCollisionEnter(CRigiBody2D * collidedRigiBody)
 {
-	if (GetOwner())
+	if (collidedRigiBody->GetBody())
 	{
-		if (GetOwner()->m_tag == "Block" || GetOwner()->m_tag == "Pig")
+		if (collidedRigiBody->GetOwner())
 		{
-			if (collidedRigiBody->GetOwner()->m_tag == "Block" || collidedRigiBody->GetOwner()->m_tag == "Pig" || collidedRigiBody->GetOwner()->m_tag == "Player")
+			if (collidedRigiBody->GetOwner()->m_tag == "Player")
 			{
-				float ForceLength = (collidedRigiBody->GetBody()->GetLinearVelocity() + (-(this->GetBody()->GetLinearVelocity()))).Length();
-				ForceLength *= 10;
-				GetOwner()->TakeDamage(ForceLength);
+				BodiesColliding.push_back(collidedRigiBody->GetBody());
 			}
 		}
 	}
-
 }
 
 void CRigiBody2D::OnCollisionExit(CRigiBody2D * collidedRigiBody)
 {
-
+	if (b2Body* body = collidedRigiBody->GetBody())
+	{
+		for (auto it = BodiesColliding.begin(); it != BodiesColliding.end(); it++)
+		{
+			if (*it == body)
+			{
+				(*it) = nullptr;
+				BodiesColliding.erase(it);
+				return;
+			}
+		}
+	}
 }
 

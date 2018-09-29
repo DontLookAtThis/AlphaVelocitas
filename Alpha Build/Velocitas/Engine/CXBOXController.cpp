@@ -71,7 +71,7 @@ void XBOXController::Update()
 			else if (ControllerButtons[iCurrentButton] != INPUT_HOLD)
 			{
 				ControllerButtons[iCurrentButton] = INPUT_FIRST_PRESS;
-				std::cout << iCurrentButton << " Pressed\n";
+				std::cout << iCurrentButton << " Pressed by: " << _controllerNum << std::endl;
 			}
 		}
 		else

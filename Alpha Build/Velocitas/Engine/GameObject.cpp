@@ -68,7 +68,12 @@ CGameObject::~CGameObject()
 
 }
 
-void CGameObject::BeginPlay() 
+void CGameObject::SetWorld(CScene * world)
+{
+	m_Scene = world;
+}
+
+void CGameObject::BeginPlay()
 {
 	for (auto iter : m_components)
 	{
@@ -94,9 +99,9 @@ void CGameObject::Update(float _tick)
 			else if (CRigiBody2D* body = dynamic_cast<CRigiBody2D*>(it))
 			{
 				body->GetBody()->SetTransform(b2Vec2(0.0f , -1000.0f), 0.0f);
-				if (m_tag == "Pig" && World != nullptr)
+				if (m_tag == "Pig" && m_Scene != nullptr)
 				{
-					World->m_PigCount--;
+					m_Scene->m_PigCount--;
 				}
 			}
 		}

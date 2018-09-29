@@ -48,7 +48,7 @@ void CTestScene::ConfigurateScene()
 
 	Ground->GetComponent<CSpriteRender>()->SetSprite("Ground");
 	Ground->GetComponent<CRigiBody2D>()->CreateBody(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f, 0);
-
+	
 	CGameObject* Player1 = new CSpaceShip(1);
 	Player1->m_name = "Player1";
 	Player1->m_tag = "Player";
@@ -58,6 +58,16 @@ void CTestScene::ConfigurateScene()
 	Player1->GetComponent<CSpriteRender>()->SetSprite("Triangle");
 	Player1->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
 	Player1->GetComponent<CRigiBody2D>()->GetBody()->GetFixtureList()->SetRestitution(0.3f);
+
+	CGameObject* GravityBlock = new CBlocks(3);
+	GravityBlock->m_name = "Block1";
+	GravityBlock->m_tag = "Block";
+	GravityBlock->m_transform.position = glm::vec3(0.0f, 0.0f, 0.0f);
+	GravityBlock->m_transform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
+	GravityBlock->m_transform.scale = glm::vec3(0.25f, 0.5f, 0.5f);
+	this->m_vGameObj.push_back(GravityBlock);
+	GravityBlock->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
+	GravityBlock->GetComponent<CRigiBody2D>()->CreateGravityWell(GetWorld(), 10.0f, true, 2.0f);
 
 	/*CGameObject* Player2 = new CSpaceShip(2);
 	Player2->m_name = "Player2";
@@ -222,7 +232,7 @@ void CTestScene::CreatePigs()
 	this->m_vGameObj.push_back(Pig1);
 	Pig1->GetComponent<CSpriteRender>()->SetSprite("Pig");
 	Pig1->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 0.5f, 0);
-	Pig1->World = this;
+	Pig1->m_Scene = this;
 	m_PigCount++;
 
 	CGameObject* Pig2 = new CBlocks(10);
@@ -234,7 +244,7 @@ void CTestScene::CreatePigs()
 	this->m_vGameObj.push_back(Pig2);
 	Pig2->GetComponent<CSpriteRender>()->SetSprite("Pig");
 	Pig2->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 0.5f, 0);
-	Pig2->World = this;
+	Pig2->m_Scene = this;
 	m_PigCount++;
 
 	CGameObject* Pig3 = new CBlocks(10);
@@ -246,7 +256,7 @@ void CTestScene::CreatePigs()
 	this->m_vGameObj.push_back(Pig3);
 	Pig3->GetComponent<CSpriteRender>()->SetSprite("Pig");
 	Pig3->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 0.5f, 0);
-	Pig3->World = this;
+	Pig3->m_Scene = this;
 	m_PigCount++;
 
 }

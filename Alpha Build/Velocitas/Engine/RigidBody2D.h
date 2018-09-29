@@ -3,7 +3,7 @@
 // Inherited Include
 #include "Component.h"
 #include "Utility.h"
-
+#include <vector>
 class CRigiBody2D : public CComponent
 {
 
@@ -22,7 +22,8 @@ public:
 
 	void CreateBodyCircle(b2World* _world, b2BodyType BodyType,
 		bool bCanRotate = true, bool bHasFixture = true, float Density = 1.0f, float Friction = 0.3f, int fixtureType = 0);
-
+	void CreateGravityWell(b2World* _world, float fRadius, bool bHasFixture = true, float Strength = 0.0f);
+	void DestroyGravityWell();
 	void SetBodyType(b2BodyType _bodyType);
 	b2BodyType GetBodyType() const;
 
@@ -43,12 +44,15 @@ private:
 private:
 
 	b2Body* m_body;
-
+	b2Body* m_GravityWell;
+	std::vector<b2Body*>BodiesColliding;
 	// Properties that can be set either before or after the body being declared
 	b2BodyType m_bodyType;
 	bool m_bCanRotate;
 	bool m_bHasFixture;
 	float m_density;
 	float m_friction;
+	float m_GravityStrength;
 	int m_fixtureType;
+	bool m_bHasGravityWell;
 };

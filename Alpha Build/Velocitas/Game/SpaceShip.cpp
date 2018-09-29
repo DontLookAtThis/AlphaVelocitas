@@ -51,6 +51,8 @@ void CSpaceShip::Update(float _tick)
 		//float mouseposY = -((float)CInput::GetInstance()->MouseY - (float)util::SCR_HEIGHT / 2.0f) / (float)util::PIXELUNIT;
 		//MouseMovement(mouseposX, mouseposY);
 		Movement();
+		this->m_transform.position = glm::vec3(myBody->GetPosition().x, myBody->GetPosition().y, 0.0f);
+		this->m_transform.rotation.z = m_fCurrentRotation;
 	}
 }
 
@@ -136,10 +138,8 @@ void CSpaceShip::Movement()
 		b2Vec2 direction = b2Vec2(0.0f, 1.0f);
 		RotateVecotr(direction, m_fCurrentRotation);
 		direction.Normalize();
-		direction *= (float)up * fMovementSpeed; // 10.0f;
+		direction *= ((float)up * fMovementSpeed); // 10.0f;
 		myBody->ApplyForceToCenter(direction, true);
-		this->m_transform.position = glm::vec3(myBody->GetPosition().x, myBody->GetPosition().y, 0.0f);
-		this->m_transform.rotation.z = m_fCurrentRotation;
 	}
 	return;
 }

@@ -42,10 +42,10 @@
     <ClInclude Include="Engine\TextLoader.h" />
     <ClInclude Include="Engine\Time.h" />
     <ClInclude Include="Engine\Utility.h" />
-    <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="Game\Blocks.h" />
     <ClInclude Include="Game\CheckPoint.h" />
     <ClInclude Include="Game\GameClasses.h" />
+    <ClInclude Include="Game\GameOverScene.h" />
     <ClInclude Include="Game\ItemCube.h" />
     <ClInclude Include="Game\RaceCourse.h" />
     <ClInclude Include="Game\RailgunShot.h" />
@@ -73,9 +73,9 @@
     <ClCompile Include="Engine\TextLabel.cpp" />
     <ClCompile Include="Engine\TextLoader.cpp" />
     <ClCompile Include="Engine\Time.cpp" />
-    <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="Game\Blocks.cpp" />
     <ClCompile Include="Game\CheckPoint.cpp" />
+    <ClCompile Include="Game\GameOverScene.cpp" />
     <ClCompile Include="Game\ItemCube.cpp" />
     <ClCompile Include="Game\RaceCourse.cpp" />
     <ClCompile Include="Game\RailgunShot.cpp" />

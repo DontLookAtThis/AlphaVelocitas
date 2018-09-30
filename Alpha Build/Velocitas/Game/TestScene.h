@@ -34,6 +34,6 @@ public:
 	bool IsGameWon = false;
 	std::vector<CSpaceShip*> m_vPlayers;
 private:
-	int iScore;
+	
 
 };

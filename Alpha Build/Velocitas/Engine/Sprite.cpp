@@ -106,7 +106,7 @@ void CSprite::CreateSprite(const char* _filePath /**  , GLuint _programID */)
 void CSprite::RenderSprite(Transform _transform, CCamera* _camera, GLuint _programID)
 {
 	glUseProgram(_programID);
-
+	glEnable(GL_BLEND);
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_tex);
 	glUniform1i(glGetUniformLocation(_programID, "tex"), 0);
@@ -132,6 +132,7 @@ void CSprite::RenderSprite(Transform _transform, CCamera* _camera, GLuint _progr
 	// Unbind
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindVertexArray(0);
+	glDisable(GL_BLEND);
 	glUseProgram(0);
 }
 

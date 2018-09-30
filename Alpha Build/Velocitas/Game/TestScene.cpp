@@ -44,12 +44,12 @@ void CTestScene::ConfigurateScene()
 	BackGround->GetComponent<CSpriteRender>()->SetSprite("Background");
 	//--------------------------------------------------------------
 
-	CTextLabel* Gameover = new CTextLabel("SpaceFont");
-	Gameover->SetText("FONT WORKS");
-	Gameover->SetPosition(glm::vec2(0.0f, 0.0f));
-	Gameover->SetScale(1.0f);
-	Gameover->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
-	m_vTextList.push_back(Gameover);
+	CTextLabel* Test = new CTextLabel("SpaceFont");
+	Test->SetText("Testing Text");
+	Test->SetPosition(glm::vec2((util::SCR_WIDTH /4) + 100.0f, util::SCR_HEIGHT/2));
+	Test->SetScale(1.0f);
+	Test->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
+	m_vTextList.push_back(Test);
 	//CGameObject* GravityBlock = new CBlocks(3);
 	//GravityBlock->SetWorld(this);
 	//GravityBlock->m_name = "Block1";
@@ -249,6 +249,8 @@ void CTestScene::CheckWin()
 		IsGameWon = true;
 		CSpaceShip* Winner = m_vPlayers.at(0);
 		std::cout << Winner->m_name << " Has Won!" << std::endl;
+		Winner->iScore += 1;
+		std::cout << Winner->iScore << std::endl;
 	}
 }
 

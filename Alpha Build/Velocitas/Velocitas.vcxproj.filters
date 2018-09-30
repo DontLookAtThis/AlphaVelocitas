@@ -191,7 +191,7 @@
     <ClInclude Include="Game\RailgunShot.h">
       <Filter>Game\LevelObjects</Filter>
     </ClInclude>
-    <ClInclude Include="GameOverScene.h">
+    <ClInclude Include="Game\GameOverScene.h">
       <Filter>Game\Scenes\GameOverScene</Filter>
     </ClInclude>
   </ItemGroup>
@@ -277,7 +277,9 @@
     <ClCompile Include="Game\RailgunShot.cpp">
       <Filter>Game\LevelObjects</Filter>
     </ClCompile>
-    <ClCompile Include="GameOverScene.cpp" />
+    <ClCompile Include="Game\GameOverScene.cpp">
+      <Filter>Game\Scenes\GameOverScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Shaders\CubeMap.fs">

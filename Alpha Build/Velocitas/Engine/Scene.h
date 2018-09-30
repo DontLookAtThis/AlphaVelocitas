@@ -55,7 +55,7 @@ public:
 
 
 	int m_PigCount;
-
+	CSpaceShip* Winner;
 
 public:
 

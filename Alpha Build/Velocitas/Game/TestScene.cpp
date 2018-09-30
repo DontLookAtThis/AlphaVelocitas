@@ -41,7 +41,6 @@ void CTestScene::ConfigurateScene()
 	this->m_vGameObj.push_back(BackGround);
 	BackGround->GetComponent<CSpriteRender>()->SetSprite("Background");
 	//--------------------------------------------------------------
-
 	CTextLabel* Test = new CTextLabel("SpaceFont");
 	Test->SetText("Testing Text");
 	Test->SetPosition(glm::vec2((util::SCR_WIDTH /4) + 100.0f, util::SCR_HEIGHT/2));
@@ -129,16 +128,14 @@ void CTestScene::ConfigurateScene()
 		checkPoint_2->GetComponent<CRigiBody2D>()->GetBody()->GetFixtureList()->SetSensor(true);
 	}
 
-
 	LoadAllPlayers();
 	LoadAllBlocks();
-	AddScore();
-
+	LoadUserInterface();
 	/** Create a example text */
 	//CTextLabel* newTextLabel = new CTextLabel("FontName");
 	//m_vTextLabel.push_back(newTextLabel);
 	//newTextLabel->SetText("Whatever text here");
-
+	
 
 }
 
@@ -153,6 +150,7 @@ void CTestScene::UpdateScene(float _tick)
 {
 	__super::UpdateScene(_tick);
 	CheckWin();
+	SetScores();
 }
 
 void CTestScene::LoadAllBlocks()
@@ -209,7 +207,7 @@ void CTestScene::LoadAllBlocks()
 
 void CTestScene::LoadAllPlayers()
 {
-	CGameObject* Player1 = new CSpaceShip(1);
+	Player1 = new CSpaceShip(1);
 	Player1->SetWorld(this);
 	Player1->m_name = "Player1";
 	Player1->m_tag = "Player";
@@ -224,7 +222,7 @@ void CTestScene::LoadAllPlayers()
 	player1RB->CreateGravityWell(GetWorld(), 5.0f, true, 0.5f);
 	player1RB->m_bHasGravityWell = false;
 
-	CGameObject* Player2 = new CSpaceShip(2);
+	Player2 = new CSpaceShip(2);
 	Player2->SetWorld(this);
 	Player2->m_name = "Player2";
 	Player2->m_tag = "Player";
@@ -240,7 +238,7 @@ void CTestScene::LoadAllPlayers()
 	player2RB->m_bHasGravityWell = false;
 	dynamic_cast<CSpaceShip*>(Player2)->bControllerInput = false;
 
-	CGameObject* Player3 = new CSpaceShip(3);
+	Player3 = new CSpaceShip(3);
 	Player3->SetWorld(this);
 	Player3->m_name = "Player3";
 	Player3->m_tag = "Player";
@@ -255,7 +253,7 @@ void CTestScene::LoadAllPlayers()
 	player3RB->CreateGravityWell(GetWorld(), 5.0f, true, 0.5f);
 	player3RB->m_bHasGravityWell = false;
 
-	CGameObject* Player4 = new CSpaceShip(4);
+	Player4 = new CSpaceShip(4);
 	Player4->SetWorld(this);
 	Player4->m_name = "Player4";
 	Player4->m_tag = "Player";
@@ -272,17 +270,80 @@ void CTestScene::LoadAllPlayers()
 
 }
 
+void CTestScene::LoadUserInterface()
+{
+	CTextLabel* Player1UI = new CTextLabel("SpaceFont");
+	Player1UI->SetText("Player 1");
+	Player1UI->SetPosition(glm::vec2(0, util::SCR_HEIGHT - 35.0f));
+	Player1UI->SetScale(0.5f);
+	Player1UI->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
+	m_vTextLabel.push_back(Player1UI);
+
+	CTextLabel* Player2UI = new CTextLabel("SpaceFont");
+	Player2UI->SetText("Player 2");
+	Player2UI->SetPosition(glm::vec2(util::SCR_WIDTH - 210.0f , util::SCR_HEIGHT - 35.0f));
+	Player2UI->SetScale(0.5f);
+	Player2UI->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
+	m_vTextLabel.push_back(Player2UI);
+
+	CTextLabel* Player3UI = new CTextLabel("SpaceFont");
+	Player3UI->SetText("Player 3");
+	Player3UI->SetPosition(glm::vec2(0, 30.0f));
+	Player3UI->SetScale(0.5f);
+	Player3UI->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
+	m_vTextLabel.push_back(Player3UI);
+
+	CTextLabel* Player4UI = new CTextLabel("SpaceFont");
+	Player4UI->SetText("Player 4");
+	Player4UI->SetPosition(glm::vec2(util::SCR_WIDTH - 210.0f, 30.0f));
+	Player4UI->SetScale(0.5f);
+	Player4UI->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
+	m_vTextLabel.push_back(Player4UI);
+
+	//Player 1 score:
+	Player1Score = new CTextLabel("SpaceFont");
+	Player1Score->SetText("Score: ");
+	Player1Score->SetPosition(glm::vec2(0, util::SCR_HEIGHT - 65.0f));
+	Player1Score->SetScale(0.4f);
+	Player1Score->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
+	m_vTextLabel.push_back(Player1Score);
+
+	//Player 2 Score:
+	Player2Score = new CTextLabel("SpaceFont");
+	Player2Score->SetText("Score: ");
+	Player2Score->SetPosition(glm::vec2(util::SCR_WIDTH - 210.0f, util::SCR_HEIGHT - 65.0f));
+	Player2Score->SetScale(0.4f);
+	Player2Score->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
+	m_vTextLabel.push_back(Player2Score);
+
+	//Player 3 Score:
+	Player3Score = new CTextLabel("SpaceFont");
+	Player3Score->SetText("Score: ");
+	Player3Score->SetPosition(glm::vec2(0.0f, 0.0f));
+	Player3Score->SetScale(0.4f);
+	Player3Score->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
+	m_vTextLabel.push_back(Player3Score);
+
+	//Player 4 Score:
+	Player4Score = new CTextLabel("SpaceFont");
+	Player4Score->SetText("Score: ");
+	Player4Score->SetPosition(glm::vec2(util::SCR_WIDTH - 210.0f, 0.0f));
+	Player4Score->SetScale(0.4f);
+	Player4Score->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
+	m_vTextLabel.push_back(Player4Score);
+}
+
 void CTestScene::Reset()
 {
 	if(m_vPlayers.empty())
 	{
 		LoadAllPlayers();
+		dynamic_cast<CSpaceShip*>(Player1)->iScore = 0;
+		dynamic_cast<CSpaceShip*>(Player2)->iScore = 0;
+		dynamic_cast<CSpaceShip*>(Player3)->iScore = 0;
+		dynamic_cast<CSpaceShip*>(Player4)->iScore = 0;
+		
 	}
-}
-
-void CTestScene::AddScore()
-{
-	auto Score = std::make_shared<CTextLabel>("Score:", "Resources/Fonts/Space.TTF", glm::vec2(0, 0));
 }
 
 void CTestScene::CheckWin()
@@ -290,10 +351,39 @@ void CTestScene::CheckWin()
 	if (m_vPlayers.size() == 1)
 	{
 		IsGameWon = true;
-		CSpaceShip* Winner = m_vPlayers.at(0);
+		Winner = m_vPlayers.at(0);
 		std::cout << Winner->m_name << " Has Won!" << std::endl;
-		Winner->iScore += 1;
-		std::cout << Winner->iScore << std::endl;
+		
+		if (Winner == Player1)
+		{
+			Winner->iScore++;
+			Player1Score->SetText("Score: " + std::to_string(dynamic_cast<CSpaceShip*>(Player1)->iScore));
+			Reset();
+		}
+		else if (Winner == Player2)
+		{
+			Winner->iScore++;
+			Player2Score->SetText("Score: " + std::to_string(dynamic_cast<CSpaceShip*>(Player2)->iScore));
+			Reset();
+		}
+		else if (Winner == Player3)
+		{
+			Winner->iScore++;
+			Player3Score->SetText("Score: " + std::to_string(dynamic_cast<CSpaceShip*>(Player3)->iScore));
+			Reset();
+		}
+		else if (Winner == Player4)
+		{
+			Winner->iScore++;
+			Player4Score->SetText("Score: " + std::to_string(dynamic_cast<CSpaceShip*>(Player4)->iScore));
+			Reset();
+		}
+
+		if (Winner->iScore == 3)
+		{
+			CSceneMgr::GetInstance()->LoadScene("GameOver Scene");
+		}
+		//std::cout << Winner->iScore << std::endl;
 	}
 }
 

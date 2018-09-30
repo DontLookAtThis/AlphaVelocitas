@@ -10,8 +10,8 @@ CSpriteRender::CSpriteRender()
 {
 	m_sprite = CAssetMgr::GetInstance()->GetSprite("DefaultSprite");
 	m_programID = CAssetMgr::GetInstance()->GetProgramID("DefaultSpriteProgram");
-	float xMultiplier = 1.0f;
-	float yMultiplier = 1.0f;
+	 xMultiplier = 1.0f;
+	 yMultiplier = 1.0f;
 }
 
 CSpriteRender::~CSpriteRender() {}

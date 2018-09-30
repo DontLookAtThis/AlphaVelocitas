@@ -2,6 +2,7 @@
 #include "ItemCube.h"
 #include "SpaceShip.h"
 #include "Engine/Time.h"
+#include "Engine/Scene.h"
 
 CGrapplingHook::CGrapplingHook(b2Vec2 _Direction, CGameObject* User)
 {

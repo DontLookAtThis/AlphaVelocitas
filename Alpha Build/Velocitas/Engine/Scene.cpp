@@ -7,6 +7,7 @@
 #include "RigidBody2D.h"
 #include "Debug.h"
 #include "Camera.h"
+#include "TextLabel.h"
 //#include "Player.h"
 //#include "PowerUps.h"
 //#include "AssetMgr.h"
@@ -66,24 +67,26 @@ void CScene::BeginPlay()
 void CScene::RenderScene()
 {
 	//m_cCubeMap->Render(m_MainCamera);
-
+	
 	if (!m_vGameObj.empty())
 	{
 		for (CGameObject* gameObject : m_vGameObj)
 		{
 			// GameObject.render()
-
+			
 			if (CSpriteRender* spriteRenderer
 				= gameObject->GetComponent<CSpriteRender>())
 			{
 				spriteRenderer->Render(m_mainCamera);
-				for (auto it : m_mTextList)
-				{
-					it.second->RenderTextLabel();
-				}
+			
 				//continue;
 			}
 		}
+	}
+	
+	for (CTextLabel* Text : m_vTextList)
+	{
+		Text->RenderTextLabel();
 	}
 	
 }

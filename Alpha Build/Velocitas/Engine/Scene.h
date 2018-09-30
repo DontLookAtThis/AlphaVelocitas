@@ -3,13 +3,14 @@
 
 // Global Include
 #include "Utility.h"
-#include "TextLabel.h"
+
 // Forward Declaration
 class CGameObject;
 class CCamera;
 class CCubeMap;
 class CTextLabel;
 class CContactListener;
+
 
 class CScene
 {
@@ -31,9 +32,8 @@ public:
 	void DestroyObject(CGameObject* _gameobj);
 
 	b2World* GetWorld() const;
-
+	std::vector<CTextLabel*> m_vTextList;
 	std::vector<CGameObject*> GetObjectVec() const;
-	std::map<std::string, std::shared_ptr<CTextLabel>> m_mTextList;
 	int m_PigCount;
 public:
 

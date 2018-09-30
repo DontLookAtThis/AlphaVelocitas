@@ -42,10 +42,10 @@ public:
 	void SetPosition(glm::vec2 _position);
 	void SetColor(glm::vec3 _color);
 	void SetScale(GLfloat _scale);
-
+	
 private:
+	
 	Text* m_textObj;
-
 	std::string m_text;
 	glm::vec2 m_position;
 	GLfloat m_scale;

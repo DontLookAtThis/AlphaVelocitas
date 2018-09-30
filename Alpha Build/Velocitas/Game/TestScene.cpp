@@ -13,7 +13,7 @@
 #include "Engine/SceneMgr.h"
 #include "Game/SpaceShip.h"
 #include "Game/ItemCube.h"
-
+#include "Engine/TextLabel.h"
 //Includes
 #include <memory>
 
@@ -44,6 +44,12 @@ void CTestScene::ConfigurateScene()
 	BackGround->GetComponent<CSpriteRender>()->SetSprite("Background");
 	//--------------------------------------------------------------
 
+	CTextLabel* Gameover = new CTextLabel("SpaceFont");
+	Gameover->SetText("FONT WORKS");
+	Gameover->SetPosition(glm::vec2(0.0f, 0.0f));
+	Gameover->SetScale(1.0f);
+	Gameover->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
+	m_vTextList.push_back(Gameover);
 	//CGameObject* GravityBlock = new CBlocks(3);
 	//GravityBlock->SetWorld(this);
 	//GravityBlock->m_name = "Block1";
@@ -254,7 +260,7 @@ void CTestScene::CreateBlocks(int iBlockID, std::string Name,  std::string Sprit
 	Blocks->m_name = Name;
 	Blocks->m_tag = Tag;
 	Blocks->m_transform.position = Transform.position;
-	Blocks->m_transform.rotation.x = Transform.rotation.x ;
+	Blocks->m_transform.rotation.x = Transform.rotation.x;
 	Blocks->m_transform.rotation.y = Transform.rotation.y;
 	Blocks->m_transform.rotation.z = Transform.rotation.z;
 	Blocks->m_transform.scale = Transform.scale;

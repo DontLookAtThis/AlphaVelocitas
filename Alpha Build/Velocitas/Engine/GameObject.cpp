@@ -129,6 +129,14 @@ void CGameObject::TakeDamage(int _damage)
 	m_iHealth -= _damage;
 }
 
+void CGameObject::OnCollisionEnter(CGameObject * CollidedObject)
+{
+}
+
+void CGameObject::OnColliisionExit(CGameObject * CollidedObject)
+{
+}
+
 bool CGameObject::ShouldDestroyed() const
 {
 	return m_ShouldDestroyed;

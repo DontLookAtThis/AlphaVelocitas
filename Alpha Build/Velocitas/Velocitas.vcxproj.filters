@@ -94,6 +94,9 @@
     <Filter Include="Game\CheckPoint">
       <UniqueIdentifier>{ba2d7da9-e78f-40db-a168-51ec0c29e680}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\LevelObjects\ItemObjects">
+      <UniqueIdentifier>{ac966c1d-91c0-4617-95b6-93a60f31b307}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Engine\Commenting Header.txt">
@@ -176,6 +179,12 @@
     <ClInclude Include="CheckPoint.h">
       <Filter>Game\CheckPoint</Filter>
     </ClInclude>
+    <ClInclude Include="Game\ItemCube.h">
+      <Filter>Game\LevelObjects\ItemObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\RailgunShot.h">
+      <Filter>Game\LevelObjects\ItemObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Camera.cpp">
@@ -249,6 +258,12 @@
     </ClCompile>
     <ClCompile Include="CheckPoint.cpp">
       <Filter>Game\CheckPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\ItemCube.cpp">
+      <Filter>Game\LevelObjects\ItemObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\RailgunShot.cpp">
+      <Filter>Game\LevelObjects\ItemObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

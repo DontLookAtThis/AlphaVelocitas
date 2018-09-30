@@ -10,7 +10,8 @@
 #include "Engine/Input.h"
 #include "Engine/Utility.h"
 #include "Engine/Camera.h"
-
+#include "Engine/Time.h"
+#include "RailgunShot.h"
 CSpaceShip::CSpaceShip(int playerID)
 {
 	m_spriteRenderer = CreateComponent<CSpriteRender>();
@@ -23,6 +24,7 @@ CSpaceShip::CSpaceShip(int playerID)
 	bIsLoaded = false;
 	bIsHeld = false;
 	fMovementSpeed = 3.0f;
+	m_fInputReEnabletime = 3.0f;
 }
 
 CSpaceShip::~CSpaceShip()
@@ -43,17 +45,22 @@ void CSpaceShip::Update(float _tick)
 	__super::Update(_tick);
 
 	//CInput::GetInstance()->g_cKeyState[]
-	b2Body* myBody = Get2DBody()->GetBody();
 	MovementChecks();
+	b2Body* myBody = Get2DBody()->GetBody();
 	if (myBody)
 	{
-		//float mouseposX = ((float)CInput::GetInstance()->MouseX - (float)util::SCR_WIDTH / 2.0f) / (float)util::PIXELUNIT;
-		//float mouseposY = -((float)CInput::GetInstance()->MouseY - (float)util::SCR_HEIGHT / 2.0f) / (float)util::PIXELUNIT;
-		//MouseMovement(mouseposX, mouseposY);
 		Movement();
-		this->m_transform.position = glm::vec3(myBody->GetPosition().x, myBody->GetPosition().y, 0.0f);
-		this->m_transform.rotation.z = m_fCurrentRotation;
 	}
+	if (!bInputEnabled)
+	{ 
+		m_fInputReEnabletime -= CTime::GetInstance()->GetDeltaTime();
+	}
+	if (m_fInputReEnabletime <= 0)
+	{
+		m_fInputReEnabletime = 3.0f;
+		bInputEnabled = true;
+	}
+	UseItem();
 }
 
 void CSpaceShip::MovementChecks()
@@ -68,14 +75,16 @@ void CSpaceShip::MovementChecks()
 	glm::vec2 LeftThumbStick = { CInput::GetInstance()->Players[m_iPlayerID - 1]->GetState().Gamepad.sThumbLX , CInput::GetInstance()->Players[m_iPlayerID - 1]->GetState().Gamepad.sThumbLY };
 	if (!bControllerInput)
 	{
-		bLeftPressed = m_iPlayerID == 1 && (CInput::GetInstance()->g_cKeyState[(unsigned char)'a'] == INPUT_HOLD ||
+		bLeftPressed = m_iPlayerID == 2 && (CInput::GetInstance()->g_cKeyState[(unsigned char)'a'] == INPUT_HOLD ||
 			CInput::GetInstance()->g_cKeyState[(unsigned char)'a'] == INPUT_FIRST_PRESS);
-		bRightPressed = m_iPlayerID == 1 && (CInput::GetInstance()->g_cKeyState[(unsigned char)'d'] == INPUT_HOLD ||
+		bRightPressed = m_iPlayerID == 2 && (CInput::GetInstance()->g_cKeyState[(unsigned char)'d'] == INPUT_HOLD ||
 			CInput::GetInstance()->g_cKeyState[(unsigned char)'d'] == INPUT_FIRST_PRESS);
-		bUpPressed = m_iPlayerID == 1 && (CInput::GetInstance()->g_cKeyState[(unsigned char)'w'] == INPUT_HOLD ||
+		bUpPressed = m_iPlayerID == 2 && (CInput::GetInstance()->g_cKeyState[(unsigned char)'w'] == INPUT_HOLD ||
 			CInput::GetInstance()->g_cKeyState[(unsigned char)'w'] == INPUT_FIRST_PRESS);
-		bDownPressed = m_iPlayerID == 1 && (CInput::GetInstance()->g_cKeyState[(unsigned char)'s'] == INPUT_HOLD ||
+		bDownPressed = m_iPlayerID == 2 && (CInput::GetInstance()->g_cKeyState[(unsigned char)'s'] == INPUT_HOLD ||
 			CInput::GetInstance()->g_cKeyState[(unsigned char)'s'] == INPUT_FIRST_PRESS);
+		bFirePressed = m_iPlayerID == 2 && (CInput::GetInstance()->g_cKeyState[(unsigned char)'j'] == INPUT_HOLD ||
+			CInput::GetInstance()->g_cKeyState[(unsigned char)'j'] == INPUT_FIRST_PRESS);
 	}
 	else
 	{
@@ -101,6 +110,15 @@ void CSpaceShip::MovementChecks()
 		else
 		{
 			bDownPressed = false;
+		}
+		if (CInput::GetInstance()->Players[m_iPlayerID - 1]->ControllerButtons[LEFT_FACE_BUTTON] == INPUT_FIRST_PRESS
+			|| CInput::GetInstance()->Players[m_iPlayerID - 1]->ControllerButtons[LEFT_FACE_BUTTON] == INPUT_HOLD)
+		{
+			bFirePressed = true;
+		}
+		else
+		{
+			bFirePressed = false;
 		}
 	}
 }
@@ -135,10 +153,11 @@ void CSpaceShip::Movement()
 	if (myBody)
 	{
 		myBody->SetTransform(myBody->GetPosition(), (m_fCurrentRotation / 180 * b2_pi));
-		b2Vec2 direction = b2Vec2(0.0f, 1.0f);
-		RotateVecotr(direction, m_fCurrentRotation);
-		direction.Normalize();
-		direction *= ((float)up * fMovementSpeed); // 10.0f;
+		m_FacingDirection = b2Vec2(0.0f, 1.0f);
+		RotateVecotr(m_FacingDirection, m_fCurrentRotation);
+		m_FacingDirection.Normalize();
+		b2Vec2 direction = m_FacingDirection;
+		direction *= (float)up * fMovementSpeed; // 10.0f;
 		myBody->ApplyForceToCenter(direction, true);
 	}
 	return;
@@ -157,13 +176,12 @@ void CSpaceShip::Movement(bool bLeft, bool bRight, bool bUp, bool bDown)
 	if (myBody)
 	{
 		myBody->SetTransform(myBody->GetPosition(), (m_fCurrentRotation / 180 * b2_pi));
-		b2Vec2 direction = b2Vec2(0.0f, 1.0f);
-		RotateVecotr(direction, m_fCurrentRotation);
-		direction.Normalize();
+		m_FacingDirection = b2Vec2(0.0f, 1.0f);
+		RotateVecotr(m_FacingDirection, m_fCurrentRotation);
+		m_FacingDirection.Normalize();
+		b2Vec2 direction = m_FacingDirection;
 		direction *= (float)up * fMovementSpeed; // 10.0f;
 		myBody->ApplyForceToCenter(direction, true);
-		this->m_transform.position = glm::vec3(myBody->GetPosition().x, myBody->GetPosition().y, 0.0f);
-		this->m_transform.rotation.z = m_fCurrentRotation;
 	}
 	return;
 }
@@ -237,4 +255,26 @@ void CSpaceShip::RotateVecotr(b2Vec2 & Vector, float fDeg)
 	float py = Vector.x * sinf(fDeg / 180 * b2_pi) + Vector.y * cosf(fDeg / 180 * b2_pi);
 	Vector.x = px;
 	Vector.y = py;
+}
+
+void CSpaceShip::UseItem()
+{
+	if (bFirePressed)
+	{
+		switch (CurrentItem)
+		{
+		case ITEM_NONE:
+			break;
+		case ITEM_RAILGUN:
+			CurrentItem = ITEM_NONE;
+			m_Scene->Instantiate(new CRailgunShot(m_FacingDirection, this));
+			break;
+		case ITEM_GRAVITYWELL:
+			CurrentItem = ITEM_NONE;
+			break;
+		case ITEM_GRAPPLINGHOOK:
+			CurrentItem = ITEM_NONE;
+			break;
+		}
+	}
 }

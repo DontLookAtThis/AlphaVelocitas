@@ -64,6 +64,10 @@ public:
 	void SetActive(bool);
 	void TakeDamage(int _damage);
 
+	virtual void OnCollisionEnter(CGameObject * CollidedObject);
+	virtual void OnColliisionExit(CGameObject * CollidedObject);
+
+
 protected:
 	
 	/**

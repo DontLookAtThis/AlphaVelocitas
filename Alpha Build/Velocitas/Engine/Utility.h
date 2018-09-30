@@ -78,6 +78,14 @@ enum InputState
 	INPUT_HOLD,				// Key is held Down 
 };
 
+enum ItemState
+{
+	ITEM_NONE,
+	ITEM_RAILGUN,
+	ITEM_GRAVITYWELL,
+	ITEM_GRAPPLINGHOOK,
+};
+
 enum InputMouse 
 { 
 	MOUSE_LEFT, 

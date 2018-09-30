@@ -12,7 +12,7 @@
 #include "ContactListener.h"
 #include "Engine/SceneMgr.h"
 #include "Game/SpaceShip.h"
-
+#include "Game/ItemCube.h"
 void CTestScene::ConfigurateScene()
 {
 	__super::ConfigurateScene();
@@ -31,6 +31,7 @@ void CTestScene::ConfigurateScene()
 
 	//BACKGROUND----------------------------------------------------
 	CGameObject* BackGround = new CBlocks(1);
+	BackGround->SetWorld(this);
 	BackGround->m_name = "BackGround";
 	BackGround->m_tag = "BackGround";
 	BackGround->m_transform.position = glm::vec3(0.0f, 0.0f, -1.0f);
@@ -40,68 +41,37 @@ void CTestScene::ConfigurateScene()
 	//--------------------------------------------------------------
 
 	CGameObject* Ground = new CBlocks(2);
+	Ground->SetWorld(this);
 	Ground->m_name = "Ground";
 	Ground->m_tag = "Ground";
 	Ground->m_transform.position = glm::vec3(0.0f, -11.0f, 0.0f);
 	Ground->m_transform.scale = glm::vec3(25.0f, 1.0f, 1.0f);
 	this->m_vGameObj.push_back(Ground);
-
 	Ground->GetComponent<CSpriteRender>()->SetSprite("Ground");
 	Ground->GetComponent<CRigiBody2D>()->CreateBody(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f, 0);
-	
-	CGameObject* Player1 = new CSpaceShip(1);
-	Player1->m_name = "Player1";
-	Player1->m_tag = "Player";
-	Player1->m_transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
-	this->m_vGameObj.push_back(Player1);
-	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player1));
-	Player1->GetComponent<CSpriteRender>()->SetSprite("Triangle");
-	Player1->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
-	Player1->GetComponent<CRigiBody2D>()->GetBody()->GetFixtureList()->SetRestitution(0.3f);
 
 	CGameObject* GravityBlock = new CBlocks(3);
+	GravityBlock->SetWorld(this);
 	GravityBlock->m_name = "Block1";
 	GravityBlock->m_tag = "Block";
 	GravityBlock->m_transform.position = glm::vec3(0.0f, 0.0f, 0.0f);
 	GravityBlock->m_transform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
-	GravityBlock->m_transform.scale = glm::vec3(0.25f, 0.5f, 0.5f);
+	GravityBlock->m_transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
 	this->m_vGameObj.push_back(GravityBlock);
-	GravityBlock->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
+	GravityBlock->GetComponent<CSpriteRender>()->SetSprite("Block");
 	GravityBlock->GetComponent<CRigiBody2D>()->CreateGravityWell(GetWorld(), 10.0f, true, 2.0f);
 
-	CGameObject* Player2 = new CSpaceShip(2);
-	Player2->m_name = "Player2";
-	Player2->m_tag = "Player";
-	Player2->m_transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
-	this->m_vGameObj.push_back(Player2);
-	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player2));
-	Player2->GetComponent<CSpriteRender>()->SetSprite("Triangle");
-	Player2->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
-
-	CGameObject* Player3 = new CSpaceShip(3);
-	Player3->m_name = "Player3";
-	Player3->m_tag = "Player";
-	Player3->m_transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
-	this->m_vGameObj.push_back(Player3);
-	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player3));
-	Player3->GetComponent<CSpriteRender>()->SetSprite("Triangle");
-	Player3->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
-
-	CGameObject* Player4 = new CSpaceShip(4);
-	Player4->m_name = "Player4";
-	Player4->m_tag = "Player";
-	Player4->m_transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
-	this->m_vGameObj.push_back(Player4);
-	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player4));
-	Player4->GetComponent<CSpriteRender>()->SetSprite("Triangle");
-	Player4->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
-
-
-
-
-	//CreateBlocks();
-	//CreatePigs();
-	//CreateBirdies();
+	CGameObject* ItemCube = new CItemCubes(ITEM_RAILGUN);
+	ItemCube->SetWorld(this);
+	ItemCube->m_name = "ItemCube1";
+	ItemCube->m_tag = "ItemCube";
+	ItemCube->m_transform.position = glm::vec3(10.0f, 0.0f, 0.0f);
+	ItemCube->m_transform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
+	ItemCube->m_transform.scale = glm::vec3(0.5f, 0.5f, 0.5f);
+	this->m_vGameObj.push_back(ItemCube);
+	ItemCube->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
+	ItemCube->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
+	CreatePlayers();
 }
 
 void CTestScene::BeginPlay()
@@ -301,4 +271,50 @@ void CTestScene::CreateBirdies()
 	this->m_vGameObj.push_back(Sling);
 	Sling->GetComponent<CSpriteRender>()->SetSprite("Sling");
 	Sling->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f, 1);
+}
+
+void CTestScene::CreatePlayers()
+{
+
+	CGameObject* Player1 = new CSpaceShip(1);
+	Player1->SetWorld(this);
+	Player1->m_name = "Player1";
+	Player1->m_tag = "Player";
+	Player1->m_transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
+	this->m_vGameObj.push_back(Player1);
+	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player1));
+	Player1->GetComponent<CSpriteRender>()->SetSprite("Triangle");
+	Player1->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
+	Player1->GetComponent<CRigiBody2D>()->GetBody()->GetFixtureList()->SetRestitution(0.3f);
+
+	CGameObject* Player2 = new CSpaceShip(2);
+	Player2->SetWorld(this);
+	Player2->m_name = "Player2";
+	Player2->m_tag = "Player";
+	Player2->m_transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
+	this->m_vGameObj.push_back(Player2);
+	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player2));
+	Player2->GetComponent<CSpriteRender>()->SetSprite("Triangle");
+	Player2->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
+	dynamic_cast<CSpaceShip*>(Player2)->bControllerInput = false;
+
+	CGameObject* Player3 = new CSpaceShip(3);
+	Player3->SetWorld(this);
+	Player3->m_name = "Player3";
+	Player3->m_tag = "Player";
+	Player3->m_transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
+	this->m_vGameObj.push_back(Player3);
+	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player3));
+	Player3->GetComponent<CSpriteRender>()->SetSprite("Triangle");
+	Player3->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
+
+	CGameObject* Player4 = new CSpaceShip(4);
+	Player4->SetWorld(this);
+	Player4->m_name = "Player4";
+	Player4->m_tag = "Player";
+	Player4->m_transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
+	this->m_vGameObj.push_back(Player4);
+	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player4));
+	Player4->GetComponent<CSpriteRender>()->SetSprite("Triangle");
+	Player4->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
 }

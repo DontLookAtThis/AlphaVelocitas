@@ -15,7 +15,10 @@ public:
 	bool bInputEnabled;
 	bool bHasBeenFired;
 	bool bIsLoaded;
-	bool bIsHeld;
+	bool bIsHeld;	
+	bool bControllerInput;
+	int CurrentItem;
+
 
 	virtual void BeginPlay() override;
 	virtual void Update(float _tick) override;
@@ -23,21 +26,25 @@ public:
 	void SetIsController(bool _bIsController);
 	CRigiBody2D* Get2DBody();
 	CSpriteRender* m_spriteRenderer;
+
 private:
 	void Movement();
 	void Movement(bool bLeft, bool bRight, bool bUp, bool bDown);
 	void MouseMovement(float MouseX, float MouseY);
 	void RotateVecotr(b2Vec2& Vector, float fDeg);
+	void UseItem();
 	CRigiBody2D* m_rigidBody;
-
+	b2Vec2 m_FacingDirection;
 
 	float fMovementSpeed;
 	bool bUpPressed;
 	bool bDownPressed;
 	bool bLeftPressed;
 	bool bRightPressed;
+	bool bFirePressed;
 	int m_iPlayerID;
-	bool bControllerInput;
+	float m_fInputReEnabletime;
 	float m_fCurrentRotation;
+
 };
 

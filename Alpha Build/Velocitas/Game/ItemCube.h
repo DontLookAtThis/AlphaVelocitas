@@ -12,19 +12,22 @@
 class CSpriteRender;
 class CRigiBody2D;
 
-class CBlocks : public CGameObject
+class CItemCubes : public CGameObject
 {
 public:
-	CBlocks(int iBlockID);
-	~CBlocks();
+	CItemCubes(int ItemType);
+	~CItemCubes();
 	virtual void BeginPlay() override;
 	virtual void Update(float _tick) override;
 	CRigiBody2D* Get2DBody();
 	CSpriteRender* m_spriteRenderer;
 
+	virtual void OnCollisionEnter(CGameObject * CollidedObject) override;
+	virtual void OnColliisionExit(CGameObject * CollidedObject) override;
+
 private:
 	CRigiBody2D * m_rigidBody;
-
-	int m_iBlockID;
-	
+	int m_ItemType;
+	bool m_IsTaken;
+	float ResetTimer;
 };

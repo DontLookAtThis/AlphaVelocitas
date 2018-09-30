@@ -19,7 +19,8 @@ public:
 	
 	void CreateBody(b2World* _world, b2BodyType BodyType,
 		bool bCanRotate = true, bool bHasFixture = true, float Density = 1.0f, float Friction = 0.3f, int fixtureType = 0);
-
+	void CreateSensorCube(b2World* _world, b2BodyType BodyType,
+		bool bCanRotate = true, bool bHasFixture = true, float Density = 1.0f, float Friction = 0.3f);
 	void CreateBodyCircle(b2World* _world, b2BodyType BodyType,
 		bool bCanRotate = true, bool bHasFixture = true, float Density = 1.0f, float Friction = 0.3f, int fixtureType = 0);
 	void CreateGravityWell(b2World* _world, float fRadius, bool bHasFixture = true, float Strength = 0.0f);

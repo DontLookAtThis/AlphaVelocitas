@@ -14,6 +14,8 @@ public:
 	CRaceCourse();
 	virtual ~CRaceCourse();
 
+	void NextCheckPoint(CGameObject* _player, CCheckPoint* _currCheckPoint);
+
 
 private:
 

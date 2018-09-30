@@ -5,6 +5,7 @@
 
 // Forward Declare
 class CSprite;
+class Text;
 
 
 class CAssetMgr
@@ -37,7 +38,7 @@ public:
 
 	CSprite* GetSprite(std::string _name) const;
 	GLuint GetProgramID(std::string _name) const;
-
+	Text* GetFont(std::string _name) const;
 
 private:
 
@@ -45,6 +46,7 @@ private:
 
 	void CreateSprite(std::string _name, const char* _pathName);
 
+	void CreateFont(std::string _name, const char* _pathName);
 
 private:
 	/** Map collection of sprites with a string name */
@@ -52,6 +54,8 @@ private:
 
 	/** Map collection of programs with a string name */
 	std::map<std::string, GLuint> m_programMap;
+
+	std::map<std::string, Text*> m_fontMap;
 
 };
 

@@ -1,6 +1,6 @@
 
 // This Include
-#include "CheckPoint.h"
+#include "GameClasses.h"
 
 // Engine Include
 #include "Engine/SceneMgr.h"
@@ -38,8 +38,22 @@ void CCheckPoint::Update(float _tick)
 
 }
 
+void CCheckPoint::PassCheckPoint(CGameObject* _player)
+{
+	m_raceCourse->NextCheckPoint(_player, this);
+}
+
 void CCheckPoint::AddPlayer(CGameObject* _player)
 {
+	// Check if the player is already been added
+	for (auto iter = m_playerVec.begin(); iter != m_playerVec.end(); ++iter)
+	{
+		if (*iter == _player)
+		{
+			return;
+		}
+	}
+	// Add the player into the vector
 	m_playerVec.push_back(_player);
 }
 

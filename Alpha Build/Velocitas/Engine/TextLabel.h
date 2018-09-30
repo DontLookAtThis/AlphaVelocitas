@@ -32,8 +32,8 @@ class Text;
 class CTextLabel
 {
 public:
-	CTextLabel(const char* _fontFamily);
-	CTextLabel(const char* _fontFamily, std::string _text, glm::vec2 _position);
+	CTextLabel(std::string _fontFamily);
+	CTextLabel(std::string _fontFamily, std::string _text, glm::vec2 _position);
 	~CTextLabel();
 
 	void RenderTextLabel();

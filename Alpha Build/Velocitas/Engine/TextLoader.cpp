@@ -2,7 +2,7 @@
 #include "TextLoader.h"
 
 // Local Include
-//#include "AssetMgr.h"
+#include "AssetMgr.h"
 #include "Utility.h"
 
 Text::Text(std::string font) :
@@ -10,7 +10,7 @@ Text::Text(std::string font) :
 	text(""),
 	scale(1.0f)
 {
-	//m_Program = CAssetMgr::GetInstance()->GetProgramID("Text");
+	m_Program = CAssetMgr::GetInstance()->GetProgramID("DefaultTextPrograrm");
 
 	glm::mat4 proj = glm::ortho(0.0f, (GLfloat)util::SCR_WIDTH, 0.0f, (GLfloat)util::SCR_HEIGHT);
 	glUseProgram(m_Program);

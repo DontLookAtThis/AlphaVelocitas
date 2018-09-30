@@ -176,17 +176,11 @@
     <ClInclude Include="ContactListener.h">
       <Filter>Game\ContactListener</Filter>
     </ClInclude>
-    <ClInclude Include="CheckPoint.h">
+    <ClInclude Include="Game\CheckPoint.h">
       <Filter>Game\CheckPoint</Filter>
     </ClInclude>
-    <ClInclude Include="RaceCourse.h">
+    <ClInclude Include="Game\RaceCourse.h">
       <Filter>Game\RaceCourse</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\ItemCube.h">
-      <Filter>Game\LevelObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\RailgunShot.h">
-      <Filter>Game\LevelObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -259,15 +253,10 @@
     <ClCompile Include="ContactListener.cpp">
       <Filter>Game\ContactListener</Filter>
     </ClCompile>
-    <ClCompile Include="CheckPoint.cpp">
+    <ClCompile Include="Game\CheckPoint.cpp">
       <Filter>Game\CheckPoint</Filter>
     </ClCompile>
-    <ClCompile Include="Game\ItemCube.cpp">
-      <Filter>Game\LevelObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\RailgunShot.cpp">
-      <Filter>Game\LevelObjects</Filter>
-    </ClCompile>
+    <ClCompile Include="Game\RaceCourse.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Shaders\CubeMap.fs">

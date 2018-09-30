@@ -14,7 +14,7 @@ class CGameObject
 {
 public:
 	CGameObject();
-	~CGameObject();
+	virtual ~CGameObject();
 
 	// Properties
 	std::string m_tag;

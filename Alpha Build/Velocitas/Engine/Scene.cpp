@@ -101,17 +101,17 @@ void CScene::ResetScene()
 
 void CScene::UpdateScene(float _tick)
 {
-	float32 timeStep = 1.0f / 60.0f;
-	int32 velocityIterations = 6;
-	int32 positionIterations = 2;
-	//std::cout << CTime::GetInstance()->GetDeltaTime() << std::endl;
-	m_box2DWorld->Step(CTime::GetInstance()->GetDeltaTime() , velocityIterations, positionIterations);
-
 	// Delete the object that should be deleted fron last frame
 	for (auto obj : m_vGameObj)
 	{
 		if (obj->ShouldDestroyed()) { DestroyObject(obj); }
 	}
+
+	// Box2D step
+	float32 timeStep = CTime::GetInstance()->GetDeltaTime();
+	int32 velocityIterations = 6;
+	int32 positionIterations = 2;
+	m_box2DWorld->Step(timeStep, velocityIterations, positionIterations);
 
 	// Get each Object in the Scene and do their own Update Function
 	size_t currVecSize = m_vGameObj.size();

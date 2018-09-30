@@ -10,7 +10,7 @@ class CRigiBody2D : public CComponent
 public:
 	float fRadius;
 	CRigiBody2D();
-	~CRigiBody2D();
+	virtual ~CRigiBody2D();
 
 	virtual void Update(float _tick) override;
 	virtual void BeginPlay() override;
@@ -36,6 +36,7 @@ public:
 	void OnCollisionEnter(CRigiBody2D* collidedRigiBody);
 	void OnCollisionExit(CRigiBody2D* collidedRigiBody);
 	Transform m_transform;
+
 private:
 
 	void CreateBody();

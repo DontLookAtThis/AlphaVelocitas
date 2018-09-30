@@ -7,6 +7,6 @@ class CMeshComponent : public CComponent
 {
 public:
 	CMeshComponent();
-	~CMeshComponent();
+	virtual ~CMeshComponent();
 };
 

@@ -14,7 +14,7 @@ class CSpriteRender : public CComponent
 {
 public:
 	CSpriteRender();
-	~CSpriteRender();
+	virtual ~CSpriteRender();
 
 	virtual void BeginPlay() override;
 

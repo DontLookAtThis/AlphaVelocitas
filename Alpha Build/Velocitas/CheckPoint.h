@@ -15,7 +15,12 @@ public:
 	CCheckPoint();
 	virtual ~CCheckPoint();
 
+	virtual void BeginPlay();
+	virtual void Update(float _tick);
+
+
 	void AddPlayer(CGameObject* _player);
+	void RemovePlayer(CGameObject* _player);
 	std::vector<CGameObject*> GetPlayerVec() const;
 
 private:
@@ -24,6 +29,7 @@ private:
 	CSpriteRender* m_spriteRender;
 	CRigiBody2D* m_rigidBody;
 
+	
 	std::vector<CGameObject*> m_playerVec;
 
 

@@ -5,4 +5,12 @@
 #pragma once
 
 /** Game Object and Component Class */
+
+// Main Player Class
 #include "SpaceShip.h"
+
+
+// Race Course Class
+#include "RaceCourse.h"
+#include "CheckPoint.h"
+

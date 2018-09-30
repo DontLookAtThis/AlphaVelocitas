@@ -122,6 +122,11 @@ bool CGameObject::IsActive() const
 void CGameObject::SetActive(bool _b)
 {
 	m_isActive = _b;
+
+	for (auto component : m_components)
+	{
+		component->SetActive(_b);
+	}
 }
 
 void CGameObject::TakeDamage(int _damage)

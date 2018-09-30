@@ -23,7 +23,8 @@ CRigiBody2D::CRigiBody2D() :
 
 CRigiBody2D::~CRigiBody2D()
 {
-
+	m_body->GetWorld()->DestroyBody(m_body);
+	m_body = nullptr;
 }
 
 void CRigiBody2D::Update(float _tick)
@@ -322,7 +323,7 @@ bool CRigiBody2D::GetHasFixture() const
 	return m_bHasFixture;
 }
 
-void CRigiBody2D::OnCollisionEnter(CRigiBody2D * collidedRigiBody)
+void CRigiBody2D::OnCollisionEnter(CRigiBody2D* collidedRigiBody)
 {
 	if (collidedRigiBody->GetBody())
 	{

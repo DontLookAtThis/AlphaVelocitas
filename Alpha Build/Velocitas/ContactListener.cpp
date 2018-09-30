@@ -10,7 +10,7 @@ CContactListener::~CContactListener()
 {
 }
 
-void CContactListener::BeginContact(b2Contact * _contact)
+void CContactListener::BeginContact(b2Contact* _contact)
 {
 	//Get 2 bodies colliding
 	CRigiBody2D* bodyA = static_cast<CRigiBody2D*>(_contact->GetFixtureA()->GetBody()->GetUserData());

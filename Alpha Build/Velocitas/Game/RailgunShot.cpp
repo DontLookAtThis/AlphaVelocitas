@@ -56,14 +56,15 @@ void CRailgunShot::OnCollisionEnter(CGameObject * CollidedObject)
 			if (CSpaceShip* ship = dynamic_cast<CSpaceShip*>(CollidedObject))
 			{
 				ship->bInputEnabled = false;
+				bHit = true;
 			}
 		}
 		if (m_user != CollidedObject && CollidedObject->m_tag != "ItemCube")
 		{
 			//m_user->m_Scene->GetWorld()->DestroyBody(Get2DBody()->GetBody());
 			this->SetActive(false);
+			bHit = true;
 		}
-		bHit = true;
 	}
 }
 

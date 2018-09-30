@@ -1,16 +1,3 @@
-/*
-// Bachelor of Software Engineering
-// Media Design School
-// Auckland
-// New Zealand
-//
-// (c) 2018 Media Design School
-//
-// File Name    : Textabel.cpp
-// Description	:
-// Author       : Richard Wulansari & Jacob Dewse
-// Mail         : richard.wul7481@mediadesign.school.nz, jacob.dew7364@mediadesign.school.nz
-*/
 
 // This Include
 #include "TextLabel.h"
@@ -19,21 +6,21 @@
 #include "AssetMgr.h"
 #include "TextLoader.h"
 
-CTextLabel::CTextLabel(const char* _fontFamily) :
+CTextLabel::CTextLabel(std::string _fontFamily) :
 	m_position(glm::vec3()),
 	m_scale(1.0f),
 	m_color(glm::vec3(1.0f, 1.0f, 1.0f))
 {
-	//m_textObj = CAssetMgr::GetInstance()->GetTextID(_fontFamily);
+	m_textObj = CAssetMgr::GetInstance()->GetFont(_fontFamily);
 }
 
-CTextLabel::CTextLabel(const char * _fontFamily, std::string _text, glm::vec2 _position) :
+CTextLabel::CTextLabel(std::string _fontFamily, std::string _text, glm::vec2 _position) :
 	m_text(_text),
 	m_position(_position),
 	m_scale(1.0f),
 	m_color(glm::vec3(1.0f, 1.0f, 1.0f))
 {
-	//m_textObj = CAssetMgr::GetInstance()->GetTextID(_fontFamily);
+	m_textObj = CAssetMgr::GetInstance()->GetFont(_fontFamily);
 }
 
 CTextLabel::~CTextLabel()

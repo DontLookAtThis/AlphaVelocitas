@@ -31,7 +31,8 @@ void CRigiBody2D::Update(float _tick)
 {
 	if (m_body)
 	{
-		//std::cout << m_body->GetPosition().x << " :: " << m_body->GetPosition().y << std::endl;
+		GetOwner()->m_transform.position = glm::vec3(m_body->GetPosition().x, m_body->GetPosition().y, 0.0f);
+		GetOwner()->m_transform.rotation = glm::vec3(0.0f, 0.0f, (m_body->GetAngle() * 180.0f / b2_pi));
 	}
 	if (m_GravityWell)
 	{
@@ -139,6 +140,53 @@ void CRigiBody2D::CreateBody(b2World* _world, b2BodyType BodyType, bool bCanRota
 				//fixtureDef.filter.groupIndex = -2;
 			}
 			// Add the shape to the body.
+			m_body->CreateFixture(&fixtureDef);
+		}
+		else
+		{
+			m_body->CreateFixture(&dynamicBox, 0.0f);
+		}
+	}
+	else
+	{
+		if (bHasFixture)
+		{
+			std::cout << "No sprite component Detected in: " << GetOwner()->m_name << std::endl;
+		}
+	}
+}
+
+void CRigiBody2D::CreateSensorCube(b2World * _world, b2BodyType BodyType, bool bCanRotate, bool bHasFixture, float Density, float Friction)
+{
+	m_transform = GetOwner()->m_transform;
+	//m_transform.position = GetOwner()->m_transform.position;
+	// Define the dynamic body. We set its position and call the body factory.
+	b2BodyDef bodyDef;
+	bodyDef.type = BodyType;
+	bodyDef.position.Set(m_transform.position.x, m_transform.position.y);
+	m_body = _world->CreateBody(&bodyDef);
+	m_body->SetTransform(bodyDef.position, (m_transform.rotation.z / 180) * b2_pi);
+	std::cout << m_transform.rotation.z << std::endl;
+	m_body->SetFixedRotation(!bCanRotate);
+	//Setting self pointer
+	m_body->SetUserData(this);
+	// Define another box shape for our dynamic body.
+	b2PolygonShape dynamicBox;
+	if (GetOwner()->GetComponent<CSpriteRender>())
+	{
+		dynamicBox.SetAsBox(GetOwner()->GetComponent<CSpriteRender>()->GetSprite()->GetWidth() / 2.0f / util::PIXELUNIT * GetOwner()->m_transform.scale.x,
+			GetOwner()->GetComponent<CSpriteRender>()->GetSprite()->GetHeight() / 2.0f / util::PIXELUNIT * GetOwner()->m_transform.scale.y);
+		fRadius = GetOwner()->GetComponent<CSpriteRender>()->GetSprite()->GetWidth() / 2.0f / util::PIXELUNIT * GetOwner()->m_transform.scale.x;
+		if (bHasFixture)
+		{
+			// Define the dynamic body fixture.
+			b2FixtureDef fixtureDef;
+			fixtureDef.shape = &dynamicBox;
+			// Set the box density to be non-zero, so it will be dynamic.
+			fixtureDef.density = Density;
+			// Override the default friction.
+			fixtureDef.friction = Friction;
+			fixtureDef.isSensor = true;
 			m_body->CreateFixture(&fixtureDef);
 		}
 		else
@@ -327,12 +375,13 @@ void CRigiBody2D::OnCollisionEnter(CRigiBody2D* collidedRigiBody)
 {
 	if (collidedRigiBody->GetBody())
 	{
-		if (collidedRigiBody->GetOwner())
+		if (CGameObject* obj = collidedRigiBody->GetOwner())
 		{
 			if (collidedRigiBody->GetOwner()->m_tag == "Player")
 			{
 				BodiesColliding.push_back(collidedRigiBody->GetBody());
 			}
+			GetOwner()->OnCollisionEnter(obj);
 		}
 	}
 }
@@ -349,6 +398,10 @@ void CRigiBody2D::OnCollisionExit(CRigiBody2D * collidedRigiBody)
 				BodiesColliding.erase(it);
 				return;
 			}
+		}
+		if (CGameObject* obj = collidedRigiBody->GetOwner())
+		{
+			GetOwner()->OnColliisionExit(obj);
 		}
 	}
 }

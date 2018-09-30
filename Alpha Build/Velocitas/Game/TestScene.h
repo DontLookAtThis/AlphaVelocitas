@@ -17,6 +17,7 @@ public:
 	void CreateBlocks();
 	void CreatePigs();
 	void CreateBirdies();
+	void CreatePlayers();
 
 	bool bSlingLoaded;
 	int CurrentBird;

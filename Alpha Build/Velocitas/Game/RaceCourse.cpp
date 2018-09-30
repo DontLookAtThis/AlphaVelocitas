@@ -47,5 +47,6 @@ void CRaceCourse::NextCheckPoint(CGameObject* _player, CCheckPoint* _currCheckPo
 
 void CRaceCourse::AddCheckPoint(CCheckPoint* _checkPoint)
 {
+	_checkPoint->SetRaceCourse(this);
 	m_vCheckPoints.push_back(_checkPoint);
 }

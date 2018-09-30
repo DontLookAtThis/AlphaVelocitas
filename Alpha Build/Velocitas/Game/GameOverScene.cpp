@@ -7,7 +7,7 @@ void CGameOver::ConfigurateScene()
 	GameOver->SetPosition(glm::vec2((util::SCR_WIDTH / 4) + 180.0f, util::SCR_HEIGHT / 2));
 	GameOver->SetScale(1.0f);
 	GameOver->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
-	m_vTextList.push_back(GameOver);
+	m_vTextLabel.push_back(GameOver);
 }
 
 void CGameOver::BeginPlay()

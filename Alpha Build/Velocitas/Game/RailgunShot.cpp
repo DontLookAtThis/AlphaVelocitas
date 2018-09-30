@@ -2,6 +2,12 @@
 #include "ItemCube.h"
 #include "SpaceShip.h"
 #include "Engine/Time.h"
+#include "Engine/AssetMgr.h"
+#include "Engine/Component.h"
+#include "Engine/SpriteRender.h"
+#include "Engine/RigidBody2D.h"
+#include "Engine/Input.h"
+#include "Engine/Scene.h"
 
 CRailgunShot::CRailgunShot(b2Vec2 _Direction, CGameObject* User)
 {

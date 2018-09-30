@@ -7,18 +7,15 @@
 #include "Engine/Scene.h"
 #include "Engine/RigidBody2D.h"
 #include "Engine/SpriteRender.h"
+#include "Engine/Debug.h"
 
 CCheckPoint::CCheckPoint()
 {
-	m_name = "CheckPoint";
+	//m_name = "CheckPoint";
 	m_tag = "CheckPoint";
 
 	m_spriteRender = CreateComponent<CSpriteRender>();
 	m_rigidBody = CreateComponent<CRigiBody2D>();
-
-	b2World* world = m_Scene->GetWorld();
-	m_rigidBody->CreateBody(world, b2_staticBody, false, true);
-	m_rigidBody->GetBody()->GetFixtureList()->SetSensor(true);
 }
 
 CCheckPoint::~CCheckPoint()
@@ -42,23 +39,35 @@ void CCheckPoint::Update(float _tick)
 void CCheckPoint::OnCollisionEnter(CGameObject* CollidedObject)
 {
 	__super::OnCollisionEnter(CollidedObject);
-	
+
 	if (CSpaceShip* player = dynamic_cast<CSpaceShip*>(CollidedObject))
 	{
-		PassCheckPoint(player);
+		for (auto iter : m_pursuingPlayerVec)
+		{
+			if (iter == player)
+			{
+				CDebug::Log(player->m_name + " passed " + m_name);
+				PassCheckPoint(player);
+			}
+		}
 	}
+}
+
+void CCheckPoint::SetRaceCourse(CRaceCourse* _raceCourse)
+{
+	m_raceCourse = _raceCourse;
 }
 
 float CCheckPoint::GetDistanceToCheckPoint(CGameObject* _player)
 {
-	//float distance;
+	float distance = 0.0f;
 
-	//Transform thistrans = this->m_transform;
+	// Get the position of the player
+	glm::vec3 playePosition = _player->m_transform.position;
+	// Calculate the distance between
+	distance = glm::distance(playePosition, this->m_transform.position);
 
-
-
-	//return distance;
-	return 0;
+	return distance;
 }
 
 void CCheckPoint::PassCheckPoint(CGameObject* _player)

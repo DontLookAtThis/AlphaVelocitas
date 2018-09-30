@@ -47,7 +47,7 @@ void CTestScene::ConfigurateScene()
 	Test->SetPosition(glm::vec2((util::SCR_WIDTH /4) + 100.0f, util::SCR_HEIGHT/2));
 	Test->SetScale(1.0f);
 	Test->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
-	m_vTextList.push_back(Test);
+	m_vTextLabel.push_back(Test);
 	//CGameObject* GravityBlock = new CBlocks(3);
 	//GravityBlock->SetWorld(this);
 	//GravityBlock->m_name = "Block1";
@@ -112,8 +112,21 @@ void CTestScene::ConfigurateScene()
 		checkPoint_1->SetWorld(this);
 		m_vGameObj.push_back(checkPoint_1);
 		m_raceCourse->AddCheckPoint((CCheckPoint*)checkPoint_1);
+		checkPoint_1->m_name = "CheckPoint_1";
+		checkPoint_1->m_transform.position = glm::vec3(14.5f, 5.5f, 0.0f);
+		checkPoint_1->m_transform.scale = glm::vec3(5.0f, 1.0f, 0.0f);
+		checkPoint_1->GetComponent<CRigiBody2D>()->CreateBody(m_box2DWorld, b2_staticBody, false, true);
+		checkPoint_1->GetComponent<CRigiBody2D>()->GetBody()->GetFixtureList()->SetSensor(true);
 
-
+		CGameObject* checkPoint_2 = new CCheckPoint();
+		checkPoint_2->SetWorld(this);
+		m_vGameObj.push_back(checkPoint_2);
+		m_raceCourse->AddCheckPoint((CCheckPoint*)checkPoint_2);
+		checkPoint_2->m_name = "CheckPoint_2";
+		checkPoint_2->m_transform.position = glm::vec3(-10.0f, 8.5f, 0.0f);
+		checkPoint_2->m_transform.scale = glm::vec3(1.0f, 3.0f, 0.0f);
+		checkPoint_2->GetComponent<CRigiBody2D>()->CreateBody(m_box2DWorld, b2_staticBody, false, true);
+		checkPoint_2->GetComponent<CRigiBody2D>()->GetBody()->GetFixtureList()->SetSensor(true);
 	}
 
 

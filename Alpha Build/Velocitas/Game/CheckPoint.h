@@ -20,6 +20,7 @@ public:
 	virtual void Update(float _tick) override;
 	virtual void OnCollisionEnter(CGameObject* CollidedObject) override;
 
+	void SetRaceCourse(CRaceCourse* _raceCourse);
 	float GetDistanceToCheckPoint(CGameObject* _player);
 	void PassCheckPoint(CGameObject* _player);
 	void AddPlayer(CGameObject* _player);

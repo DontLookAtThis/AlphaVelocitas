@@ -64,7 +64,6 @@ b2Body * CRigiBody2D::GetBody()
 	return m_body;
 }
 
-
 void CRigiBody2D::CreateBody()
 {
 	// Define the dynamic body. We set its position and call the body factory.

@@ -5,6 +5,7 @@
 // Engine Include
 #include "ShaderLoader.h"
 #include "Sprite.h"
+#include "TextLoader.h"
 #include "Debug.h"
 
 // Static Variable
@@ -33,6 +34,7 @@ void CAssetMgr::InitializeAssets()
 {
 	/** Initialize Programs */
 	CreateProgram("DefaultSpriteProgram", "Engine/Shaders/Sprite.vs", "Engine/Shaders/Sprite.fs");
+	CreateProgram("DefaultTextPrograrm", "Engine/Shaders/Text.vs", "Engine/Shaders/Text.fs");
 
 	/** Initialize Sprites */
 	CreateSprite("DefaultSprite", "Resources/Sprites/DefaultSprite.png");
@@ -78,6 +80,20 @@ GLuint CAssetMgr::GetProgramID(std::string _name) const
 	return NULL;
 }
 
+Text* CAssetMgr::GetFont(std::string _name) const
+{
+	for (auto iter = m_fontMap.begin(); iter != m_fontMap.end(); ++iter)
+	{
+		if (iter->first == _name)
+		{
+			return iter->second;
+		}
+	}
+
+	CDebug::Log("Unable to grab Font from name.");
+	return nullptr;
+}
+
 void CAssetMgr::CreateProgram(std::string _name, const char* _vertexPath, const char* _fragmentPath)
 {
 	GLuint newProgram = ShaderLoader::CreateProgram(_vertexPath, _fragmentPath);
@@ -91,4 +107,11 @@ void CAssetMgr::CreateSprite(std::string _name, const char* _pathName)
 	newSprite->CreateSprite(_pathName);
 
 	m_spriteMap.insert(std::pair<std::string, CSprite*>(_name, newSprite));
+}
+
+void CAssetMgr::CreateFont(std::string _name, const char* _pathName)
+{
+	Text* newFont = new Text(_pathName);
+
+	m_fontMap.insert(std::pair<std::string, Text*>(_name, newFont));
 }

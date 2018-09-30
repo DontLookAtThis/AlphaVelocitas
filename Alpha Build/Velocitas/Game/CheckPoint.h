@@ -6,6 +6,7 @@
 // Forward Declare
 class CSpriteRender;
 class CRigiBody2D;
+class CRaceCourse;
 
 class CCheckPoint : public CGameObject
 {
@@ -18,7 +19,7 @@ public:
 	virtual void BeginPlay();
 	virtual void Update(float _tick);
 
-
+	void PassCheckPoint(CGameObject* _player);
 	void AddPlayer(CGameObject* _player);
 	void RemovePlayer(CGameObject* _player);
 	std::vector<CGameObject*> GetPlayerVec() const;
@@ -29,8 +30,11 @@ private:
 	CSpriteRender* m_spriteRender;
 	CRigiBody2D* m_rigidBody;
 
-	
+	// A vector of player who are chasing this check point
 	std::vector<CGameObject*> m_playerVec;
+
+	// The race course of the check point
+	CRaceCourse* m_raceCourse;
 
 
 

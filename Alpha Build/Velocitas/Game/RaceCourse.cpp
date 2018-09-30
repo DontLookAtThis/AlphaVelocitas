@@ -25,13 +25,15 @@ void CRaceCourse::NextCheckPoint(CGameObject* _player, CCheckPoint* _currCheckPo
 		{
 			if (++iter != m_vCheckPoints.end())
 			{
+				// To the next check point
 				nextCheckPoint = *iter;
 			}
 			else 
 			{
-				// Player Wins
+				// Go back to the first one
+				nextCheckPoint = *(m_vCheckPoints.begin());
 			}
-			return;
+			break;
 		}
 	}
 

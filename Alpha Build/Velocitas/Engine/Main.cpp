@@ -102,8 +102,8 @@ void Update()
 	p_Time->Update();
 
 	// Update whats currently running
-	CInput::GetInstance()->Update(p_Time->GetTick());
 	p_SceneMgr->UpdateCurrentScene(p_Time->GetTick());
+	CInput::GetInstance()->Update(p_Time->GetTick());
 
 	// Full Screen Control
 	//if (cInputMgr->g_cKeyState[(unsigned char)'f'] == INPUT_FIRST_PRESS)

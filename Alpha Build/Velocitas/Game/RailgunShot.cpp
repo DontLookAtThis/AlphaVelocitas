@@ -14,6 +14,7 @@ CRailgunShot::CRailgunShot(b2Vec2 _Direction, CGameObject* User)
 	m_user = User;
 	m_rigidBody->CreateSensorCube(User->m_Scene->GetWorld(), b2_dynamicBody, true, true, 1.0f, 0.0f);
 	m_tag = "Bullet";
+	bHit = false;
 }
 
 CRailgunShot::~CRailgunShot()
@@ -24,7 +25,7 @@ CRailgunShot::~CRailgunShot()
 void CRailgunShot::BeginPlay()
 {
 	__super::BeginPlay();
-	m_v2Direction *= 4.0f;
+	m_v2Direction *= 2.0f;
 	Get2DBody()->GetBody()->ApplyLinearImpulseToCenter(m_v2Direction, true);
 	
 }
@@ -48,15 +49,22 @@ CRigiBody2D * CRailgunShot::Get2DBody()
 
 void CRailgunShot::OnCollisionEnter(CGameObject * CollidedObject)
 {
-	if (CollidedObject->m_tag == "Player" && m_user != CollidedObject)
+	if (bHit == false)
 	{
-		if (CSpaceShip* ship = dynamic_cast<CSpaceShip*>(CollidedObject))
+		if (CollidedObject->m_tag == "Player" && m_user != CollidedObject)
 		{
-			ship->bInputEnabled = false;
-			ship->bInputEnabled = false;
+			if (CSpaceShip* ship = dynamic_cast<CSpaceShip*>(CollidedObject))
+			{
+				ship->bInputEnabled = false;
+			}
 		}
+		if (m_user != CollidedObject && CollidedObject->m_tag != "ItemCube")
+		{
+			//m_user->m_Scene->GetWorld()->DestroyBody(Get2DBody()->GetBody());
+			this->SetActive(false);
+		}
+		bHit = true;
 	}
-
 }
 
 void CRailgunShot::OnColliisionExit(CGameObject * CollidedObject)

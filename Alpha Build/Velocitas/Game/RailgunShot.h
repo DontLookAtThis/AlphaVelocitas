@@ -29,4 +29,5 @@ private:
 	CRigiBody2D * m_rigidBody;
 	b2Vec2 m_v2Direction;
 	CGameObject* m_user;
+	bool bHit;
 };

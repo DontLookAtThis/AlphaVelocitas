@@ -44,28 +44,61 @@ void CTestScene::ConfigurateScene()
 	BackGround->GetComponent<CSpriteRender>()->SetSprite("Background");
 	//--------------------------------------------------------------
 
-	CGameObject* GravityBlock = new CBlocks(3);
-	GravityBlock->SetWorld(this);
-	GravityBlock->m_name = "Block1";
-	GravityBlock->m_tag = "Block";
-	GravityBlock->m_transform.position = glm::vec3(0.0f, 0.0f, 0.0f);
-	GravityBlock->m_transform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
-	GravityBlock->m_transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
-	this->m_vGameObj.push_back(GravityBlock);
-	GravityBlock->GetComponent<CSpriteRender>()->SetSprite("Block");
-	GravityBlock->GetComponent<CRigiBody2D>()->CreateGravityWell(GetWorld(), 10.0f, true, 2.0f);
+	//CGameObject* GravityBlock = new CBlocks(3);
+	//GravityBlock->SetWorld(this);
+	//GravityBlock->m_name = "Block1";
+	//GravityBlock->m_tag = "Block";
+	//GravityBlock->m_transform.position = glm::vec3(0.0f, 0.0f, 0.0f);
+	//GravityBlock->m_transform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
+	//GravityBlock->m_transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
+	//this->m_vGameObj.push_back(GravityBlock);
+	//GravityBlock->GetComponent<CSpriteRender>()->SetSprite("Block");
+	//GravityBlock->GetComponent<CRigiBody2D>()->CreateGravityWell(GetWorld(), 10.0f, true, 0.5f);
 
 	CGameObject* ItemCube = new CItemCubes(ITEM_RAILGUN);
 	ItemCube->SetWorld(this);
 	ItemCube->m_name = "ItemCube1";
 	ItemCube->m_tag = "ItemCube";
-	ItemCube->m_transform.position = glm::vec3(10.0f, 0.0f, 0.0f);
+	ItemCube->m_transform.position = glm::vec3(10.0f, 10.0f, 0.0f);
 	ItemCube->m_transform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
-	ItemCube->m_transform.scale = glm::vec3(0.5f, 0.5f, 0.5f);
+	ItemCube->m_transform.scale = glm::vec3(0.3f, 0.1f, 0.5f);
 	this->m_vGameObj.push_back(ItemCube);
 	ItemCube->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
 	ItemCube->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
 	
+	CGameObject* ItemCube2 = new CItemCubes(ITEM_RAILGUN);
+	ItemCube2->SetWorld(this);
+	ItemCube2->m_name = "ItemCube1";
+	ItemCube2->m_tag = "ItemCube";
+	ItemCube2->m_transform.position = glm::vec3(10.0f, 9.0f, 0.0f);
+	ItemCube2->m_transform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
+	ItemCube2->m_transform.scale = glm::vec3(0.3f, 0.1f, 0.5f);
+	this->m_vGameObj.push_back(ItemCube2);
+	ItemCube2->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
+	ItemCube2->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
+
+	CGameObject* ItemCube3 = new CItemCubes(ITEM_RAILGUN);
+	ItemCube3->SetWorld(this);
+	ItemCube3->m_name = "ItemCube1";
+	ItemCube3->m_tag = "ItemCube";
+	ItemCube3->m_transform.position = glm::vec3(10.0f, 8.0f, 0.0f);
+	ItemCube3->m_transform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
+	ItemCube3->m_transform.scale = glm::vec3(0.3f, 0.1f, 0.5f);
+	this->m_vGameObj.push_back(ItemCube3);
+	ItemCube3->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
+	ItemCube3->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
+
+	CGameObject* ItemCube4 = new CItemCubes(ITEM_RAILGUN);
+	ItemCube4->SetWorld(this);
+	ItemCube4->m_name = "ItemCube1";
+	ItemCube4->m_tag = "ItemCube";
+	ItemCube4->m_transform.position = glm::vec3(10.0f, 7.0f, 0.0f);
+	ItemCube4->m_transform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
+	ItemCube4->m_transform.scale = glm::vec3(0.3f, 0.1f, 0.5f);
+	this->m_vGameObj.push_back(ItemCube4);
+	ItemCube4->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
+	ItemCube4->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
+
 	LoadAllPlayers();
 	LoadAllBlocks();
 	AddScore();
@@ -140,6 +173,7 @@ void CTestScene::LoadAllBlocks()
 void CTestScene::LoadAllPlayers()
 {
 	CGameObject* Player1 = new CSpaceShip(1);
+	Player1->SetWorld(this);
 	Player1->m_name = "Player1";
 	Player1->m_tag = "Player";
 	Player1->m_transform.scale = glm::vec3(0.65f, 0.65f, 1.0f);
@@ -147,10 +181,11 @@ void CTestScene::LoadAllPlayers()
 	this->m_vGameObj.push_back(Player1);
 	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player1));
 	Player1->GetComponent<CSpriteRender>()->SetSprite("Player1");
-	Player1->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
-	Player1->GetComponent<CRigiBody2D>()->GetBody()->GetFixtureList()->SetRestitution(0.3f);
+	Player1->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, false, true, 1.0f, 1.0f, 1);
+	Player1->GetComponent<CRigiBody2D>()->GetBody()->GetFixtureList()->SetRestitution(0.1f);
 
 	CGameObject* Player2 = new CSpaceShip(2);
+	Player2->SetWorld(this);
 	Player2->m_name = "Player2";
 	Player2->m_tag = "Player";
 	Player2->m_transform.scale = glm::vec3(0.65f, 0.65f, 1.0f);
@@ -158,9 +193,12 @@ void CTestScene::LoadAllPlayers()
 	this->m_vGameObj.push_back(Player2);
 	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player2));
 	Player2->GetComponent<CSpriteRender>()->SetSprite("Player2");
-	Player2->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
+	Player2->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, false, true, 1.0f, 1.0f, 1);
+	Player2->GetComponent<CRigiBody2D>()->GetBody()->GetFixtureList()->SetRestitution(0.1f);
+	dynamic_cast<CSpaceShip*>(Player2)->bControllerInput = false;
 
 	CGameObject* Player3 = new CSpaceShip(3);
+	Player3->SetWorld(this);
 	Player3->m_name = "Player3";
 	Player3->m_tag = "Player";
 	Player3->m_transform.scale = glm::vec3(0.65f, 0.65f, 1.0f);
@@ -168,9 +206,11 @@ void CTestScene::LoadAllPlayers()
 	this->m_vGameObj.push_back(Player3);
 	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player3));
 	Player3->GetComponent<CSpriteRender>()->SetSprite("Player3");
-	Player3->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
+	Player3->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, false, true, 1.0f, 1.0f, 1);
+	Player3->GetComponent<CRigiBody2D>()->GetBody()->GetFixtureList()->SetRestitution(0.1f);
 
 	CGameObject* Player4 = new CSpaceShip(4);
+	Player4->SetWorld(this);
 	Player4->m_name = "Player4";
 	Player4->m_tag = "Player";
 	Player4->m_transform.scale = glm::vec3(0.65f, 0.65f, 1.0f);
@@ -178,7 +218,8 @@ void CTestScene::LoadAllPlayers()
 	this->m_vGameObj.push_back(Player4);
 	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player4));
 	Player4->GetComponent<CSpriteRender>()->SetSprite("Player4");
-	Player4->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
+	Player4->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, false, true, 1.0f, 1.0f, 1);
+	Player4->GetComponent<CRigiBody2D>()->GetBody()->GetFixtureList()->SetRestitution(0.1f);
 
 }
 
@@ -209,7 +250,7 @@ void CTestScene::CreateBlocks(int iBlockID, std::string Name,  std::string Sprit
 {
 	//std::shared_ptr<CBlocks>Blocks = std::make_shared<CBlocks>(iBlockID);
 	CBlocks* Blocks = new CBlocks(iBlockID);
-
+	Blocks->SetWorld(this);
 	Blocks->m_name = Name;
 	Blocks->m_tag = Tag;
 	Blocks->m_transform.position = Transform.position;

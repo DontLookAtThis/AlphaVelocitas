@@ -31,7 +31,7 @@ void CSceneMgr::InitializeScenes()
 {
 	/** Create scenes that is going to build in the game */
 	CreateNewScene("Test Scene", new CTestScene());
-	CreateNewScene("Second Scene", new CTestScene());
+	//CreateNewScene("Second Scene", new CTestScene());
 	/** Run the first scene */
 	if (!m_scenes.empty())
 	{

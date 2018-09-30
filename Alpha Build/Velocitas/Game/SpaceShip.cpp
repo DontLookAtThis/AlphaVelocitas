@@ -23,7 +23,7 @@ CSpaceShip::CSpaceShip(int playerID)
 	bHasBeenFired = false;
 	bIsLoaded = false;
 	bIsHeld = false;
-	fMovementSpeed = 3.0f;
+	fMovementSpeed = 1.0f;
 	m_fInputReEnabletime = 3.0f;
 }
 

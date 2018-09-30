@@ -18,7 +18,7 @@ CRaceCourse::~CRaceCourse()
 void CRaceCourse::NextCheckPoint(CGameObject* _player, CCheckPoint* _currCheckPoint)
 {
 	// Find the next check point in the course
-	CCheckPoint* nextCheckPoint;
+	CCheckPoint* nextCheckPoint = nullptr;
 	for (auto iter = m_vCheckPoints.begin(); iter != m_vCheckPoints.end(); ++iter)
 	{
 		if (*iter == _currCheckPoint)
@@ -37,5 +37,8 @@ void CRaceCourse::NextCheckPoint(CGameObject* _player, CCheckPoint* _currCheckPo
 
 	// Insert the player to the next check point to chase
 	_currCheckPoint->RemovePlayer(_player);
-	nextCheckPoint->AddPlayer(_player);
+	if (nextCheckPoint != nullptr)
+	{
+		nextCheckPoint->AddPlayer(_player);
+	}
 }

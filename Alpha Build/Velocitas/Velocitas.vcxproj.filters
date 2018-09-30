@@ -182,6 +182,12 @@
     <ClInclude Include="RaceCourse.h">
       <Filter>Game\RaceCourse</Filter>
     </ClInclude>
+    <ClInclude Include="Game\ItemCube.h">
+      <Filter>Game\LevelObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\RailgunShot.h">
+      <Filter>Game\LevelObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Camera.cpp">
@@ -255,6 +261,12 @@
     </ClCompile>
     <ClCompile Include="CheckPoint.cpp">
       <Filter>Game\CheckPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\ItemCube.cpp">
+      <Filter>Game\LevelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\RailgunShot.cpp">
+      <Filter>Game\LevelObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

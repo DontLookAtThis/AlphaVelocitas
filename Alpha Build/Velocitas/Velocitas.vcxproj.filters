@@ -94,6 +94,9 @@
     <Filter Include="Game\CheckPoint">
       <UniqueIdentifier>{ba2d7da9-e78f-40db-a168-51ec0c29e680}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\RaceCourse">
+      <UniqueIdentifier>{c23b9ab1-923e-4b5e-8760-be332242c84c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Engine\Commenting Header.txt">
@@ -175,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="CheckPoint.h">
       <Filter>Game\CheckPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="RaceCourse.h">
+      <Filter>Game\RaceCourse</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

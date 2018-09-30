@@ -47,6 +47,7 @@
     <ClInclude Include="Game\GameClasses.h" />
     <ClInclude Include="Game\SpaceShip.h" />
     <ClInclude Include="Game\TestScene.h" />
+    <ClInclude Include="RaceCourse.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CheckPoint.cpp" />

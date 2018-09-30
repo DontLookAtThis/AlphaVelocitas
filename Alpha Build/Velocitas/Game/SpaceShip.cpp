@@ -65,7 +65,7 @@ void CSpaceShip::MovementChecks()
 	bRightPressed = false;
 
 	glm::vec2 Direction = { 0, 0 };
-	glm::vec2 LeftThumbStick = { CInput::GetInstance()->Players[m_iPlayerID]->GetState().Gamepad.sThumbLX , CInput::GetInstance()->Players[m_iPlayerID]->GetState().Gamepad.sThumbLY };
+	glm::vec2 LeftThumbStick = { CInput::GetInstance()->Players[m_iPlayerID - 1]->GetState().Gamepad.sThumbLX , CInput::GetInstance()->Players[m_iPlayerID - 1]->GetState().Gamepad.sThumbLY };
 	if (!bControllerInput)
 	{
 		bLeftPressed = m_iPlayerID == 1 && (CInput::GetInstance()->g_cKeyState[(unsigned char)'a'] == INPUT_HOLD ||

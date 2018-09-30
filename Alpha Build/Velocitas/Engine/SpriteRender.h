@@ -25,11 +25,11 @@ public:
 
 	void SetProgram(GLuint _programID);
 	CSprite* GetSprite();
-
+	float xMultiplier;
+	float yMultiplier;
 private:
 
 	CSprite* m_sprite;
 	GLuint m_programID;
-
 };
 

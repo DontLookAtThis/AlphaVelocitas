@@ -74,14 +74,12 @@ void CScene::RenderScene()
 	{
 		for (CGameObject* gameObject : m_vGameObj)
 		{
-			// GameObject.render()
-			
-			if (CSpriteRender* spriteRenderer
-				= gameObject->GetComponent<CSpriteRender>())
+			for (CComponent* comp : gameObject->m_components)
 			{
-				spriteRenderer->Render(m_mainCamera);
-			
-				//continue;
+				if (CSpriteRender* spriteRenderer = dynamic_cast<CSpriteRender*>(comp))
+				{
+					spriteRenderer->Render(m_mainCamera);
+				}
 			}
 		}
 	}

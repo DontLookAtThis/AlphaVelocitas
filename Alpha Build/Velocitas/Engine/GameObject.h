@@ -22,12 +22,13 @@ public:
 	Transform m_transform;
 	int m_iHealth = 100;
 	CScene* m_Scene;
+	std::vector<CComponent*> m_components;
 protected:
 	
 	bool m_ShouldDestroyed;
 	bool m_isActive;
 	bool m_isAlive;
-	std::vector<CComponent*> m_components;
+
 
 public:
 	/**

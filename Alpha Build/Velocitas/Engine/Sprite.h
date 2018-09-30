@@ -14,7 +14,7 @@ public:
 	~CSprite();
 
 	void CreateSprite(const char* _filePath /*, GLuint _programID*/);
-	void RenderSprite(Transform _transform, CCamera* _camera, GLuint _programID);
+	void RenderSprite(Transform _transform, CCamera* _camera, GLuint _programID, float xMod, float yMod);
 	int GetHeight();
 	int GetWidth();
 private:

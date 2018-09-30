@@ -194,6 +194,9 @@
     <ClInclude Include="Game\GameOverScene.h">
       <Filter>Game\Scenes\GameOverScene</Filter>
     </ClInclude>
+    <ClInclude Include="Game\GrapplingHook.h">
+      <Filter>Game\LevelObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Camera.cpp">
@@ -279,6 +282,9 @@
     </ClCompile>
     <ClCompile Include="Game\GameOverScene.cpp">
       <Filter>Game\Scenes\GameOverScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GrapplingHook.cpp">
+      <Filter>Game\LevelObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

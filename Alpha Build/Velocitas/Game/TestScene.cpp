@@ -65,7 +65,6 @@ void CTestScene::ConfigurateScene()
 	this->m_vGameObj.push_back(ItemCube);
 	ItemCube->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
 	ItemCube->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
-	CreatePlayers();
 	
 	LoadAllPlayers();
 	LoadAllBlocks();

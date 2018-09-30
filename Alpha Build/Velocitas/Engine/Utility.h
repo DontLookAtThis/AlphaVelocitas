@@ -18,6 +18,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <memory>
 #include <chrono>
 #include <strstream>
 #include <Windows.h>

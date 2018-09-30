@@ -34,14 +34,12 @@ void CSceneMgr::InitializeScenes()
 	CreateNewScene("Test Scene", new CTestScene());
 	//CreateNewScene("GameOver Scene", new CGameOver());
 	//CreateNewScene("Second Scene", new CTestScene());
+
 	/** Run the first scene */
 	
 	if (!m_scenes.empty())
 	{
-		auto iter = m_scenes.begin();
-		m_runningScene = iter->second;
-		m_runningScene->ConfigurateScene();
-		m_runningScene->BeginPlay();
+		LoadScene("Test Scene");
 	}
 	else
 	{
@@ -70,10 +68,11 @@ void CSceneMgr::CreateNewScene(std::string _name, CScene* _scene)
 void CSceneMgr::LoadScene(std::string _name)
 {
 	// Reset the current scene
-	if(m_runningScene != nullptr)
-	{ 
+	if (m_runningScene != nullptr)
+	{
 		m_runningScene->ResetScene();
 	}
+	
 	// Jump to another scene and initialise 
 	for (auto iter = m_scenes.begin(); iter != m_scenes.end(); ++iter)
 	{
@@ -93,7 +92,9 @@ CScene* CSceneMgr::GetRunningScene() const
 }
 
 CSceneMgr::CSceneMgr()
-{}
+{
+	m_runningScene = nullptr;
+}
 
 CSceneMgr::~CSceneMgr()
 {

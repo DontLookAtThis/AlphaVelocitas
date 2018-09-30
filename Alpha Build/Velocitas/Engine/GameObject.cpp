@@ -5,6 +5,9 @@
 #include "Component.h"
 #include "RigidBody2D.h"
 #include "SpriteRender.h"
+#include "Scene.h"
+
+
 /* Legacy Render Function*/
 // void CGameObject::RenderObject(CCamera* _camera)
 // {

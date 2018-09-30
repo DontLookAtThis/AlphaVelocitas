@@ -8,6 +8,8 @@
 #include "Debug.h"
 #include "Camera.h"
 #include "TextLabel.h"
+#include "ContactListener.h"
+#include "Engine/Time.h"
 //#include "Player.h"
 //#include "PowerUps.h"
 //#include "AssetMgr.h"
@@ -17,9 +19,7 @@
 //#include "Input.h"
 //#include "CAIMgr.h"
 //#include "CubeMap.h"
-//#include "TextLabel.h"
-#include "ContactListener.h"
-#include "Engine/Time.h"
+
 CScene::CScene()
 {
 	m_mainCamera = nullptr;
@@ -74,19 +74,21 @@ void CScene::RenderScene()
 	{
 		for (CGameObject* gameObject : m_vGameObj)
 		{
-			for (CComponent* comp : gameObject->m_components)
+			// GameObject.render()
+			
+			if (CSpriteRender* spriteRenderer
+				= gameObject->GetComponent<CSpriteRender>())
 			{
-				if (CSpriteRender* spriteRenderer = dynamic_cast<CSpriteRender*>(comp))
-				{
-					spriteRenderer->Render(m_mainCamera);
-				}
+				spriteRenderer->Render(m_mainCamera);
+				//continue;
 			}
 		}
 	}
-	
-	for (CTextLabel* Text : m_vTextList)
+
+	// Render all the textLabel in the scene
+	for (CTextLabel* textLabel : m_vTextLabel)
 	{
-		Text->RenderTextLabel();
+		textLabel->RenderTextLabel();
 	}
 	
 }

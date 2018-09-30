@@ -1,9 +1,11 @@
+#pragma once
 
 // Derive Include
 #include "Engine/Scene.h"
 
-
+// Forward Declare
 class CSpaceShip;
+class CRaceCourse;
 
 class CTestScene : public CScene
 {
@@ -29,10 +31,13 @@ public:
 	glm::vec3 SpawnLocation2 = { 13.0f, 0.0f, 0.0f };
 	glm::vec3 SpawnLocation3 = { 14.0f, 0.0f, 0.0f };
 	glm::vec3 SpawnLocation4 = { 15.0f, 0.0f, 0.0f };
-	bool bSlingLoaded;
-	int CurrentBird;
+
 	bool IsGameWon = false;
+
+	CRaceCourse* m_raceCourse;
 	std::vector<CSpaceShip*> m_vPlayers;
+	
+
 private:
 	
 

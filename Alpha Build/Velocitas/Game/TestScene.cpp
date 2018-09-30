@@ -9,21 +9,19 @@
 #include "Engine/SpriteRender.h"
 #include "Engine/AssetMgr.h"
 #include "Blocks.h"
+#include "RaceCourse.h"
+#include "CheckPoint.h"
 #include "ContactListener.h"
 #include "Engine/SceneMgr.h"
 #include "Game/SpaceShip.h"
 #include "Game/ItemCube.h"
 #include "Engine/TextLabel.h"
-//Includes
-#include <memory>
 
 void CTestScene::ConfigurateScene()
 {
 	__super::ConfigurateScene();
 
 	/** Configuration */
-	bSlingLoaded = false;
-	CurrentBird = -1;
 
 	this->m_sceneName = "Test Scene";
 
@@ -49,7 +47,7 @@ void CTestScene::ConfigurateScene()
 	Test->SetPosition(glm::vec2((util::SCR_WIDTH /4) + 100.0f, util::SCR_HEIGHT/2));
 	Test->SetScale(1.0f);
 	Test->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
-	m_vTextList.push_back(Test);
+	m_vTextLabel.push_back(Test);
 	//CGameObject* GravityBlock = new CBlocks(3);
 	//GravityBlock->SetWorld(this);
 	//GravityBlock->m_name = "Block1";
@@ -104,10 +102,43 @@ void CTestScene::ConfigurateScene()
 	this->m_vGameObj.push_back(ItemCube4);
 	ItemCube4->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
 	ItemCube4->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
+	
+	// Configurate Race Course
+	{
+		m_raceCourse = new CRaceCourse();
+		m_vGameObj.push_back(m_raceCourse);
+
+		CGameObject* checkPoint_1 = new CCheckPoint();
+		checkPoint_1->SetWorld(this);
+		m_vGameObj.push_back(checkPoint_1);
+		m_raceCourse->AddCheckPoint((CCheckPoint*)checkPoint_1);
+		checkPoint_1->m_name = "CheckPoint_1";
+		checkPoint_1->m_transform.position = glm::vec3(14.5f, 5.5f, 0.0f);
+		checkPoint_1->m_transform.scale = glm::vec3(5.0f, 1.0f, 0.0f);
+		checkPoint_1->GetComponent<CRigiBody2D>()->CreateBody(m_box2DWorld, b2_staticBody, false, true);
+		checkPoint_1->GetComponent<CRigiBody2D>()->GetBody()->GetFixtureList()->SetSensor(true);
+
+		CGameObject* checkPoint_2 = new CCheckPoint();
+		checkPoint_2->SetWorld(this);
+		m_vGameObj.push_back(checkPoint_2);
+		m_raceCourse->AddCheckPoint((CCheckPoint*)checkPoint_2);
+		checkPoint_2->m_name = "CheckPoint_2";
+		checkPoint_2->m_transform.position = glm::vec3(-10.0f, 8.5f, 0.0f);
+		checkPoint_2->m_transform.scale = glm::vec3(1.0f, 3.0f, 0.0f);
+		checkPoint_2->GetComponent<CRigiBody2D>()->CreateBody(m_box2DWorld, b2_staticBody, false, true);
+		checkPoint_2->GetComponent<CRigiBody2D>()->GetBody()->GetFixtureList()->SetSensor(true);
+	}
+
 
 	LoadAllPlayers();
 	LoadAllBlocks();
 	AddScore();
+
+	/** Create a example text */
+	//CTextLabel* newTextLabel = new CTextLabel("FontName");
+	//m_vTextLabel.push_back(newTextLabel);
+	//newTextLabel->SetText("Whatever text here");
+
 
 }
 

@@ -8,6 +8,11 @@ CItemCubes::CItemCubes(int ItemType)
 	m_ItemType = ItemType;
 	m_IsTaken = false;
 	ResetTimer = 5.0f;
+	if (ItemType == ITEM_NONE)
+	{
+		m_ItemType = rand() % ((int)ITEM_END -1) + 1;
+	}
+
 }
 
 CItemCubes::~CItemCubes()
@@ -28,6 +33,7 @@ void CItemCubes::Update(float _tick)
 	}
 	if (ResetTimer <= 0)
 	{
+		m_ItemType = rand() % ((int)ITEM_END - 1) + 1;
 		m_IsTaken = false;
 		SetActive(true);
 		ResetTimer = 5.0f;

@@ -105,27 +105,27 @@ void CScene::ResetScene()
 
 void CScene::UpdateScene(float _tick)
 {
-	// Delete the object that should be deleted fron last frame
-	for (auto obj : m_vGameObj)
+	if (_tick == 0)
 	{
-		if (obj->ShouldDestroyed()) { DestroyObject(obj); }
+		// Delete the object that should be deleted fron last frame
+		for (auto obj : m_vGameObj)
+		{
+			if (obj->ShouldDestroyed()) { DestroyObject(obj); }
+		}	
+		// Get each Object in the Scene and do their own Update Function
+		size_t currVecSize = m_vGameObj.size();
+		for (size_t index = 0; index < currVecSize; ++index)
+		{
+			m_vGameObj[index]->Update(_tick);
+			currVecSize = m_vGameObj.size(); // Revalidate the number of item inside the vector
+		}
 	}
-
 	// Box2D step
 	float32 timeStep = CTime::GetInstance()->GetDeltaTime();
 	int32 velocityIterations = 6;
 	int32 positionIterations = 2;
 	m_box2DWorld->Step(timeStep, velocityIterations, positionIterations);
-
-	// Get each Object in the Scene and do their own Update Function
-	size_t currVecSize = m_vGameObj.size();
-	for (size_t index = 0; index < currVecSize; ++index)
-	{
-		m_vGameObj[index]->Update(_tick);
-		currVecSize = m_vGameObj.size(); // Revalidate the number of item inside the vector
-	}
 }
-
 
 void CScene::Instantiate(CGameObject * _gameobj)
 {

@@ -43,8 +43,11 @@ private:
 	bool bRightPressed;
 	bool bFirePressed;
 	int m_iPlayerID;
-	float m_fInputReEnabletime;
 	float m_fCurrentRotation;
+	//TIMERS
+	float m_fInputReEnabletime;
+	float m_fGravityWellDuration;
+
 
 };
 

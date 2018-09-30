@@ -18,9 +18,25 @@ public:
 	CScene();
 	~CScene();
 
+	/**
+	 * Create all the game object that is build into the scene
+	 * at the beginning here. This will be running first when
+	 * the scene start.
+	 */
 	virtual void ConfigurateScene();
+	/**
+	 * Update all the contained object and logic of the game
+	 * every frame
+	 */
 	virtual void UpdateScene(float _tick);
+	/**
+	 * After ConfigurationScene() run, the scene is ready to be
+	 * run. This function will run and calls all the BeginPlay()
+	 * inside each gameobject and all the logic needs to be run
+	 * for the scene.
+	 */
 	virtual void BeginPlay();
+
 	void RenderScene();
 	void ResetScene();
 
@@ -32,9 +48,15 @@ public:
 	void DestroyObject(CGameObject* _gameobj);
 
 	b2World* GetWorld() const;
-	std::vector<CTextLabel*> m_vTextList;
+
 	std::vector<CGameObject*> GetObjectVec() const;
+	//std::map<std::string, std::shared_ptr<CTextLabel>> m_mTextList;
+	std::vector<CTextLabel*> m_vTextLabel;
+
+
 	int m_PigCount;
+
+
 public:
 
 	std::string m_sceneName;

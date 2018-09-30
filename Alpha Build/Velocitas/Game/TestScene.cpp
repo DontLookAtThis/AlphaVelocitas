@@ -9,21 +9,19 @@
 #include "Engine/SpriteRender.h"
 #include "Engine/AssetMgr.h"
 #include "Blocks.h"
+#include "RaceCourse.h"
+#include "CheckPoint.h"
 #include "ContactListener.h"
 #include "Engine/SceneMgr.h"
 #include "Game/SpaceShip.h"
 #include "Game/ItemCube.h"
 #include "Engine/TextLabel.h"
-//Includes
-#include <memory>
 
 void CTestScene::ConfigurateScene()
 {
 	__super::ConfigurateScene();
 
 	/** Configuration */
-	bSlingLoaded = false;
-	CurrentBird = -1;
 
 	this->m_sceneName = "Test Scene";
 
@@ -49,7 +47,7 @@ void CTestScene::ConfigurateScene()
 	Test->SetPosition(glm::vec2((util::SCR_WIDTH /4) + 100.0f, util::SCR_HEIGHT/2));
 	Test->SetScale(1.0f);
 	Test->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
-	m_vTextList.push_back(Test);
+	m_vTextLabel.push_back(Test);
 	//CGameObject* GravityBlock = new CBlocks(3);
 	//GravityBlock->SetWorld(this);
 	//GravityBlock->m_name = "Block1";
@@ -61,7 +59,7 @@ void CTestScene::ConfigurateScene()
 	//GravityBlock->GetComponent<CSpriteRender>()->SetSprite("Block");
 	//GravityBlock->GetComponent<CRigiBody2D>()->CreateGravityWell(GetWorld(), 10.0f, true, 0.5f);
 
-	CGameObject* ItemCube = new CItemCubes(ITEM_RAILGUN);
+	CGameObject* ItemCube = new CItemCubes(ITEM_GRAPPLINGHOOK);
 	ItemCube->SetWorld(this);
 	ItemCube->m_name = "ItemCube1";
 	ItemCube->m_tag = "ItemCube";
@@ -72,7 +70,7 @@ void CTestScene::ConfigurateScene()
 	ItemCube->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
 	ItemCube->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
 	
-	CGameObject* ItemCube2 = new CItemCubes(ITEM_RAILGUN);
+	CGameObject* ItemCube2 = new CItemCubes(ITEM_GRAPPLINGHOOK);
 	ItemCube2->SetWorld(this);
 	ItemCube2->m_name = "ItemCube1";
 	ItemCube2->m_tag = "ItemCube";
@@ -83,7 +81,7 @@ void CTestScene::ConfigurateScene()
 	ItemCube2->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
 	ItemCube2->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
 
-	CGameObject* ItemCube3 = new CItemCubes(ITEM_RAILGUN);
+	CGameObject* ItemCube3 = new CItemCubes(ITEM_GRAPPLINGHOOK);
 	ItemCube3->SetWorld(this);
 	ItemCube3->m_name = "ItemCube1";
 	ItemCube3->m_tag = "ItemCube";
@@ -94,7 +92,7 @@ void CTestScene::ConfigurateScene()
 	ItemCube3->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
 	ItemCube3->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
 
-	CGameObject* ItemCube4 = new CItemCubes(ITEM_RAILGUN);
+	CGameObject* ItemCube4 = new CItemCubes(ITEM_GRAPPLINGHOOK);
 	ItemCube4->SetWorld(this);
 	ItemCube4->m_name = "ItemCube1";
 	ItemCube4->m_tag = "ItemCube";
@@ -104,10 +102,43 @@ void CTestScene::ConfigurateScene()
 	this->m_vGameObj.push_back(ItemCube4);
 	ItemCube4->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
 	ItemCube4->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
+	
+	// Configurate Race Course
+	{
+		m_raceCourse = new CRaceCourse();
+		m_vGameObj.push_back(m_raceCourse);
+
+		CGameObject* checkPoint_1 = new CCheckPoint();
+		checkPoint_1->SetWorld(this);
+		m_vGameObj.push_back(checkPoint_1);
+		m_raceCourse->AddCheckPoint((CCheckPoint*)checkPoint_1);
+		checkPoint_1->m_name = "CheckPoint_1";
+		checkPoint_1->m_transform.position = glm::vec3(14.5f, 5.5f, 0.0f);
+		checkPoint_1->m_transform.scale = glm::vec3(5.0f, 1.0f, 0.0f);
+		checkPoint_1->GetComponent<CRigiBody2D>()->CreateBody(m_box2DWorld, b2_staticBody, false, true);
+		checkPoint_1->GetComponent<CRigiBody2D>()->GetBody()->GetFixtureList()->SetSensor(true);
+
+		CGameObject* checkPoint_2 = new CCheckPoint();
+		checkPoint_2->SetWorld(this);
+		m_vGameObj.push_back(checkPoint_2);
+		m_raceCourse->AddCheckPoint((CCheckPoint*)checkPoint_2);
+		checkPoint_2->m_name = "CheckPoint_2";
+		checkPoint_2->m_transform.position = glm::vec3(-10.0f, 8.5f, 0.0f);
+		checkPoint_2->m_transform.scale = glm::vec3(1.0f, 3.0f, 0.0f);
+		checkPoint_2->GetComponent<CRigiBody2D>()->CreateBody(m_box2DWorld, b2_staticBody, false, true);
+		checkPoint_2->GetComponent<CRigiBody2D>()->GetBody()->GetFixtureList()->SetSensor(true);
+	}
+
 
 	LoadAllPlayers();
 	LoadAllBlocks();
 	AddScore();
+
+	/** Create a example text */
+	//CTextLabel* newTextLabel = new CTextLabel("FontName");
+	//m_vTextLabel.push_back(newTextLabel);
+	//newTextLabel->SetText("Whatever text here");
+
 
 }
 
@@ -187,8 +218,11 @@ void CTestScene::LoadAllPlayers()
 	this->m_vGameObj.push_back(Player1);
 	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player1));
 	Player1->GetComponent<CSpriteRender>()->SetSprite("Player1");
-	Player1->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, false, true, 1.0f, 1.0f, 1);
-	Player1->GetComponent<CRigiBody2D>()->GetBody()->GetFixtureList()->SetRestitution(0.1f);
+	CRigiBody2D* player1RB = Player1->GetComponent<CRigiBody2D>();
+	player1RB->CreateBodyCircle(GetWorld(), b2_dynamicBody, false, true, 1.0f, 1.0f, 1);
+	player1RB->GetBody()->GetFixtureList()->SetRestitution(0.1f);
+	player1RB->CreateGravityWell(GetWorld(), 5.0f, true, 0.5f);
+	player1RB->m_bHasGravityWell = false;
 
 	CGameObject* Player2 = new CSpaceShip(2);
 	Player2->SetWorld(this);
@@ -199,8 +233,11 @@ void CTestScene::LoadAllPlayers()
 	this->m_vGameObj.push_back(Player2);
 	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player2));
 	Player2->GetComponent<CSpriteRender>()->SetSprite("Player2");
-	Player2->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, false, true, 1.0f, 1.0f, 1);
-	Player2->GetComponent<CRigiBody2D>()->GetBody()->GetFixtureList()->SetRestitution(0.1f);
+	CRigiBody2D* player2RB = Player2->GetComponent<CRigiBody2D>();
+	player2RB->CreateBodyCircle(GetWorld(), b2_dynamicBody, false, true, 1.0f, 1.0f, 1);
+	player2RB->GetBody()->GetFixtureList()->SetRestitution(0.1f);
+	player2RB->CreateGravityWell(GetWorld(), 5.0f, true, 0.5f);
+	player2RB->m_bHasGravityWell = false;
 	dynamic_cast<CSpaceShip*>(Player2)->bControllerInput = false;
 
 	CGameObject* Player3 = new CSpaceShip(3);
@@ -212,8 +249,11 @@ void CTestScene::LoadAllPlayers()
 	this->m_vGameObj.push_back(Player3);
 	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player3));
 	Player3->GetComponent<CSpriteRender>()->SetSprite("Player3");
-	Player3->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, false, true, 1.0f, 1.0f, 1);
-	Player3->GetComponent<CRigiBody2D>()->GetBody()->GetFixtureList()->SetRestitution(0.1f);
+	CRigiBody2D* player3RB = Player3->GetComponent<CRigiBody2D>();
+	player3RB->CreateBodyCircle(GetWorld(), b2_dynamicBody, false, true, 1.0f, 1.0f, 1);
+	player3RB->GetBody()->GetFixtureList()->SetRestitution(0.1f);
+	player3RB->CreateGravityWell(GetWorld(), 5.0f, true, 0.5f);
+	player3RB->m_bHasGravityWell = false;
 
 	CGameObject* Player4 = new CSpaceShip(4);
 	Player4->SetWorld(this);
@@ -224,8 +264,11 @@ void CTestScene::LoadAllPlayers()
 	this->m_vGameObj.push_back(Player4);
 	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player4));
 	Player4->GetComponent<CSpriteRender>()->SetSprite("Player4");
-	Player4->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, false, true, 1.0f, 1.0f, 1);
-	Player4->GetComponent<CRigiBody2D>()->GetBody()->GetFixtureList()->SetRestitution(0.1f);
+	CRigiBody2D* player4RB = Player4->GetComponent<CRigiBody2D>();
+	player4RB->CreateBodyCircle(GetWorld(), b2_dynamicBody, false, true, 1.0f, 1.0f, 1);
+	player4RB->GetBody()->GetFixtureList()->SetRestitution(0.1f);
+	player4RB->CreateGravityWell(GetWorld(), 5.0f, true, 0.5f);
+	player4RB->m_bHasGravityWell = false;
 
 }
 

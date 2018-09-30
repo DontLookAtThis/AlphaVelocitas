@@ -1,13 +1,8 @@
 #pragma once
 
-#include "Engine/Utility.h"
 // Derive Include
 #include "Engine/GameObject.h"
-#include "Engine/AssetMgr.h"
-#include "Engine/Component.h"
-#include "Engine/SpriteRender.h"
-#include "Engine/RigidBody2D.h"
-#include "Engine/Input.h"
+
 // Forward Declare
 class CSpriteRender;
 class CRigiBody2D;

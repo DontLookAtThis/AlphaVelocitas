@@ -16,6 +16,7 @@ public:
 
 	void NextCheckPoint(CGameObject* _player, CCheckPoint* _currCheckPoint);
 
+	void AddCheckPoint(CCheckPoint* _checkPoint);
 
 private:
 

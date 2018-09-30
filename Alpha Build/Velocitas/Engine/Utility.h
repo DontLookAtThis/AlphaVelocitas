@@ -18,6 +18,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <memory>
 #include <chrono>
 #include <strstream>
 #include <Windows.h>
@@ -84,6 +85,7 @@ enum ItemState
 	ITEM_RAILGUN,
 	ITEM_GRAVITYWELL,
 	ITEM_GRAPPLINGHOOK,
+	ITEM_END,
 };
 
 enum InputMouse 

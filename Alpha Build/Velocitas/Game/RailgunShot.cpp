@@ -2,6 +2,12 @@
 #include "ItemCube.h"
 #include "SpaceShip.h"
 #include "Engine/Time.h"
+#include "Engine/AssetMgr.h"
+#include "Engine/Component.h"
+#include "Engine/SpriteRender.h"
+#include "Engine/RigidBody2D.h"
+#include "Engine/Input.h"
+#include "Engine/Scene.h"
 
 CRailgunShot::CRailgunShot(b2Vec2 _Direction, CGameObject* User)
 {
@@ -57,9 +63,10 @@ void CRailgunShot::OnCollisionEnter(CGameObject * CollidedObject)
 			{
 				ship->bInputEnabled = false;
 				bHit = true;
+				this->SetActive(false);
 			}
 		}
-		if (m_user != CollidedObject && CollidedObject->m_tag != "ItemCube")
+		else if (m_user != CollidedObject && CollidedObject->m_tag != "ItemCube" && CollidedObject->m_tag != "Bullet")
 		{
 			//m_user->m_Scene->GetWorld()->DestroyBody(Get2DBody()->GetBody());
 			this->SetActive(false);

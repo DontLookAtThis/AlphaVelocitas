@@ -24,7 +24,8 @@ public:
 	void CreateBodyCircle(b2World* _world, b2BodyType BodyType,
 		bool bCanRotate = true, bool bHasFixture = true, float Density = 1.0f, float Friction = 0.3f, int fixtureType = 0);
 	void CreateGravityWell(b2World* _world, float fRadius, bool bHasFixture = true, float Strength = 0.0f);
-	void DestroyGravityWell();
+	void DestroyGravityWell();	
+
 	void SetBodyType(b2BodyType _bodyType);
 	b2BodyType GetBodyType() const;
 
@@ -37,7 +38,7 @@ public:
 	void OnCollisionEnter(CRigiBody2D* collidedRigiBody);
 	void OnCollisionExit(CRigiBody2D* collidedRigiBody);
 	Transform m_transform;
-
+	bool m_bHasGravityWell;
 private:
 
 	void CreateBody();
@@ -56,5 +57,5 @@ private:
 	float m_friction;
 	float m_GravityStrength;
 	int m_fixtureType;
-	bool m_bHasGravityWell;
+
 };

@@ -70,6 +70,9 @@ void CAssetMgr::InitializeAssets()
 	CreateSprite("9Block", "Resources/Sprites/9Block.png");
 	CreateSprite("10Block", "Resources/Sprites/10Block.png");
 	CreateSprite("11Block", "Resources/Sprites/11Block.png");
+
+	//Font
+	CreateFont("SpaceFont", "Resources/Fonts/Space.ttf");
 }
 
 

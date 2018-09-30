@@ -97,6 +97,9 @@
     <Filter Include="Game\RaceCourse">
       <UniqueIdentifier>{c23b9ab1-923e-4b5e-8760-be332242c84c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Scenes\GameOverScene">
+      <UniqueIdentifier>{04f7ff9e-1ac1-4cfa-be1d-88c56e31a529}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Engine\Commenting Header.txt">
@@ -188,6 +191,9 @@
     <ClInclude Include="Game\RailgunShot.h">
       <Filter>Game\LevelObjects</Filter>
     </ClInclude>
+    <ClInclude Include="Game\GameOverScene.h">
+      <Filter>Game\Scenes\GameOverScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Camera.cpp">
@@ -270,6 +276,9 @@
     </ClCompile>
     <ClCompile Include="Game\RailgunShot.cpp">
       <Filter>Game\LevelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameOverScene.cpp">
+      <Filter>Game\Scenes\GameOverScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

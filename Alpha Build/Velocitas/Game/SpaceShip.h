@@ -26,7 +26,7 @@ public:
 	void SetIsController(bool _bIsController);
 	CRigiBody2D* Get2DBody();
 	CSpriteRender* m_spriteRenderer;
-
+	int iScore = 0;
 private:
 	void Movement();
 	void Movement(bool bLeft, bool bRight, bool bUp, bool bDown);
@@ -43,8 +43,11 @@ private:
 	bool bRightPressed;
 	bool bFirePressed;
 	int m_iPlayerID;
-	float m_fInputReEnabletime;
 	float m_fCurrentRotation;
+	//TIMERS
+	float m_fInputReEnabletime;
+	float m_fGravityWellDuration;
+
 
 };
 

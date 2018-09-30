@@ -3,7 +3,6 @@
 
 // Global Include
 #include "Utility.h"
-//#include "TextLabel.h"
 
 // Forward Declaration
 class CGameObject;
@@ -11,6 +10,7 @@ class CCamera;
 class CCubeMap;
 class CTextLabel;
 class CContactListener;
+
 
 class CScene
 {

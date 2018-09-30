@@ -26,8 +26,9 @@ CSpaceShip::CSpaceShip(int playerID)
 	bHasBeenFired = false;
 	bIsLoaded = false;
 	bIsHeld = false;
-	fMovementSpeed = 1.0f;
-	m_fInputReEnabletime = 3.0f;
+	fMovementSpeed = 2.0f;
+	m_fInputReEnabletime = 2.0f;
+	m_fGravityWellDuration = 4.0f;
 }
 
 CSpaceShip::~CSpaceShip()
@@ -54,6 +55,7 @@ void CSpaceShip::Update(float _tick)
 	{
 		Movement();
 	}
+	//Reenabling Input;
 	if (!bInputEnabled)
 	{ 
 		m_fInputReEnabletime -= CTime::GetInstance()->GetDeltaTime();
@@ -63,6 +65,19 @@ void CSpaceShip::Update(float _tick)
 		m_fInputReEnabletime = 3.0f;
 		bInputEnabled = true;
 	}
+	//-----------------
+
+	//Disabling Gravity
+	if (Get2DBody()->m_bHasGravityWell == true)
+	{
+		m_fGravityWellDuration -= CTime::GetInstance()->GetDeltaTime();
+	}
+	if (m_fGravityWellDuration <= 0)
+	{
+		m_fGravityWellDuration = 4.0f;
+		Get2DBody()->m_bHasGravityWell = false;
+	}
+	//-----------------
 	UseItem();
 }
 
@@ -151,7 +166,7 @@ void CSpaceShip::Movement()
 	if (bRightPressed) { Right -= 1.5f; };
 	if (bUpPressed) { up++; };
 	if (bDownPressed) { up -= 0.5f; };
-	m_fCurrentRotation += Right;
+	m_fCurrentRotation += (Right * 2);
 	b2Body* myBody = Get2DBody()->GetBody();
 	if (myBody)
 	{
@@ -174,7 +189,7 @@ void CSpaceShip::Movement(bool bLeft, bool bRight, bool bUp, bool bDown)
 	if (bRight) { Right -= 1.5f; };
 	if (bUp) { up++; };
 	if (bDown) { up -= 0.5f; };
-	m_fCurrentRotation += Right;
+	m_fCurrentRotation += (Right * 2);
 	b2Body* myBody = Get2DBody()->GetBody();
 	if (myBody)
 	{
@@ -274,6 +289,7 @@ void CSpaceShip::UseItem()
 			break;
 		case ITEM_GRAVITYWELL:
 			CurrentItem = ITEM_NONE;
+			Get2DBody()->m_bHasGravityWell = true;
 			break;
 		case ITEM_GRAPPLINGHOOK:
 			CurrentItem = ITEM_NONE;

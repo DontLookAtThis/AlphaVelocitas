@@ -7,6 +7,7 @@
 #include "Debug.h"
 
 #include "Game/TestScene.h"
+#include "Game/GameOverScene.h"
 
 // Static Variable
 CSceneMgr* CSceneMgr::s_pSceneMgr = nullptr;
@@ -31,9 +32,11 @@ void CSceneMgr::InitializeScenes()
 {
 	/** Create scenes that is going to build in the game */
 	CreateNewScene("Test Scene", new CTestScene());
+	//CreateNewScene("GameOver Scene", new CGameOver());
 	//CreateNewScene("Second Scene", new CTestScene());
 
 	/** Run the first scene */
+	
 	if (!m_scenes.empty())
 	{
 		LoadScene("Test Scene");

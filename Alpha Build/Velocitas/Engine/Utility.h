@@ -85,6 +85,7 @@ enum ItemState
 	ITEM_RAILGUN,
 	ITEM_GRAVITYWELL,
 	ITEM_GRAPPLINGHOOK,
+	ITEM_END,
 };
 
 enum InputMouse 

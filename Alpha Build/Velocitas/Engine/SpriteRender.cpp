@@ -21,6 +21,7 @@ void CSpriteRender::BeginPlay()
 
 void CSpriteRender::Render(CCamera* _camera)
 {
+	
 	if (GetOwner()->IsActive() == false
 		|| m_sprite == nullptr)
 	{

@@ -77,6 +77,10 @@ void CScene::RenderScene()
 				= gameObject->GetComponent<CSpriteRender>())
 			{
 				spriteRenderer->Render(m_mainCamera);
+				for (auto it : m_mTextList)
+				{
+					it.second->RenderTextLabel();
+				}
 				//continue;
 			}
 		}

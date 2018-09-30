@@ -27,6 +27,7 @@ public:
 	CSprite* GetSprite();
 	float xMultiplier;
 	float yMultiplier;
+	bool bSpriteActive;
 private:
 
 	CSprite* m_sprite;

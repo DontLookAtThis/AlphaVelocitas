@@ -14,6 +14,7 @@
 #include "Game/SpaceShip.h"
 #include "Game/ItemCube.h"
 #include "Engine/TextLabel.h"
+#include "Game/GravityWellObj.h"
 //Includes
 #include <memory>
 
@@ -105,6 +106,12 @@ void CTestScene::ConfigurateScene()
 	ItemCube4->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
 	ItemCube4->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
 
+	CGameObject* GravityWell1 = new CGravityWell();
+	GravityWell1->SetWorld(this);
+	GravityWell1->m_name = "GravityWell1";
+	GravityWell1->m_transform.position = glm::vec3(10.0f, -7.0f, 0.0f);
+	Instantiate(GravityWell1);
+
 	LoadAllPlayers();
 	LoadAllBlocks();
 	AddScore();
@@ -187,6 +194,7 @@ void CTestScene::LoadAllPlayers()
 	this->m_vGameObj.push_back(Player1);
 	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player1));
 	Player1->GetComponent<CSpriteRender>()->SetSprite("Player1");
+	dynamic_cast<CSpaceShip*>(Player1)->m_GravityWell->SetSprite("Gravity");
 	CRigiBody2D* player1RB = Player1->GetComponent<CRigiBody2D>();
 	player1RB->CreateBodyCircle(GetWorld(), b2_dynamicBody, false, true, 1.0f, 1.0f, 1);
 	player1RB->GetBody()->GetFixtureList()->SetRestitution(0.1f);
@@ -202,6 +210,7 @@ void CTestScene::LoadAllPlayers()
 	this->m_vGameObj.push_back(Player2);
 	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player2));
 	Player2->GetComponent<CSpriteRender>()->SetSprite("Player2");
+	dynamic_cast<CSpaceShip*>(Player2)->m_GravityWell->SetSprite("Gravity");
 	CRigiBody2D* player2RB = Player2->GetComponent<CRigiBody2D>();
 	player2RB->CreateBodyCircle(GetWorld(), b2_dynamicBody, false, true, 1.0f, 1.0f, 1);
 	player2RB->GetBody()->GetFixtureList()->SetRestitution(0.1f);
@@ -218,6 +227,7 @@ void CTestScene::LoadAllPlayers()
 	this->m_vGameObj.push_back(Player3);
 	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player3));
 	Player3->GetComponent<CSpriteRender>()->SetSprite("Player3");
+	dynamic_cast<CSpaceShip*>(Player3)->m_GravityWell->SetSprite("Gravity");
 	CRigiBody2D* player3RB = Player3->GetComponent<CRigiBody2D>();
 	player3RB->CreateBodyCircle(GetWorld(), b2_dynamicBody, false, true, 1.0f, 1.0f, 1);
 	player3RB->GetBody()->GetFixtureList()->SetRestitution(0.1f);
@@ -233,6 +243,7 @@ void CTestScene::LoadAllPlayers()
 	this->m_vGameObj.push_back(Player4);
 	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player4));
 	Player4->GetComponent<CSpriteRender>()->SetSprite("Player4");
+	dynamic_cast<CSpaceShip*>(Player4)->m_GravityWell->SetSprite("Gravity");
 	CRigiBody2D* player4RB = Player4->GetComponent<CRigiBody2D>();
 	player4RB->CreateBodyCircle(GetWorld(), b2_dynamicBody, false, true, 1.0f, 1.0f, 1);
 	player4RB->GetBody()->GetFixtureList()->SetRestitution(0.1f);

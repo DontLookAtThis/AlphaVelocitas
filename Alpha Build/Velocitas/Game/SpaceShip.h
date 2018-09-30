@@ -26,9 +26,10 @@ public:
 	void SetIsController(bool _bIsController);
 	CRigiBody2D* Get2DBody();
 	CSpriteRender* m_spriteRenderer;
+	CSpriteRender* m_GravityWell;
 	int iScore = 0;
 private:
-	void Movement();
+	void Movement(float _tick);
 	void Movement(bool bLeft, bool bRight, bool bUp, bool bDown);
 	void MouseMovement(float MouseX, float MouseY);
 	void RotateVecotr(b2Vec2& Vector, float fDeg);

@@ -16,6 +16,10 @@ CSpaceShip::CSpaceShip(int playerID)
 {
 	m_spriteRenderer = CreateComponent<CSpriteRender>();
 	m_rigidBody = CreateComponent<CRigiBody2D>();
+	m_GravityWell = CreateComponent<CSpriteRender>();
+	m_GravityWell->bSpriteActive = false;
+	m_GravityWell->xMultiplier = 5.0f/ m_transform.scale.x;
+	m_GravityWell->yMultiplier = 5.0f / m_transform.scale.y;
 	bInputEnabled = true;
 	m_iPlayerID = playerID;
 	bControllerInput = true;
@@ -23,7 +27,7 @@ CSpaceShip::CSpaceShip(int playerID)
 	bHasBeenFired = false;
 	bIsLoaded = false;
 	bIsHeld = false;
-	fMovementSpeed = 2.0f;
+	fMovementSpeed = 1.5f;
 	m_fInputReEnabletime = 2.0f;
 	m_fGravityWellDuration = 4.0f;
 }
@@ -50,7 +54,7 @@ void CSpaceShip::Update(float _tick)
 	b2Body* myBody = Get2DBody()->GetBody();
 	if (myBody)
 	{
-		Movement();
+		Movement(_tick);
 	}
 	//Reenabling Input;
 	if (!bInputEnabled)
@@ -73,6 +77,7 @@ void CSpaceShip::Update(float _tick)
 	{
 		m_fGravityWellDuration = 4.0f;
 		Get2DBody()->m_bHasGravityWell = false;
+		m_GravityWell->bSpriteActive = false;
 	}
 	//-----------------
 	UseItem();
@@ -155,15 +160,15 @@ CRigiBody2D * CSpaceShip::Get2DBody()
 	}
 }
 
-void CSpaceShip::Movement()
+void CSpaceShip::Movement(float _tick)
 {
 	float Right = 0;
 	float up = 0;
-	if (bLeftPressed) { Right += 1.5f; };
-	if (bRightPressed) { Right -= 1.5f; };
+	if (bLeftPressed) { Right += 1.0f; };
+	if (bRightPressed) { Right -= 1.0f; };
 	if (bUpPressed) { up++; };
 	if (bDownPressed) { up -= 0.5f; };
-	m_fCurrentRotation += (Right * 2);
+	m_fCurrentRotation += (Right * 180 * CTime::GetInstance()->GetDeltaTime());
 	b2Body* myBody = Get2DBody()->GetBody();
 	if (myBody)
 	{
@@ -287,6 +292,7 @@ void CSpaceShip::UseItem()
 		case ITEM_GRAVITYWELL:
 			CurrentItem = ITEM_NONE;
 			Get2DBody()->m_bHasGravityWell = true;
+			m_GravityWell->bSpriteActive = true;
 			break;
 		case ITEM_GRAPPLINGHOOK:
 			CurrentItem = ITEM_NONE;

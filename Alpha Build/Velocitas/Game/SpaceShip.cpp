@@ -12,6 +12,9 @@
 #include "Engine/Camera.h"
 #include "Engine/Time.h"
 #include "RailgunShot.h"
+#include "Engine/Scene.h"
+
+
 CSpaceShip::CSpaceShip(int playerID)
 {
 	m_spriteRenderer = CreateComponent<CSpriteRender>();

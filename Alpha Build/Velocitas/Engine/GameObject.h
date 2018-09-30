@@ -3,10 +3,11 @@
 
 // Global Include
 #include "Utility.h"
-#include "Scene.h"
+
 // Forward Declare
 class CGameObject;
 class CComponent;
+class CScene;
 
 // Declare a Transform struct
 
@@ -22,6 +23,7 @@ public:
 	Transform m_transform;
 	int m_iHealth = 100;
 	CScene* m_Scene;
+
 protected:
 	
 	bool m_ShouldDestroyed;

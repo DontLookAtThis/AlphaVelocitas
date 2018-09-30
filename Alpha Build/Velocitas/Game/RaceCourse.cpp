@@ -44,3 +44,8 @@ void CRaceCourse::NextCheckPoint(CGameObject* _player, CCheckPoint* _currCheckPo
 		nextCheckPoint->AddPlayer(_player);
 	}
 }
+
+void CRaceCourse::AddCheckPoint(CCheckPoint* _checkPoint)
+{
+	m_vCheckPoints.push_back(_checkPoint);
+}

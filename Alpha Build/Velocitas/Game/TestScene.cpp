@@ -9,21 +9,19 @@
 #include "Engine/SpriteRender.h"
 #include "Engine/AssetMgr.h"
 #include "Blocks.h"
+#include "RaceCourse.h"
+#include "CheckPoint.h"
 #include "ContactListener.h"
 #include "Engine/SceneMgr.h"
 #include "Game/SpaceShip.h"
 #include "Game/ItemCube.h"
-
-//Includes
-#include <memory>
+#include "Engine/TextLabel.h"
 
 void CTestScene::ConfigurateScene()
 {
 	__super::ConfigurateScene();
 
 	/** Configuration */
-	bSlingLoaded = false;
-	CurrentBird = -1;
 
 	this->m_sceneName = "Test Scene";
 
@@ -98,10 +96,30 @@ void CTestScene::ConfigurateScene()
 	this->m_vGameObj.push_back(ItemCube4);
 	ItemCube4->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
 	ItemCube4->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
+	
+	// Configurate Race Course
+	{
+		m_raceCourse = new CRaceCourse();
+		m_vGameObj.push_back(m_raceCourse);
+
+		CGameObject* checkPoint_1 = new CCheckPoint();
+		checkPoint_1->SetWorld(this);
+		m_vGameObj.push_back(checkPoint_1);
+		m_raceCourse->AddCheckPoint((CCheckPoint*)checkPoint_1);
+
+
+	}
+
 
 	LoadAllPlayers();
 	LoadAllBlocks();
 	AddScore();
+
+	/** Create a example text */
+	//CTextLabel* newTextLabel = new CTextLabel("FontName");
+	//m_vTextLabel.push_back(newTextLabel);
+	//newTextLabel->SetText("Whatever text here");
+
 
 }
 

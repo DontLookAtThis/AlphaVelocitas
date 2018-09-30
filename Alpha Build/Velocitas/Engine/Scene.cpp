@@ -7,6 +7,9 @@
 #include "RigidBody2D.h"
 #include "Debug.h"
 #include "Camera.h"
+#include "TextLabel.h"
+#include "ContactListener.h"
+#include "Engine/Time.h"
 //#include "Player.h"
 //#include "PowerUps.h"
 //#include "AssetMgr.h"
@@ -16,9 +19,7 @@
 //#include "Input.h"
 //#include "CAIMgr.h"
 //#include "CubeMap.h"
-//#include "TextLabel.h"
-#include "ContactListener.h"
-#include "Engine/Time.h"
+
 CScene::CScene()
 {
 	m_mainCamera = nullptr;
@@ -77,13 +78,15 @@ void CScene::RenderScene()
 				= gameObject->GetComponent<CSpriteRender>())
 			{
 				spriteRenderer->Render(m_mainCamera);
-				for (auto it : m_mTextList)
-				{
-					it.second->RenderTextLabel();
-				}
 				//continue;
 			}
 		}
+	}
+
+	// Render all the textLabel in the scene
+	for (CTextLabel* textLabel : m_vTextLabel)
+	{
+		textLabel->RenderTextLabel();
 	}
 	
 }

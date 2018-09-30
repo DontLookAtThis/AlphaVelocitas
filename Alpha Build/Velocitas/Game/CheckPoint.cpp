@@ -10,12 +10,13 @@
 
 CCheckPoint::CCheckPoint()
 {
+	m_name = "CheckPoint";
+	m_tag = "CheckPoint";
+
 	m_spriteRender = CreateComponent<CSpriteRender>();
 	m_rigidBody = CreateComponent<CRigiBody2D>();
 
-	//m_spriteRender->SetSprite()
-
-	b2World* world = CSceneMgr::GetInstance()->GetRunningScene()->GetWorld();
+	b2World* world = m_Scene->GetWorld();
 	m_rigidBody->CreateBody(world, b2_staticBody, false, true);
 	m_rigidBody->GetBody()->GetFixtureList()->SetSensor(true);
 }
@@ -38,6 +39,28 @@ void CCheckPoint::Update(float _tick)
 
 }
 
+void CCheckPoint::OnCollisionEnter(CGameObject* CollidedObject)
+{
+	__super::OnCollisionEnter(CollidedObject);
+	
+	if (CSpaceShip* player = dynamic_cast<CSpaceShip*>(CollidedObject))
+	{
+		PassCheckPoint(player);
+	}
+}
+
+float CCheckPoint::GetDistanceToCheckPoint(CGameObject* _player)
+{
+	//float distance;
+
+	//Transform thistrans = this->m_transform;
+
+
+
+	//return distance;
+	return 0;
+}
+
 void CCheckPoint::PassCheckPoint(CGameObject* _player)
 {
 	m_raceCourse->NextCheckPoint(_player, this);
@@ -46,7 +69,7 @@ void CCheckPoint::PassCheckPoint(CGameObject* _player)
 void CCheckPoint::AddPlayer(CGameObject* _player)
 {
 	// Check if the player is already been added
-	for (auto iter = m_playerVec.begin(); iter != m_playerVec.end(); ++iter)
+	for (auto iter = m_pursuingPlayerVec.begin(); iter != m_pursuingPlayerVec.end(); ++iter)
 	{
 		if (*iter == _player)
 		{
@@ -54,16 +77,16 @@ void CCheckPoint::AddPlayer(CGameObject* _player)
 		}
 	}
 	// Add the player into the vector
-	m_playerVec.push_back(_player);
+	m_pursuingPlayerVec.push_back(_player);
 }
 
 void CCheckPoint::RemovePlayer(CGameObject* _player)
 {
-	for (auto iter = m_playerVec.begin(); iter != m_playerVec.end(); ++iter)
+	for (auto iter = m_pursuingPlayerVec.begin(); iter != m_pursuingPlayerVec.end(); ++iter)
 	{
 		if (*iter == _player)
 		{
-			m_playerVec.erase(iter);
+			m_pursuingPlayerVec.erase(iter);
 			return;
 		}
 	}
@@ -71,5 +94,6 @@ void CCheckPoint::RemovePlayer(CGameObject* _player)
 
 std::vector<CGameObject*> CCheckPoint::GetPlayerVec() const
 {
-	return m_playerVec;
+	return m_pursuingPlayerVec;
 }
+

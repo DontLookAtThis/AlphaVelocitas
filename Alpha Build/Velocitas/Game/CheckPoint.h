@@ -16,9 +16,11 @@ public:
 	CCheckPoint();
 	virtual ~CCheckPoint();
 
-	virtual void BeginPlay();
-	virtual void Update(float _tick);
+	virtual void BeginPlay() override;
+	virtual void Update(float _tick) override;
+	virtual void OnCollisionEnter(CGameObject* CollidedObject) override;
 
+	float GetDistanceToCheckPoint(CGameObject* _player);
 	void PassCheckPoint(CGameObject* _player);
 	void AddPlayer(CGameObject* _player);
 	void RemovePlayer(CGameObject* _player);
@@ -31,7 +33,7 @@ private:
 	CRigiBody2D* m_rigidBody;
 
 	// A vector of player who are chasing this check point
-	std::vector<CGameObject*> m_playerVec;
+	std::vector<CGameObject*> m_pursuingPlayerVec;
 
 	// The race course of the check point
 	CRaceCourse* m_raceCourse;

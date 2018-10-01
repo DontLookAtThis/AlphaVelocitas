@@ -40,16 +40,17 @@ void CTestScene::ConfigurateScene()
 	BackGround->m_name = "BackGround";
 	BackGround->m_tag = "BackGround";
 	BackGround->m_transform.position = glm::vec3(0.0f, 0.0f, -1.0f);
-	BackGround->m_transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
+	BackGround->m_transform.scale = glm::vec3(2.0f, 2.0f, 2.0f);
 	this->m_vGameObj.push_back(BackGround);
 	BackGround->GetComponent<CSpriteRender>()->SetSprite("Background");
 	//--------------------------------------------------------------
-	CTextLabel* Test = new CTextLabel("SpaceFont");
-	Test->SetText("Testing Text");
-	Test->SetPosition(glm::vec2((util::SCR_WIDTH /4) + 100.0f, util::SCR_HEIGHT/2));
-	Test->SetScale(1.0f);
-	Test->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
-	m_vTextLabel.push_back(Test);
+	//CTextLabel* Test = new CTextLabel("SpaceFont");
+	//Test->SetText("Testing Text");
+	//Test->SetPosition(glm::vec2((util::SCR_WIDTH /4) + 100.0f, util::SCR_HEIGHT/2));
+	//Test->SetScale(1.0f);
+	//Test->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
+	//m_vTextLabel.push_back(Test);
+
 	//CGameObject* GravityBlock = new CBlocks(3);
 	//GravityBlock->SetWorld(this);
 	//GravityBlock->m_name = "Block1";
@@ -61,7 +62,7 @@ void CTestScene::ConfigurateScene()
 	//GravityBlock->GetComponent<CSpriteRender>()->SetSprite("Block");
 	//GravityBlock->GetComponent<CRigiBody2D>()->CreateGravityWell(GetWorld(), 10.0f, true, 0.5f);
 
-	CGameObject* ItemCube = new CItemCubes(ITEM_RAILGUN);
+	CGameObject* ItemCube = new CItemCubes(ITEM_GRAPPLINGHOOK);
 	ItemCube->SetWorld(this);
 	ItemCube->m_name = "ItemCube1";
 	ItemCube->m_tag = "ItemCube";
@@ -72,7 +73,7 @@ void CTestScene::ConfigurateScene()
 	ItemCube->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
 	ItemCube->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
 	
-	CGameObject* ItemCube2 = new CItemCubes(ITEM_RAILGUN);
+	CGameObject* ItemCube2 = new CItemCubes(ITEM_GRAPPLINGHOOK);
 	ItemCube2->SetWorld(this);
 	ItemCube2->m_name = "ItemCube1";
 	ItemCube2->m_tag = "ItemCube";
@@ -83,7 +84,7 @@ void CTestScene::ConfigurateScene()
 	ItemCube2->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
 	ItemCube2->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
 
-	CGameObject* ItemCube3 = new CItemCubes(ITEM_RAILGUN);
+	CGameObject* ItemCube3 = new CItemCubes(ITEM_GRAPPLINGHOOK);
 	ItemCube3->SetWorld(this);
 	ItemCube3->m_name = "ItemCube1";
 	ItemCube3->m_tag = "ItemCube";
@@ -94,7 +95,7 @@ void CTestScene::ConfigurateScene()
 	ItemCube3->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
 	ItemCube3->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
 
-	CGameObject* ItemCube4 = new CItemCubes(ITEM_RAILGUN);
+	CGameObject* ItemCube4 = new CItemCubes(ITEM_GRAPPLINGHOOK);
 	ItemCube4->SetWorld(this);
 	ItemCube4->m_name = "ItemCube1";
 	ItemCube4->m_tag = "ItemCube";
@@ -148,7 +149,7 @@ void CTestScene::ConfigurateScene()
 	CGameObject* GravityWell1 = new CGravityWell();
 	GravityWell1->SetWorld(this);
 	GravityWell1->m_name = "GravityWell1";
-	GravityWell1->m_transform.position = glm::vec3(10.0f, -7.0f, 0.0f);
+	GravityWell1->m_transform.position = glm::vec3(9.0f, -6.0f, 0.0f);
 	Instantiate(GravityWell1);
 
 	LoadAllPlayers();

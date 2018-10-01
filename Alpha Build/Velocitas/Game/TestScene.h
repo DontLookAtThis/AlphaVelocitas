@@ -22,9 +22,10 @@ public:
 
 	void LoadAllBlocks();
 	void LoadAllPlayers();
+	void LoadUserInterface();
 	void Reset();
-	void AddScore();
 	void CheckWin();
+	void SetScores();
 	void CreateBlocks(int iBlockID, std::string Name, std::string SpriteName, Transform Transform, std::string Tag = "Block");
 
 	//For the players
@@ -38,8 +39,15 @@ public:
 	CRaceCourse* m_raceCourse;
 	std::vector<CSpaceShip*> m_vPlayers;
 	
-
 private:
-	
+	CGameObject* Player1;
+	CGameObject* Player2;
+	CGameObject* Player3;
+	CGameObject* Player4;
+
+	CTextLabel * Player1Score;
+	CTextLabel * Player2Score;
+	CTextLabel * Player3Score;
+	CTextLabel * Player4Score;
 
 };

@@ -103,7 +103,7 @@ void CSprite::CreateSprite(const char* _filePath /**  , GLuint _programID */)
 	glBindVertexArray(0);
 }
 
-void CSprite::RenderSprite(Transform _transform, CCamera* _camera, GLuint _programID)
+void CSprite::RenderSprite(Transform _transform, CCamera* _camera, GLuint _programID, float _xMod, float _yMod)
 {
 	glUseProgram(_programID);
 	glEnable(GL_BLEND);
@@ -112,7 +112,7 @@ void CSprite::RenderSprite(Transform _transform, CCamera* _camera, GLuint _progr
 	glUniform1i(glGetUniformLocation(_programID, "tex"), 0);
 
 	glm::vec3 position = _transform.position * (float)util::PIXELUNIT;
-	glm::vec3 scale = _transform.scale;
+	glm::vec3 scale = glm::vec3(_transform.scale.x * _xMod, _transform.scale.y * _yMod, _transform.scale.z);
 	glm::vec3 rotation = _transform.rotation;
 
 	glm::mat4 objTranslate = glm::translate(glm::mat4(), position);

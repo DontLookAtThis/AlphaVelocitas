@@ -10,6 +10,8 @@ CSpriteRender::CSpriteRender()
 {
 	m_sprite = CAssetMgr::GetInstance()->GetSprite("DefaultSprite");
 	m_programID = CAssetMgr::GetInstance()->GetProgramID("DefaultSpriteProgram");
+	 xMultiplier = 1.0f;
+	 yMultiplier = 1.0f;
 }
 
 CSpriteRender::~CSpriteRender() {}
@@ -29,7 +31,7 @@ void CSpriteRender::Render(CCamera* _camera)
 	}
 
 	m_sprite->RenderSprite(GetOwner()->m_transform, 
-		_camera, m_programID);
+		_camera, m_programID, xMultiplier, yMultiplier);
 }
 
 void CSpriteRender::SetSprite(CSprite* _sprite)

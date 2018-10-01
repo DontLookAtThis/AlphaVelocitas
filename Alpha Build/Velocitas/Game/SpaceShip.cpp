@@ -1,7 +1,7 @@
 
 // This Include
 #include "SpaceShip.h"
-
+#include "GrapplingHook.h"
 // Engine Include
 #include "Engine/AssetMgr.h"
 #include "Engine/Component.h"
@@ -308,6 +308,7 @@ void CSpaceShip::UseItem()
 			break;
 		case ITEM_GRAPPLINGHOOK:
 			CurrentItem = ITEM_NONE;
+			m_Scene->Instantiate(new CGrapplingHook(m_FacingDirection, this));
 			break;
 		}
 	}

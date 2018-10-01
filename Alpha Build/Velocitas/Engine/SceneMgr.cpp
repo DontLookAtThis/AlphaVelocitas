@@ -32,7 +32,7 @@ void CSceneMgr::InitializeScenes()
 {
 	/** Create scenes that is going to build in the game */
 	CreateNewScene("Test Scene", new CTestScene());
-	//CreateNewScene("GameOver Scene", new CGameOver());
+	CreateNewScene("GameOver Scene", new CGameOver());
 	//CreateNewScene("Second Scene", new CTestScene());
 
 	/** Run the first scene */

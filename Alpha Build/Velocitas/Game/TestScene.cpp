@@ -103,9 +103,10 @@ void CTestScene::ConfigurateScene()
 	ItemCube4->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
 	ItemCube4->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
 	
-	// Configurate Race Course
+	/** Configurate Race Course */
 	{
 		m_raceCourse = new CRaceCourse();
+		m_raceCourse->SetWorld(this);
 		m_vGameObj.push_back(m_raceCourse);
 
 		CGameObject* checkPoint_1 = new CCheckPoint();
@@ -115,8 +116,6 @@ void CTestScene::ConfigurateScene()
 		checkPoint_1->m_name = "CheckPoint_1";
 		checkPoint_1->m_transform.position = glm::vec3(14.5f, 5.5f, 0.0f);
 		checkPoint_1->m_transform.scale = glm::vec3(5.0f, 1.0f, 0.0f);
-		checkPoint_1->GetComponent<CRigiBody2D>()->CreateBody(m_box2DWorld, b2_staticBody, false, true);
-		checkPoint_1->GetComponent<CRigiBody2D>()->GetBody()->GetFixtureList()->SetSensor(true);
 
 		CGameObject* checkPoint_2 = new CCheckPoint();
 		checkPoint_2->SetWorld(this);
@@ -125,8 +124,22 @@ void CTestScene::ConfigurateScene()
 		checkPoint_2->m_name = "CheckPoint_2";
 		checkPoint_2->m_transform.position = glm::vec3(-10.0f, 8.5f, 0.0f);
 		checkPoint_2->m_transform.scale = glm::vec3(1.0f, 3.0f, 0.0f);
-		checkPoint_2->GetComponent<CRigiBody2D>()->CreateBody(m_box2DWorld, b2_staticBody, false, true);
-		checkPoint_2->GetComponent<CRigiBody2D>()->GetBody()->GetFixtureList()->SetSensor(true);
+
+		CGameObject* checkPoint_3 = new CCheckPoint();
+		checkPoint_3->SetWorld(this);
+		m_vGameObj.push_back(checkPoint_3);
+		m_raceCourse->AddCheckPoint((CCheckPoint*)checkPoint_3);
+		checkPoint_3->m_name = "CheckPoint_3";
+		checkPoint_3->m_transform.position = glm::vec3(-14.5f, -5.5f, 0.0f);
+		checkPoint_3->m_transform.scale = glm::vec3(5.0f, 1.0f, 0.0f);
+
+		CGameObject* checkPoint_4 = new CCheckPoint();
+		checkPoint_4->SetWorld(this);
+		m_vGameObj.push_back(checkPoint_4);
+		m_raceCourse->AddCheckPoint((CCheckPoint*)checkPoint_4);
+		checkPoint_4->m_name = "CheckPoint_4";
+		checkPoint_4->m_transform.position = glm::vec3(10.0f, -8.5f, 0.0f);
+		checkPoint_4->m_transform.scale = glm::vec3(1.0f, 3.0f, 0.0f);
 	}
 
 
@@ -145,7 +158,6 @@ void CTestScene::ConfigurateScene()
 void CTestScene::BeginPlay()
 {
 	__super::BeginPlay();
-	
 
 }
 
@@ -153,6 +165,15 @@ void CTestScene::UpdateScene(float _tick)
 {
 	__super::UpdateScene(_tick);
 	CheckWin();
+	
+	// Make the camera to the first players position
+	glm::vec3 newCameraPosition;
+	if (CGameObject* firstPlayer = m_raceCourse->GetFirstPlayer())
+	{
+		newCameraPosition = firstPlayer->m_transform.position * (float)util::PIXELUNIT;
+	}
+	newCameraPosition.z = m_mainCamera->GetCameraPosition().z;
+	m_mainCamera->SetCameraPosition(newCameraPosition);
 }
 
 void CTestScene::LoadAllBlocks()

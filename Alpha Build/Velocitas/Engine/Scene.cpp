@@ -170,6 +170,73 @@ void CScene::DestroyObject(CGameObject* _gameobj)
 	}
 }
 
+CGameObject* CScene::FindGameObject(std::string _name) const
+{
+	// Try find the first game object with the same name
+	for (auto iterOject : m_vGameObj)
+	{
+		// If found, return the game object
+		if (iterOject->m_name == _name)
+		{
+			return iterOject;
+		}
+	}
+
+	// After loop through the vector, if nothing being found, return nullptr
+	return nullptr;
+}
+
+std::vector<CGameObject*> CScene::FindGameObjectAll(std::string _name) const
+{
+	std::vector<CGameObject*> resultVector;
+
+	// Try find game objects with the same name
+	for (auto iterOject : m_vGameObj)
+	{
+		// If found, append it into the vector
+		if (iterOject->m_name == _name)
+		{
+			resultVector.push_back(iterOject);
+		}
+	}
+
+	// Return the result
+	return resultVector;
+}
+
+CGameObject* CScene::FindObjectWithTag(std::string _tag) const
+{
+	// Try find the first game object with the same tag
+	for (auto iterOject : m_vGameObj)
+	{
+		if (iterOject->m_tag == _tag)
+		{
+			return iterOject;
+		}
+	}
+
+	// After loop through the vector, if nothing being found, return nullptr
+	return nullptr;
+}
+
+std::vector<CGameObject*> CScene::FindObjectWithTagAll(std::string _tag) const
+{
+	std::vector<CGameObject*> resultVector;
+
+	// Try find game objects with the same tag
+	for (auto iterOject : m_vGameObj)
+	{
+		// If found, append it into the vector
+		if (iterOject->m_tag == _tag)
+		{
+			resultVector.push_back(iterOject);
+		}
+	}
+
+	// Return the result
+	return resultVector;
+}
+
 b2World* CScene::GetWorld() const
 {
 	return m_box2DWorld;

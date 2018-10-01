@@ -25,9 +25,18 @@ public:
 	void MovementChecks();
 	void SetIsController(bool _bIsController);
 	CRigiBody2D* Get2DBody();
+
+	// Function for the player's placement in the RaceCourse
+	void AddCheckPointPassed();
+	void ResetCheckPointPassed();
+	int GetCheckPointPassed() const;
+
+
 	CSpriteRender* m_spriteRenderer;
 	int iScore = 0;
+
 private:
+
 	void Movement();
 	void Movement(bool bLeft, bool bRight, bool bUp, bool bDown);
 	void MouseMovement(float MouseX, float MouseY);
@@ -48,6 +57,6 @@ private:
 	float m_fInputReEnabletime;
 	float m_fGravityWellDuration;
 
-
+	int m_checkPointPassed;
 };
 

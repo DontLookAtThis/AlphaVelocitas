@@ -158,6 +158,21 @@ CRigiBody2D * CSpaceShip::Get2DBody()
 	}
 }
 
+void CSpaceShip::AddCheckPointPassed()
+{
+	m_checkPointPassed++;
+}
+
+void CSpaceShip::ResetCheckPointPassed()
+{
+	m_checkPointPassed = 0;
+}
+
+int CSpaceShip::GetCheckPointPassed() const
+{
+	return m_checkPointPassed;
+}
+
 void CSpaceShip::Movement()
 {
 	float Right = 0;

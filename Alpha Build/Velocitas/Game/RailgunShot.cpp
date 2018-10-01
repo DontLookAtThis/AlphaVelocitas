@@ -66,7 +66,7 @@ void CRailgunShot::OnCollisionEnter(CGameObject * CollidedObject)
 				this->SetActive(false);
 			}
 		}
-		else if (m_user != CollidedObject && CollidedObject->m_tag != "ItemCube" && CollidedObject->m_tag != "Bullet")
+		else if (m_user != CollidedObject && CollidedObject->m_tag == "Block")
 		{
 			//m_user->m_Scene->GetWorld()->DestroyBody(Get2DBody()->GetBody());
 			this->SetActive(false);

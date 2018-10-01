@@ -10,8 +10,9 @@ CSpriteRender::CSpriteRender()
 {
 	m_sprite = CAssetMgr::GetInstance()->GetSprite("DefaultSprite");
 	m_programID = CAssetMgr::GetInstance()->GetProgramID("DefaultSpriteProgram");
-	 xMultiplier = 1.0f;
-	 yMultiplier = 1.0f;
+	xMultiplier = 1.0f;
+	yMultiplier = 1.0f;
+	bSpriteActive = true;
 }
 
 CSpriteRender::~CSpriteRender() {}
@@ -25,7 +26,7 @@ void CSpriteRender::Render(CCamera* _camera)
 {
 	
 	if (GetOwner()->IsActive() == false
-		|| m_sprite == nullptr)
+		|| m_sprite == nullptr || bSpriteActive == false)
 	{
 		return;
 	}

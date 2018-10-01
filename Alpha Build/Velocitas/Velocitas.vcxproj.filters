@@ -197,6 +197,9 @@
     <ClInclude Include="Game\GrapplingHook.h">
       <Filter>Game\LevelObjects</Filter>
     </ClInclude>
+    <ClInclude Include="Game\GravityWellObj.h">
+      <Filter>Game\LevelObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Camera.cpp">
@@ -284,6 +287,9 @@
       <Filter>Game\Scenes\GameOverScene</Filter>
     </ClCompile>
     <ClCompile Include="Game\GrapplingHook.cpp">
+      <Filter>Game\LevelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GravityWellObj.cpp">
       <Filter>Game\LevelObjects</Filter>
     </ClCompile>
   </ItemGroup>

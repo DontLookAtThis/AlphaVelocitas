@@ -1,22 +1,10 @@
-//
-// Bachelor of Software Engineering
-// Media Design School
-// Auckland
-// New Zealand
-//
-// (c) 2018 Media Design School
-//
-// File Name    : Input.h
-// Description	: 
-// Author       : Richard Wulansari & Jacob Dewse
-// Mail         : richard.wul7481@mediadesign.school.nz, jacob.dew7364@mediadesign.school.nz
-//
-#include "CXBOXController.h"
+#pragma once
+
 // Local Include
 #include "Utility.h"
 
-#ifndef INPUT_H
-#define INPUT_H
+// XBOX Controller Support
+#include "CXBOXController.h"
 
 class CInput
 {
@@ -34,10 +22,8 @@ public:
 	static void InitMouse(int button, int glutState, int x, int y);
 	static void InitPassiveMouse(int x, int y);
 	void Update(float _tick);
+	void RefreshKeys();
 
-	std::vector<class XBOXController*> Players;
-	int MouseX;
-	int MouseY;
 private:
 	// Make Singleton
 	CInput();
@@ -61,6 +47,8 @@ public: // Public Variables
 	unsigned int g_cKeyState[255];
 	unsigned int g_cMouseState[3];
 
-};
+	int MouseX;
+	int MouseY;
 
-#endif // !INPUT_H
+	std::vector<XBOXController*> Players;
+};

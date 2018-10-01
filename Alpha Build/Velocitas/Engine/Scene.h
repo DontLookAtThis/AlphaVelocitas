@@ -11,12 +11,11 @@ class CTextLabel;
 class CContactListener;
 class CSpaceShip;
 
-
 class CScene
 {
 public:
 	CScene();
-	~CScene();
+	virtual ~CScene();
 
 	/**
 	 * Create all the game object that is build into the scene
@@ -46,6 +45,12 @@ public:
 	void Instantiate(CGameObject* _gameobj, glm::vec3 _pos);
 	void Instantiate(CGameObject* _gameobj, glm::vec3 _pos, glm::vec3 _scale, glm::vec3 _rotation);
 	void DestroyObject(CGameObject* _gameobj);
+
+	CGameObject* FindGameObject(std::string _name) const;
+	std::vector<CGameObject*> FindGameObjectAll(std::string _name) const;
+	CGameObject* FindObjectWithTag(std::string _tag) const;
+	std::vector<CGameObject*> FindObjectWithTagAll(std::string _tag) const;
+
 
 	b2World* GetWorld() const;
 

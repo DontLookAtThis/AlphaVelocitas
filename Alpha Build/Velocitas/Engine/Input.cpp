@@ -1,20 +1,6 @@
-//
-// Bachelor of Software Engineering
-// Media Design School
-// Auckland
-// New Zealand
-//
-// (c) 2018 Media Design School
-//
-// File Name    : Input.cpp
-// Description	: 
-// Author       : Richard Wulansari & Jacob Dewse
-// Mail         : richard.wul7481@mediadesign.school.nz, jacob.dew7364@mediadesign.school.nz
-//
 
 // This Include 
 #include "Input.h"
-
 
 // Static Variable
 CInput* CInput::s_pInput = nullptr;
@@ -45,6 +31,11 @@ void CInput::InitializeInput()
 	for (unsigned char i = 0; i < 255; i++)
 	{
 		g_cKeyState[i] = INPUT_RELEASED;
+	}
+
+	for (unsigned char i = 0; i < 3; i++)
+	{
+		g_cMouseState[i] = INPUT_RELEASED;
 	}
 
 	glutKeyboardFunc(InitKeyDown);
@@ -79,7 +70,23 @@ void CInput::Mouse(int button, int glutState, int x, int y)
 {
 	if (button < 3)
 	{
-		g_cMouseState[button] = (glutState == GLUT_DOWN) ? INPUT_HOLD : INPUT_RELEASED;
+		if (glutState == GLUT_DOWN)
+		{
+			if (g_cMouseState[button] == INPUT_RELEASED)
+			{
+				g_cMouseState[button] = INPUT_FIRST_PRESS;
+				return;
+			}
+			else
+			{
+				g_cMouseState[button] = INPUT_HOLD;
+				return;
+			}
+		}
+		else if (glutState == GLUT_UP)
+		{
+			g_cMouseState[button] = INPUT_RELEASED;
+		}
 	}
 }
 
@@ -114,5 +121,26 @@ void CInput::Update(float _tick)
 	for (auto& player : Players)
 	{
 		player->Update();
+	}
+
+	RefreshKeys();
+}
+
+void CInput::RefreshKeys()
+{
+	for (unsigned char i = 0; i < 255; i++)
+	{
+		if (g_cKeyState[i] == INPUT_FIRST_PRESS)
+		{
+			g_cKeyState[i] = INPUT_HOLD;
+		}
+	}
+
+	for (unsigned char i = 0; i < 3; i++)
+	{
+		if (g_cMouseState[i] == INPUT_FIRST_PRESS)
+		{
+			g_cMouseState[i] = INPUT_HOLD;
+		}
 	}
 }

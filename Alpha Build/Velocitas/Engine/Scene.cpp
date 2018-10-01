@@ -10,6 +10,7 @@
 #include "TextLabel.h"
 #include "ContactListener.h"
 #include "Engine/Time.h"
+#include "Engine/GameObject.h"
 //#include "Player.h"
 //#include "PowerUps.h"
 //#include "AssetMgr.h"
@@ -76,12 +77,18 @@ void CScene::RenderScene()
 		{
 			// GameObject.render()
 			
-			if (CSpriteRender* spriteRenderer
-				= gameObject->GetComponent<CSpriteRender>())
+			for (CComponent* comp : gameObject->m_components)
 			{
-				spriteRenderer->Render(m_mainCamera);
-				//continue;
+				if (CSpriteRender* spriteRenderer
+					= dynamic_cast<CSpriteRender*>(comp))
+				{
+					spriteRenderer->Render(m_mainCamera);
+					//continue;
+				}
 			}
+
+
+			
 		}
 	}
 
@@ -110,20 +117,17 @@ void CScene::ResetScene()
 
 void CScene::UpdateScene(float _tick)
 {
-	if (_tick == 0)
+	// Delete the object that should be deleted fron last frame
+	for (auto obj : m_vGameObj)
 	{
-		// Delete the object that should be deleted fron last frame
-		for (auto obj : m_vGameObj)
-		{
-			if (obj->ShouldDestroyed()) { DestroyObject(obj); }
-		}	
-		// Get each Object in the Scene and do their own Update Function
-		size_t currVecSize = m_vGameObj.size();
-		for (size_t index = 0; index < currVecSize; ++index)
-		{
-			m_vGameObj[index]->Update(_tick);
-			currVecSize = m_vGameObj.size(); // Revalidate the number of item inside the vector
-		}
+		if (obj->ShouldDestroyed()) { DestroyObject(obj); }
+	}	
+	// Get each Object in the Scene and do their own Update Function
+	size_t currVecSize = m_vGameObj.size();
+	for (size_t index = 0; index < currVecSize; ++index)
+	{
+		m_vGameObj[index]->Update(_tick);
+		currVecSize = m_vGameObj.size(); // Revalidate the number of item inside the vector
 	}
 	// Box2D step
 	float32 timeStep = CTime::GetInstance()->GetDeltaTime();
@@ -168,6 +172,73 @@ void CScene::DestroyObject(CGameObject* _gameobj)
 			return;
 		}
 	}
+}
+
+CGameObject* CScene::FindGameObject(std::string _name) const
+{
+	// Try find the first game object with the same name
+	for (auto iterOject : m_vGameObj)
+	{
+		// If found, return the game object
+		if (iterOject->m_name == _name)
+		{
+			return iterOject;
+		}
+	}
+
+	// After loop through the vector, if nothing being found, return nullptr
+	return nullptr;
+}
+
+std::vector<CGameObject*> CScene::FindGameObjectAll(std::string _name) const
+{
+	std::vector<CGameObject*> resultVector;
+
+	// Try find game objects with the same name
+	for (auto iterOject : m_vGameObj)
+	{
+		// If found, append it into the vector
+		if (iterOject->m_name == _name)
+		{
+			resultVector.push_back(iterOject);
+		}
+	}
+
+	// Return the result
+	return resultVector;
+}
+
+CGameObject* CScene::FindObjectWithTag(std::string _tag) const
+{
+	// Try find the first game object with the same tag
+	for (auto iterOject : m_vGameObj)
+	{
+		if (iterOject->m_tag == _tag)
+		{
+			return iterOject;
+		}
+	}
+
+	// After loop through the vector, if nothing being found, return nullptr
+	return nullptr;
+}
+
+std::vector<CGameObject*> CScene::FindObjectWithTagAll(std::string _tag) const
+{
+	std::vector<CGameObject*> resultVector;
+
+	// Try find game objects with the same tag
+	for (auto iterOject : m_vGameObj)
+	{
+		// If found, append it into the vector
+		if (iterOject->m_tag == _tag)
+		{
+			resultVector.push_back(iterOject);
+		}
+	}
+
+	// Return the result
+	return resultVector;
 }
 
 b2World* CScene::GetWorld() const

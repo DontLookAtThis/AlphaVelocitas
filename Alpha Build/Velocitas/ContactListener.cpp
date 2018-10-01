@@ -16,8 +16,14 @@ void CContactListener::BeginContact(b2Contact* _contact)
 	CRigiBody2D* bodyA = static_cast<CRigiBody2D*>(_contact->GetFixtureA()->GetBody()->GetUserData());
 	CRigiBody2D* bodyB = static_cast<CRigiBody2D*>(_contact->GetFixtureB()->GetBody()->GetUserData());;
 
-	bodyA->OnCollisionEnter(bodyB);
-	bodyB->OnCollisionEnter(bodyA);
+	if (!_contact->GetFixtureB()->IsSensor())
+	{
+		bodyA->OnCollisionEnter(bodyB);
+	}
+	if (!_contact->GetFixtureA()->IsSensor())
+	{
+		bodyB->OnCollisionEnter(bodyA);
+	}
 }
 
 void CContactListener::EndContact(b2Contact * _contact)
@@ -25,8 +31,14 @@ void CContactListener::EndContact(b2Contact * _contact)
 	CRigiBody2D* bodyA = static_cast<CRigiBody2D*>(_contact->GetFixtureA()->GetBody()->GetUserData());
 	CRigiBody2D* bodyB = static_cast<CRigiBody2D*>(_contact->GetFixtureB()->GetBody()->GetUserData());;
 
-	bodyA->OnCollisionExit(bodyB);
-	bodyB->OnCollisionExit(bodyA);
+	if (!_contact->GetFixtureB()->IsSensor())
+	{
+		bodyA->OnCollisionExit(bodyB);
+	}
+	if (!_contact->GetFixtureA()->IsSensor())
+	{
+		bodyB->OnCollisionExit(bodyA);
+	}
 }
 
 void CContactListener::PostSolve(b2Contact * _contact, const b2ContactImpulse * impulse)

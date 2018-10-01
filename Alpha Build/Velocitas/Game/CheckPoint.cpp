@@ -8,6 +8,7 @@
 #include "Engine/RigidBody2D.h"
 #include "Engine/SpriteRender.h"
 #include "Engine/Debug.h"
+#include "Engine/Input.h"
 
 CCheckPoint::CCheckPoint()
 {
@@ -25,13 +26,14 @@ void CCheckPoint::BeginPlay()
 {
 	__super::BeginPlay();
 	
-
+	b2World* world = m_Scene->GetWorld();
+	m_rigidBody->CreateBody(world, b2_staticBody, false, true);
+	m_rigidBody->GetBody()->GetFixtureList()->SetSensor(true);
 }
 
 void CCheckPoint::Update(float _tick)
 {
 	__super::Update(_tick);
-	
 
 
 }
@@ -49,6 +51,13 @@ void CCheckPoint::OnCollisionEnter(CGameObject* CollidedObject)
 				CDebug::Log(player->m_name + " passed " + m_name);
 				PassCheckPoint(player);
 			}
+		}
+
+		// If this is the pursuing check point and a ship hits this, set the next check point as pursue check point
+		if (m_raceCourse->GetPursuingCheckPoint() == this)
+		{
+			m_raceCourse->SetPursuingCheckPoint(
+				m_raceCourse->GetNextCheckPoint(m_raceCourse->GetPursuingCheckPoint()));
 		}
 	}
 }
@@ -87,6 +96,7 @@ void CCheckPoint::AddPlayer(CGameObject* _player)
 	}
 	// Add the player into the vector
 	m_pursuingPlayerVec.push_back(_player);
+	CDebug::Log(_player->m_name + " now pursuing " + m_name);
 }
 
 void CCheckPoint::RemovePlayer(CGameObject* _player)

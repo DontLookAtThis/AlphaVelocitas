@@ -117,11 +117,15 @@ void CScene::ResetScene()
 
 void CScene::UpdateScene(float _tick)
 {
+	// Update the camera as there maybe value change
+	m_mainCamera->UpdateCamera();
+
 	// Delete the object that should be deleted fron last frame
 	for (auto obj : m_vGameObj)
 	{
 		if (obj->ShouldDestroyed()) { DestroyObject(obj); }
-	}	
+	}
+
 	// Get each Object in the Scene and do their own Update Function
 	size_t currVecSize = m_vGameObj.size();
 	for (size_t index = 0; index < currVecSize; ++index)

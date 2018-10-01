@@ -180,7 +180,7 @@ void CTestScene::UpdateScene(float _tick)
 	glm::vec3 newCameraPosition;
 	if (CGameObject* firstPlayer = m_raceCourse->GetFirstPlayer())
 	{
-		newCameraPosition = firstPlayer->m_transform.position * (float)util::PIXELUNIT;
+		newCameraPosition = firstPlayer->m_transform.position;
 	}
 	newCameraPosition.z = m_mainCamera->GetCameraPosition().z;
 	m_mainCamera->SetCameraPosition(newCameraPosition);

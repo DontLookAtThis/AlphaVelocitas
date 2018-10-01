@@ -62,6 +62,7 @@ CGameObject::CGameObject()
 {
 	m_ShouldDestroyed = false;
 	m_isActive = true;
+	m_isUpdating = true;
 	m_iHealth = 100;
 	m_isAlive = true;
 }
@@ -130,6 +131,16 @@ void CGameObject::SetActive(bool _b)
 	{
 		component->SetActive(_b);
 	}
+}
+
+bool CGameObject::IsUpdating() const
+{
+	return m_isUpdating;
+}
+
+void CGameObject::SetUpdating(bool _b)
+{
+	m_isUpdating = _b;
 }
 
 void CGameObject::TakeDamage(int _damage)

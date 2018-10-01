@@ -126,7 +126,10 @@ void CScene::UpdateScene(float _tick)
 	size_t currVecSize = m_vGameObj.size();
 	for (size_t index = 0; index < currVecSize; ++index)
 	{
-		m_vGameObj[index]->Update(_tick);
+		if (m_vGameObj[index]->IsUpdating())
+		{
+			m_vGameObj[index]->Update(_tick);
+		}
 		currVecSize = m_vGameObj.size(); // Revalidate the number of item inside the vector
 	}
 	// Box2D step

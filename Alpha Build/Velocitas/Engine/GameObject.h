@@ -21,12 +21,14 @@ public:
 	std::string m_tag;
 	std::string m_name;
 	Transform m_transform;
+
 	int m_iHealth = 100;
 	CScene* m_Scene;
 	std::vector<CComponent*> m_components;
 
 protected:
 	
+	bool m_isUpdating;
 	bool m_ShouldDestroyed;
 	bool m_isActive;
 	bool m_isAlive;
@@ -61,9 +63,16 @@ public:
 	 */
 	bool IsActive() const;
 	/*
-	 *Set active state for a object
+	 * Set active state for a object
 	 */
 	void SetActive(bool);
+
+	/*
+	* Get and Set updating state for a object
+	*/
+	bool IsUpdating() const;
+	void SetUpdating(bool);
+
 	void TakeDamage(int _damage);
 
 	virtual void OnCollisionEnter(CGameObject * CollidedObject);

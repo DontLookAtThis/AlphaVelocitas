@@ -92,3 +92,13 @@ void CCamera::SetCameraNormal(glm::vec3 _Normal)
 	CalcViewMatrix();
 	SetProjectionMatrix();
 }
+
+float CCamera::GetCameraWidth() const
+{
+
+}
+
+float CCamera::GetCameraHeight() const
+{
+
+}

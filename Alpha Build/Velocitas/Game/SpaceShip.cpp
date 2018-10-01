@@ -178,6 +178,11 @@ int CSpaceShip::GetCheckPointPassed() const
 	return m_checkPointPassed;
 }
 
+void CSpaceShip::CheckDeath()
+{
+
+}
+
 void CSpaceShip::Movement(float _tick)
 {
 	float Right = 0;

@@ -29,6 +29,9 @@ public:
 	glm::vec3 GetCameraNormal() const;
 	void SetCameraNormal(glm::vec3 _Normal);
 
+	float GetCameraWidth() const;
+	float GetCameraHeight() const;
+
 private:
 	glm::vec3 m_CameraPosition;
 	glm::vec3 m_CameraFacing;

@@ -72,7 +72,7 @@ void CGrapplingHook::OnCollisionEnter(CGameObject * CollidedObject)
 {
 	if (bHit == false && this->IsActive())
 	{
-		if (CollidedObject->m_tag != "Player" && m_user != CollidedObject && CollidedObject->m_tag != "ItemCube" && CollidedObject->m_tag != "Bullet")
+		if (CollidedObject->m_tag == "Block")
 		{
 			bHit = true;
 			//this->SetActive(false);

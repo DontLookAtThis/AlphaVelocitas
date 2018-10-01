@@ -10,7 +10,7 @@ class CCamera;
 class CCubeMap;
 class CTextLabel;
 class CContactListener;
-
+class CSpaceShip;
 
 class CScene
 {

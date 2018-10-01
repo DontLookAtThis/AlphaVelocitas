@@ -10,6 +10,7 @@
 #include "TextLabel.h"
 #include "ContactListener.h"
 #include "Engine/Time.h"
+#include "Engine/GameObject.h"
 //#include "Player.h"
 //#include "PowerUps.h"
 //#include "AssetMgr.h"
@@ -76,12 +77,18 @@ void CScene::RenderScene()
 		{
 			// GameObject.render()
 			
-			if (CSpriteRender* spriteRenderer
-				= gameObject->GetComponent<CSpriteRender>())
+			for (CComponent* comp : gameObject->m_components)
 			{
-				spriteRenderer->Render(m_mainCamera);
-				//continue;
+				if (CSpriteRender* spriteRenderer
+					= dynamic_cast<CSpriteRender*>(comp))
+				{
+					spriteRenderer->Render(m_mainCamera);
+					//continue;
+				}
 			}
+
+
+			
 		}
 	}
 

@@ -61,7 +61,7 @@ void CTestScene::ConfigurateScene()
 	//GravityBlock->GetComponent<CSpriteRender>()->SetSprite("Block");
 	//GravityBlock->GetComponent<CRigiBody2D>()->CreateGravityWell(GetWorld(), 10.0f, true, 0.5f);
 
-	CGameObject* ItemCube = new CItemCubes(ITEM_GRAPPLINGHOOK);
+	CGameObject* ItemCube = new CItemCubes(ITEM_RAILGUN);
 	ItemCube->SetWorld(this);
 	ItemCube->m_name = "ItemCube1";
 	ItemCube->m_tag = "ItemCube";
@@ -72,7 +72,7 @@ void CTestScene::ConfigurateScene()
 	ItemCube->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
 	ItemCube->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
 	
-	CGameObject* ItemCube2 = new CItemCubes(ITEM_GRAPPLINGHOOK);
+	CGameObject* ItemCube2 = new CItemCubes(ITEM_RAILGUN);
 	ItemCube2->SetWorld(this);
 	ItemCube2->m_name = "ItemCube1";
 	ItemCube2->m_tag = "ItemCube";
@@ -83,7 +83,7 @@ void CTestScene::ConfigurateScene()
 	ItemCube2->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
 	ItemCube2->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
 
-	CGameObject* ItemCube3 = new CItemCubes(ITEM_GRAPPLINGHOOK);
+	CGameObject* ItemCube3 = new CItemCubes(ITEM_RAILGUN);
 	ItemCube3->SetWorld(this);
 	ItemCube3->m_name = "ItemCube1";
 	ItemCube3->m_tag = "ItemCube";
@@ -94,7 +94,7 @@ void CTestScene::ConfigurateScene()
 	ItemCube3->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
 	ItemCube3->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
 
-	CGameObject* ItemCube4 = new CItemCubes(ITEM_GRAPPLINGHOOK);
+	CGameObject* ItemCube4 = new CItemCubes(ITEM_RAILGUN);
 	ItemCube4->SetWorld(this);
 	ItemCube4->m_name = "ItemCube1";
 	ItemCube4->m_tag = "ItemCube";

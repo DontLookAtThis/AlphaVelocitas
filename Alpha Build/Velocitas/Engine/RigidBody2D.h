@@ -38,7 +38,8 @@ public:
 	void OnCollisionEnter(CRigiBody2D* collidedRigiBody);
 	void OnCollisionExit(CRigiBody2D* collidedRigiBody);
 	Transform m_transform;
-	bool m_bHasGravityWell;
+	bool m_bHasGravityWell = false;
+
 private:
 
 	void CreateBody();

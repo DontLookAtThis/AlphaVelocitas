@@ -372,11 +372,11 @@ bool CRigiBody2D::GetHasFixture() const
 
 void CRigiBody2D::OnCollisionEnter(CRigiBody2D* collidedRigiBody)
 {
-	if (collidedRigiBody->GetBody())
+	if (collidedRigiBody->GetBody() && GetOwner()->m_tag != "Block" && collidedRigiBody->GetOwner() != GetOwner())
 	{
 		if (CGameObject* obj = collidedRigiBody->GetOwner())
 		{
-			if (collidedRigiBody->GetOwner()->m_tag == "Player")
+			if (collidedRigiBody->GetOwner()->m_tag == "Player" && m_bHasGravityWell)
 			{
 				BodiesColliding.push_back(collidedRigiBody->GetBody());
 			}

@@ -3,7 +3,6 @@
 
 // Global Include
 #include "Utility.h"
-
 // Forward Declaration
 class CGameObject;
 class CCamera;
@@ -59,9 +58,7 @@ public:
 	//std::map<std::string, std::shared_ptr<CTextLabel>> m_mTextList;
 	std::vector<CTextLabel*> m_vTextLabel;
 
-
 	int m_PigCount;
-	CSpaceShip* Winner;
 
 public:
 

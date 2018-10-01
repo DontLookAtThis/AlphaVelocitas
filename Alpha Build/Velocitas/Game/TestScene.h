@@ -25,7 +25,7 @@ public:
 	void LoadUserInterface();
 	void Reset();
 	void CheckWin();
-	void SetScores();
+	void CheckCurrentGadget();
 	void CreateBlocks(int iBlockID, std::string Name, std::string SpriteName, Transform Transform, std::string Tag = "Block");
 
 	//For the players
@@ -38,7 +38,9 @@ public:
 
 	CRaceCourse* m_raceCourse;
 	std::vector<CSpaceShip*> m_vPlayers;
-	
+	CSpaceShip* Winner;
+	CSpaceShip* Ship;
+
 private:
 	CGameObject* Player1;
 	CGameObject* Player2;
@@ -49,5 +51,12 @@ private:
 	CTextLabel * Player2Score;
 	CTextLabel * Player3Score;
 	CTextLabel * Player4Score;
+
+	CTextLabel * Player1Gadget;
+	CTextLabel * Player2Gadget;
+	CTextLabel * Player3Gadget;
+	CTextLabel * Player4Gadget;
+
+	std::string Gadget;
 
 };

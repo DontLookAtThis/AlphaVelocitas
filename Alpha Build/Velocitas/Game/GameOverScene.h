@@ -3,8 +3,9 @@
 // Derive Include
 #include "Engine\Scene.h"
 #include "Engine\TextLabel.h"
-
+#include "TestScene.h"
 class CSpaceShip;
+class CTestScene;
 
 class CGameOver : public CScene
 {
@@ -14,6 +15,7 @@ public:
 	virtual void BeginPlay() override;
 	virtual void UpdateScene(float _tick) override;
 	CTextLabel* Gameover;
+	CTestScene* FinalWinner;
 private:
 
 };

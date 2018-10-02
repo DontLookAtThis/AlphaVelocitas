@@ -37,7 +37,7 @@ public:
 	virtual void BeginPlay();
 
 	void RenderScene();
-	void ResetScene();
+	virtual void ResetScene();
 
 	//void CheckCollision();
 
@@ -53,6 +53,7 @@ public:
 
 
 	b2World* GetWorld() const;
+	CCamera* GetMainCamera() const;
 
 	std::vector<CGameObject*> GetObjectVec() const;
 	//std::map<std::string, std::shared_ptr<CTextLabel>> m_mTextList;
@@ -75,6 +76,7 @@ protected:
 	b2Vec2 m_gravity;
 	b2World* m_box2DWorld;
 	CContactListener* m_ContactListener;
+
 private:
 
 };

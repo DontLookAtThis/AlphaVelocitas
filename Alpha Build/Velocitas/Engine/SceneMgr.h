@@ -47,6 +47,15 @@ private:
 
 	CScene* m_runningScene;
 
+
+public:
+
+	// Store all the scores
+	int m_playerOneScore = 0;
+	int m_playerTwoScore = 0;
+	int m_playerThreeScore = 0;
+	int m_playerFourScore = 0;
+
 };
 
 #endif // !_SCENEMGR_H

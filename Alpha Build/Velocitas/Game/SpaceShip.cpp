@@ -164,6 +164,11 @@ CRigiBody2D * CSpaceShip::Get2DBody()
 	}
 }
 
+bool CSpaceShip::IsAlive() const
+{
+	return m_isAlive;
+}
+
 void CSpaceShip::AddCheckPointPassed()
 {
 	m_checkPointPassed++;
@@ -179,9 +184,14 @@ int CSpaceShip::GetCheckPointPassed() const
 	return m_checkPointPassed;
 }
 
-void CSpaceShip::CheckDeath()
+void CSpaceShip::Die()
 {
+	this->bInputEnabled = false;
+	this->m_isUpdating = false;
+	this->m_isActive = false;
+	this->m_isAlive = false;
 
+	//m_rigidBody->GetBody()->GetWorld()->DestroyBody(m_rigidBody->GetBody());
 }
 
 void CSpaceShip::Movement(float _tick)

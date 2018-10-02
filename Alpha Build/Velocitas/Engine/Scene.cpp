@@ -22,31 +22,32 @@
 //#include "CubeMap.h"
 
 CScene::CScene()
-{
-	m_mainCamera = nullptr;
-	m_cubemap = nullptr;
-	m_gravity = b2Vec2(0.0f, 0.0f);
-	m_box2DWorld = new b2World(m_gravity);
-	m_ContactListener = new CContactListener();
-	m_box2DWorld->SetContactListener(m_ContactListener);
-	m_PigCount = 0;
-}
+{}
 
 CScene::~CScene()
 {
 	std::cout << "Cleaning Scene... \n";
 	// Clean up the memory allocated variables inside the class
 	// ========================================================
+
+	delete m_box2DWorld;
+	m_box2DWorld = nullptr;
+
 	delete m_mainCamera;
 	m_cubemap = nullptr;
 
+	// Clear all the 
 	for (auto obj : m_vGameObj)
 	{
 		delete obj;
 	}
 	m_vGameObj.clear();
 
-	delete m_box2DWorld;
+	for (auto label : m_vTextLabel)
+	{
+		delete label;
+	}
+	m_vTextLabel.clear();
 
 	// ========================================================
 	std::cout << "Cleaning Done... \n";
@@ -54,6 +55,13 @@ CScene::~CScene()
 
 void CScene::ConfigurateScene() 
 { 
+	m_mainCamera = nullptr;
+	m_cubemap = nullptr;
+	m_gravity = b2Vec2(0.0f, 0.0f);
+	m_box2DWorld = new b2World(m_gravity);
+	m_ContactListener = new CContactListener();
+	m_box2DWorld->SetContactListener(m_ContactListener);
+
 	m_vGameObj.resize(0);
 }
 
@@ -103,9 +111,15 @@ void CScene::RenderScene()
 void CScene::ResetScene()
 {
 	CDebug::Log("Resetting Scene: " + m_sceneName);
-
+	
 	m_cubemap = nullptr;
 
+	delete m_box2DWorld;
+	m_box2DWorld = nullptr;
+	delete m_ContactListener;
+	m_ContactListener = nullptr;
+
+	delete m_mainCamera;
 	m_mainCamera = nullptr;
 
 	for (auto obj : m_vGameObj)
@@ -113,6 +127,12 @@ void CScene::ResetScene()
 		delete obj;
 	}
 	m_vGameObj.clear();
+
+	for (auto label : m_vTextLabel)
+	{
+		delete label;
+	}
+	m_vTextLabel.clear();
 }
 
 void CScene::UpdateScene(float _tick)
@@ -251,6 +271,11 @@ std::vector<CGameObject*> CScene::FindObjectWithTagAll(std::string _tag) const
 b2World* CScene::GetWorld() const
 {
 	return m_box2DWorld;
+}
+
+CCamera* CScene::GetMainCamera() const
+{
+	return m_mainCamera;
 }
 
 std::vector<CGameObject*> CScene::GetObjectVec() const

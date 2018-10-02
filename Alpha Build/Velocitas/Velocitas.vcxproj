@@ -43,6 +43,7 @@
     <ClInclude Include="Engine\Time.h" />
     <ClInclude Include="Engine\Utility.h" />
     <ClInclude Include="Game\Blocks.h" />
+    <ClInclude Include="Game\DeathSensor.h" />
     <ClInclude Include="Game\CheckPoint.h" />
     <ClInclude Include="Game\GameClasses.h" />
     <ClInclude Include="Game\GameOverScene.h" />
@@ -76,6 +77,7 @@
     <ClCompile Include="Engine\TextLoader.cpp" />
     <ClCompile Include="Engine\Time.cpp" />
     <ClCompile Include="Game\Blocks.cpp" />
+    <ClCompile Include="Game\DeathSensor.cpp" />
     <ClCompile Include="Game\CheckPoint.cpp" />
     <ClCompile Include="Game\GameOverScene.cpp" />
     <ClCompile Include="Game\GrapplingHook.cpp" />

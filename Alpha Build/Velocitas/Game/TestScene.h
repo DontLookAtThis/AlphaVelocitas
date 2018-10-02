@@ -6,6 +6,7 @@
 // Forward Declare
 class CSpaceShip;
 class CRaceCourse;
+class CDeathSensor;
 
 class CTestScene : public CScene
 {
@@ -14,10 +15,8 @@ public:
 	virtual void ConfigurateScene() override;
 	virtual void BeginPlay() override;
 	virtual void UpdateScene(float _tick) override;
+	virtual void ResetScene() override;
 
-	void CreateBlocks();
-	void CreatePigs();
-	void CreateBirdies();
 	void CreatePlayers();
 
 	void LoadAllBlocks();
@@ -40,6 +39,7 @@ public:
 	std::vector<CSpaceShip*> m_vPlayers;
 	CSpaceShip* Winner;
 	CSpaceShip* Ship;
+	std::vector<CDeathSensor*> m_deathSensors;
 
 private:
 	CGameObject* Player1;
@@ -47,15 +47,15 @@ private:
 	CGameObject* Player3;
 	CGameObject* Player4;
 
-	CTextLabel * Player1Score;
-	CTextLabel * Player2Score;
-	CTextLabel * Player3Score;
-	CTextLabel * Player4Score;
+	CTextLabel* Player1Score;
+	CTextLabel* Player2Score;
+	CTextLabel* Player3Score;
+	CTextLabel* Player4Score;
 
-	CTextLabel * Player1Gadget;
-	CTextLabel * Player2Gadget;
-	CTextLabel * Player3Gadget;
-	CTextLabel * Player4Gadget;
+	CTextLabel* Player1Gadget;
+	CTextLabel* Player2Gadget;
+	CTextLabel* Player3Gadget;
+	CTextLabel* Player4Gadget;
 
 	std::string Gadget;
 

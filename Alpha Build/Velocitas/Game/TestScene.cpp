@@ -11,12 +11,14 @@
 #include "Blocks.h"
 #include "RaceCourse.h"
 #include "CheckPoint.h"
+#include "DeathSensor.h"
 #include "ContactListener.h"
 #include "Engine/SceneMgr.h"
 #include "Game/SpaceShip.h"
 #include "Game/ItemCube.h"
 #include "Engine/TextLabel.h"
 #include "Game/GravityWellObj.h"
+#include "Engine/Debug.h"
 //Includes
 #include <memory>
 #include "Engine/Sound.h"
@@ -150,6 +152,28 @@ void CTestScene::ConfigurateScene()
 		checkPoint_4->m_transform.scale = glm::vec3(1.0f, 3.0f, 0.0f);
 	}
 
+	/** Configurate Death Sensor */
+	{
+		CDeathSensor* sensorLeft = new CDeathSensor(CAM_LEFT);
+		sensorLeft->SetWorld(this);
+		m_vGameObj.push_back(sensorLeft);
+		m_deathSensors.push_back(sensorLeft);
+
+		CDeathSensor* sensorRight = new CDeathSensor(CAM_RIGHT);
+		sensorRight->SetWorld(this);
+		m_vGameObj.push_back(sensorRight);
+		m_deathSensors.push_back(sensorRight);
+
+		CDeathSensor* sensorTop = new CDeathSensor(CAM_TOP);
+		sensorTop->SetWorld(this);
+		m_vGameObj.push_back(sensorTop);
+		m_deathSensors.push_back(sensorTop);
+
+		CDeathSensor* sensorBottom = new CDeathSensor(CAM_BOTTOM);
+		sensorBottom->SetWorld(this);
+		m_vGameObj.push_back(sensorBottom);
+		m_deathSensors.push_back(sensorBottom);
+	}
 
 	CGameObject* GravityWell1 = new CGravityWell();
 	GravityWell1->SetWorld(this);
@@ -172,6 +196,18 @@ void CTestScene::BeginPlay()
 {
 	__super::BeginPlay();
 
+	if (CGameObject* firstPlayer = m_raceCourse->GetFirstPlayer())
+	{
+		m_mainCamera->m_cameraPosition.x =
+			firstPlayer->m_transform.position.x;
+		m_mainCamera->m_cameraPosition.y =
+			firstPlayer->m_transform.position.y;
+	}
+
+	for (auto senser : m_deathSensors)
+	{
+		senser->SetShrinkPercentage(0.8f);
+	}
 }
 
 void CTestScene::UpdateScene(float _tick)
@@ -188,6 +224,18 @@ void CTestScene::UpdateScene(float _tick)
 		m_mainCamera->m_cameraPosition.y = 
 			firstPlayer->m_transform.position.y;
 	}
+}
+
+void CTestScene::ResetScene()
+{
+	__super::ResetScene();
+	
+	m_vPlayers.clear();
+	m_vPlayers.resize(0);
+
+	m_deathSensors.clear();
+	m_deathSensors.resize(0);
+
 }
 
 void CTestScene::LoadAllBlocks()
@@ -344,7 +392,7 @@ void CTestScene::LoadUserInterface()
 
 	//Player 1 score:
 	Player1Score = new CTextLabel("SpaceFont");
-	Player1Score->SetText("Score: ");
+	Player1Score->SetText("Score: " + ToString(CSceneMgr::GetInstance()->m_playerOneScore));
 	Player1Score->SetPosition(glm::vec2(0, util::SCR_HEIGHT - 65.0f));
 	Player1Score->SetScale(0.4f);
 	Player1Score->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
@@ -352,7 +400,7 @@ void CTestScene::LoadUserInterface()
 
 	//Player 2 Score:
 	Player2Score = new CTextLabel("SpaceFont");
-	Player2Score->SetText("Score: ");
+	Player2Score->SetText("Score: " + ToString(CSceneMgr::GetInstance()->m_playerTwoScore));
 	Player2Score->SetPosition(glm::vec2(util::SCR_WIDTH - 300.0f, util::SCR_HEIGHT - 65.0f));
 	Player2Score->SetScale(0.4f);
 	Player2Score->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
@@ -360,7 +408,7 @@ void CTestScene::LoadUserInterface()
 
 	//Player 3 Score:
 	Player3Score = new CTextLabel("SpaceFont");
-	Player3Score->SetText("Score: ");
+	Player3Score->SetText("Score: " + ToString(CSceneMgr::GetInstance()->m_playerThreeScore));
 	Player3Score->SetPosition(glm::vec2(0.0f, 30.0f));
 	Player3Score->SetScale(0.4f);
 	Player3Score->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
@@ -368,7 +416,7 @@ void CTestScene::LoadUserInterface()
 
 	//Player 4 Score:
 	Player4Score = new CTextLabel("SpaceFont");
-	Player4Score->SetText("Score: ");
+	Player4Score->SetText("Score: " + ToString(CSceneMgr::GetInstance()->m_playerFourScore));
 	Player4Score->SetPosition(glm::vec2(util::SCR_WIDTH - 300.0f, 30.0f));
 	Player4Score->SetScale(0.4f);
 	Player4Score->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
@@ -422,6 +470,52 @@ void CTestScene::Reset()
 
 void CTestScene::CheckWin()
 {
+	int aliveCount = 0;
+	for (auto player : m_vPlayers)
+	{
+		if (player->IsAlive())
+		{
+			Winner = player;
+			aliveCount++;
+		}
+	}
+	if (aliveCount == 1)
+	{
+		Winner->iScore++;
+		CDebug::Log(Winner->m_name + " has Won");
+	}
+	else Winner = nullptr;
+
+	// If there is a winner
+	if (Winner)
+	{
+		if (Winner->m_name == "Player1")
+		{
+			CSceneMgr::GetInstance()->m_playerOneScore++;
+		}
+		else if (Winner->m_name == "Player2")
+		{
+			CSceneMgr::GetInstance()->m_playerTwoScore++;
+		}
+		else if (Winner->m_name == "Player3")
+		{
+			CSceneMgr::GetInstance()->m_playerThreeScore++;
+		}
+		else if (Winner->m_name == "Player4")
+		{
+			CSceneMgr::GetInstance()->m_playerFourScore++;
+		}
+		CSceneMgr::GetInstance()->LoadScene("Test Scene");
+
+		if (Winner->iScore == 3)
+		{
+			CSceneMgr::GetInstance()->LoadScene("GameOver Scene");
+		}
+	}
+	
+
+	/// Legacy Code
+	/*
 	if (m_vPlayers.size() == 1)
 	{
 		IsGameWon = true;
@@ -453,13 +547,9 @@ void CTestScene::CheckWin()
 			Reset();
 		}
 
-		if (Winner->iScore == 3)
-		{
-			Winner = m_vPlayers.at(0);
-			CSceneMgr::GetInstance()->LoadScene("GameOver Scene");
-		}
+		
 		//std::cout << Winner->iScore << std::endl;
-	}
+	}*/
 }
 
 void CTestScene::CheckCurrentGadget()

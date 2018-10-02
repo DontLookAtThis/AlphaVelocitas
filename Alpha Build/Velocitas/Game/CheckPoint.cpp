@@ -35,7 +35,13 @@ void CCheckPoint::Update(float _tick)
 {
 	__super::Update(_tick);
 
-
+	for (auto player : m_pursuingPlayerVec)
+	{
+		if (player->IsActive() == false)
+		{
+			RemovePlayer(player);
+		}
+	}
 }
 
 void CCheckPoint::OnCollisionEnter(CGameObject* CollidedObject)

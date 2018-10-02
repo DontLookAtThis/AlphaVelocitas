@@ -26,11 +26,14 @@ public:
 	void SetIsController(bool _bIsController);
 	CRigiBody2D* Get2DBody();
 
+	// Check if the player still alive
+	bool IsAlive() const;
+
 	// Function for the player's placement in the RaceCourse
 	void AddCheckPointPassed();
 	void ResetCheckPointPassed();
 	int GetCheckPointPassed() const;
-	void CheckDeath();
+	void Die();
 
 	CSpriteRender* m_spriteRenderer;
 	CSpriteRender* m_GravityWell;

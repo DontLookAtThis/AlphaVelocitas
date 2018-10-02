@@ -15,6 +15,7 @@
 #include "Engine/SceneMgr.h"
 #include "Game/SpaceShip.h"
 #include "Game/ItemCube.h"
+#include "Game/DropBox.h"
 #include "Engine/TextLabel.h"
 #include "Game/GravityWellObj.h"
 //Includes
@@ -37,7 +38,7 @@ void CTestScene::ConfigurateScene()
 	CSound::GetInstance()->Init();
 	CSound::GetInstance()->AddSound();
 	CSound::GetInstance()->SoundMgr->playSound(CSound::GetInstance()->bgMusic, 0, false, &CSound::GetInstance()->BgMusicChannel);
-	CSound::GetInstance()->BgMusicChannel->setVolume(0.2f);
+	CSound::GetInstance()->BgMusicChannel->setVolume(0.1f);
 	//BACKGROUND----------------------------------------------------
 	CGameObject* BackGround = new CBlocks(1);
 	BackGround->SetWorld(this);
@@ -67,7 +68,7 @@ void CTestScene::ConfigurateScene()
 	//GravityBlock->GetComponent<CSpriteRender>()->SetSprite("Block");
 	//GravityBlock->GetComponent<CRigiBody2D>()->CreateGravityWell(GetWorld(), 10.0f, true, 0.5f);
 
-	CGameObject* ItemCube = new CItemCubes(ITEM_GRAPPLINGHOOK);
+	CGameObject* ItemCube = new CItemCubes(ITEM_DROPBOX);
 	ItemCube->SetWorld(this);
 	ItemCube->m_name = "ItemCube1";
 	ItemCube->m_tag = "ItemCube";
@@ -78,7 +79,7 @@ void CTestScene::ConfigurateScene()
 	ItemCube->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
 	ItemCube->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
 	
-	CGameObject* ItemCube2 = new CItemCubes(ITEM_GRAPPLINGHOOK);
+	CGameObject* ItemCube2 = new CItemCubes(ITEM_DROPBOX);
 	ItemCube2->SetWorld(this);
 	ItemCube2->m_name = "ItemCube1";
 	ItemCube2->m_tag = "ItemCube";
@@ -89,7 +90,7 @@ void CTestScene::ConfigurateScene()
 	ItemCube2->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
 	ItemCube2->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
 
-	CGameObject* ItemCube3 = new CItemCubes(ITEM_GRAPPLINGHOOK);
+	CGameObject* ItemCube3 = new CItemCubes(ITEM_DROPBOX);
 	ItemCube3->SetWorld(this);
 	ItemCube3->m_name = "ItemCube1";
 	ItemCube3->m_tag = "ItemCube";
@@ -100,7 +101,7 @@ void CTestScene::ConfigurateScene()
 	ItemCube3->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
 	ItemCube3->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
 
-	CGameObject* ItemCube4 = new CItemCubes(ITEM_GRAPPLINGHOOK);
+	CGameObject* ItemCube4 = new CItemCubes(ITEM_DROPBOX);
 	ItemCube4->SetWorld(this);
 	ItemCube4->m_name = "ItemCube1";
 	ItemCube4->m_tag = "ItemCube";
@@ -478,6 +479,11 @@ void CTestScene::CheckCurrentGadget()
 		{
 			Gadget = "Rail Gun";
 		}
+		else if (dynamic_cast<CSpaceShip*>(Player1)->CurrentItem == ItemState::ITEM_DROPBOX)
+		{
+			Gadget = "Drop Box";
+		}
+
 		Player1Gadget->SetText("Gadget: " + Gadget);
 	}
 	else if(dynamic_cast<CSpaceShip*>(Player2)->CurrentItem != ItemState::ITEM_NONE)
@@ -494,6 +500,11 @@ void CTestScene::CheckCurrentGadget()
 		{
 			Gadget = "Rail Gun";
 		}
+		else if (dynamic_cast<CSpaceShip*>(Player2)->CurrentItem == ItemState::ITEM_DROPBOX)
+		{
+			Gadget = "Drop Box";
+		}
+		
 		Player2Gadget->SetText("Gadget: " + Gadget);
 	}
 	else if (dynamic_cast<CSpaceShip*>(Player3)->CurrentItem != ItemState::ITEM_NONE)
@@ -510,6 +521,11 @@ void CTestScene::CheckCurrentGadget()
 		{
 			Gadget = "Rail Gun";
 		}
+		else if (dynamic_cast<CSpaceShip*>(Player3)->CurrentItem == ItemState::ITEM_DROPBOX)
+		{
+			Gadget = "Drop Box";
+		}
+		
 		Player3Gadget->SetText("Gadget: " + Gadget);
 	}
 	else if (dynamic_cast<CSpaceShip*>(Player4)->CurrentItem != ItemState::ITEM_NONE)
@@ -525,6 +541,10 @@ void CTestScene::CheckCurrentGadget()
 		else if (dynamic_cast<CSpaceShip*>(Player4)->CurrentItem == ItemState::ITEM_RAILGUN)
 		{
 			Gadget = "Rail Gun";
+		}
+		else if (dynamic_cast<CSpaceShip*>(Player4)->CurrentItem == ItemState::ITEM_DROPBOX)
+		{
+			Gadget = "Drop Box";
 		}
 		Player4Gadget->SetText("Gadget: " + Gadget);
 	}

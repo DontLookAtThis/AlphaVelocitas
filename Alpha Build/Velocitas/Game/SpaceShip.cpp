@@ -2,7 +2,9 @@
 // This Include
 #include "SpaceShip.h"
 #include "GrapplingHook.h"
-#include "Engine/Sound.h"
+#include "RailgunShot.h"
+#include "Dropbox.h"
+
 // Engine Include
 #include "Engine/AssetMgr.h"
 #include "Engine/Component.h"
@@ -12,10 +14,9 @@
 #include "Engine/Utility.h"
 #include "Engine/Camera.h"
 #include "Engine/Time.h"
-#include "RailgunShot.h"
 #include "Engine/Scene.h"
 #include "Engine/SceneMgr.h"
-
+#include "Engine/Sound.h"
 
 CSpaceShip::CSpaceShip(int playerID)
 {
@@ -355,6 +356,12 @@ void CSpaceShip::UseItem()
 			m_Scene->Instantiate(new CGrapplingHook(m_FacingDirection, this));
 			CSound::GetInstance()->SoundMgr->playSound(CSound::GetInstance()->GrappleHook, 0, false, &CSound::GetInstance()->PowerUpChannel);
 			CSound::GetInstance()->PowerUpChannel->setVolume(0.7f);
+			break;
+		case ITEM_DROPBOX:
+			CurrentItem = ITEM_NONE;
+			m_Scene->Instantiate(new CDropBox(this));
+			CSound::GetInstance()->SoundMgr->playSound(CSound::GetInstance()->BoxDrop, 0, false, &CSound::GetInstance()->PowerUpChannel);
+			CSound::GetInstance()->PowerUpChannel->setVolume(0.3f);
 			break;
 		}
 	}

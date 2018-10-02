@@ -201,6 +201,9 @@
       <Filter>Game\LevelObjects</Filter>
     </ClInclude>
     <ClInclude Include="Game\DeathSensor.h" />
+    <ClInclude Include="Game\DropBox.h">
+      <Filter>Game\LevelObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Camera.cpp">
@@ -294,6 +297,9 @@
       <Filter>Game\LevelObjects</Filter>
     </ClCompile>
     <ClCompile Include="Game\DeathSensor.cpp" />
+    <ClCompile Include="Game\DropBox.cpp">
+      <Filter>Game\LevelObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Shaders\CubeMap.fs">

@@ -71,6 +71,7 @@ void CAssetMgr::InitializeAssets()
 	CreateSprite("10Block", "Resources/Sprites/10Block.png");
 	CreateSprite("11Block", "Resources/Sprites/11Block.png");
 
+	CreateSprite("Box", "Resources/Sprites/Box.png");
 	//Font
 	CreateFont("SpaceFont", "Resources/Fonts/Space.ttf");
 }

@@ -45,6 +45,7 @@
     <ClInclude Include="Game\Blocks.h" />
     <ClInclude Include="Game\DeathSensor.h" />
     <ClInclude Include="Game\CheckPoint.h" />
+    <ClInclude Include="Game\DropBox.h" />
     <ClInclude Include="Game\GameClasses.h" />
     <ClInclude Include="Game\GameOverScene.h" />
     <ClInclude Include="Game\GrapplingHook.h" />
@@ -79,6 +80,7 @@
     <ClCompile Include="Game\Blocks.cpp" />
     <ClCompile Include="Game\DeathSensor.cpp" />
     <ClCompile Include="Game\CheckPoint.cpp" />
+    <ClCompile Include="Game\DropBox.cpp" />
     <ClCompile Include="Game\GameOverScene.cpp" />
     <ClCompile Include="Game\GrapplingHook.cpp" />
     <ClCompile Include="Game\GravityWellObj.cpp" />

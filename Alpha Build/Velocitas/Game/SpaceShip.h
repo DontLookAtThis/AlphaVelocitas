@@ -38,7 +38,7 @@ public:
 	CSpriteRender* m_spriteRenderer;
 	CSpriteRender* m_GravityWell;
 	int iScore = 0;
-
+	float fMovementSpeed;
 private:
 	void Movement(float _tick);
 	void Movement(bool bLeft, bool bRight, bool bUp, bool bDown);
@@ -48,7 +48,6 @@ private:
 	CRigiBody2D* m_rigidBody;
 	b2Vec2 m_FacingDirection;
 
-	float fMovementSpeed;
 	bool bUpPressed;
 	bool bDownPressed;
 	bool bLeftPressed;

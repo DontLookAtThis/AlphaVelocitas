@@ -376,7 +376,7 @@ void CRigiBody2D::OnCollisionEnter(CRigiBody2D* collidedRigiBody)
 	{
 		if (CGameObject* obj = collidedRigiBody->GetOwner())
 		{
-			if (collidedRigiBody->GetOwner()->m_tag == "Player" && m_bHasGravityWell)
+			if (collidedRigiBody->GetOwner()->m_tag == "Player")
 			{
 				BodiesColliding.push_back(collidedRigiBody->GetBody());
 			}

@@ -14,7 +14,7 @@ class CRigiBody2D;
 class CGravityWell : public CGameObject
 {
 public:
-	CGravityWell();
+	CGravityWell(float Strength);
 	~CGravityWell();
 	virtual void BeginPlay() override;
 	virtual void Update(float _tick) override;
@@ -23,6 +23,7 @@ public:
 	CSpriteRender* m_spriteGravityWell;
 	virtual void OnCollisionEnter(CGameObject * CollidedObject) override;
 	virtual void OnColliisionExit(CGameObject * CollidedObject) override;
+	float m_Strength;
 
 private:
 	CRigiBody2D * m_rigidBody;

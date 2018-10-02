@@ -19,7 +19,7 @@ CDeathSensor::CDeathSensor(ERELATIVEPOSITION _relativePosition) :
 	m_spriteRender = CreateComponent<CSpriteRender>();
 	m_rigidBody = CreateComponent<CRigiBody2D>();
 
-	m_spriteRender->SetSprite("DeathSensor");
+	m_spriteRender->SetSprite("Block");
 }
 
 CDeathSensor::~CDeathSensor()
@@ -34,8 +34,8 @@ void CDeathSensor::BeginPlay()
 
 	// Set the scale of the sprite according to the Camera
 	float scalerX, scalerY;
-	scalerX = m_followingCamera->m_viewPortWidth / (float)m_spriteRender->GetSprite()->GetWidth();
-	scalerY = m_followingCamera->m_viewPortHeight / (float)m_spriteRender->GetSprite()->GetHeight();
+	scalerX = (m_followingCamera->m_viewPortWidth / ((float)m_spriteRender->GetSprite()->GetWidth())) / 1.0f;
+	scalerY = (m_followingCamera->m_viewPortHeight / ((float)m_spriteRender->GetSprite()->GetHeight())) / 1.0f;
 	m_transform.scale.x = scalerX;
 	m_transform.scale.y = scalerY;
 
@@ -47,21 +47,21 @@ void CDeathSensor::BeginPlay()
 	{
 	case CAM_TOP:
 		m_relativePositionX = 0.0f;
-		m_relativePositionY = (m_followingCamera->m_viewPortHeight / (float)util::PIXELUNIT);
+		m_relativePositionY = (m_followingCamera->m_viewPortHeight / (float)util::PIXELUNIT);// +((m_spriteRender->GetSprite()->GetHeight() / (float)util::PIXELUNIT) * scalerY);
 		break;
 
 	case CAM_BOTTOM:
 		m_relativePositionX = 0.0f;
-		m_relativePositionY = -(m_followingCamera->m_viewPortHeight / (float)util::PIXELUNIT);
+		m_relativePositionY = -(m_followingCamera->m_viewPortHeight / (float)util::PIXELUNIT);// -((m_spriteRender->GetSprite()->GetHeight() / (float)util::PIXELUNIT) * scalerY);
 		break;
 	
 	case CAM_LEFT:
-		m_relativePositionX = -(m_followingCamera->m_viewPortWidth / (float)util::PIXELUNIT);
+		m_relativePositionX = -(m_followingCamera->m_viewPortWidth / (float)util::PIXELUNIT);// -((m_spriteRender->GetSprite()->GetWidth() / (float)util::PIXELUNIT) * scalerX);
 		m_relativePositionY = 0.0f;
 		break;
 	
 	case CAM_RIGHT:
-		m_relativePositionX = (m_followingCamera->m_viewPortWidth / (float)util::PIXELUNIT);
+		m_relativePositionX = (m_followingCamera->m_viewPortWidth / (float)util::PIXELUNIT);// +((m_spriteRender->GetSprite()->GetWidth() / (float)util::PIXELUNIT) * scalerX.);
 		m_relativePositionY = 0.0f;
 		break;
 	
@@ -88,7 +88,10 @@ void CDeathSensor::OnCollisionEnter(CGameObject* CollidedObject)
 	// If any ship touch is death zone, they die!!!!
 	if (CSpaceShip* spaceShip = dynamic_cast<CSpaceShip*>(CollidedObject))
 	{
-		spaceShip->Die();
+		if (spaceShip->IsActive() == true)
+		{
+			spaceShip->Die();
+		}
 	}
 }
 
@@ -97,9 +100,9 @@ void CDeathSensor::SetPositionBaseOnShrink()
 	b2Vec2 position;
 	position.x = m_followingCamera->m_cameraPosition.x + (m_relativePositionX * m_shrinkPercentage);
 	position.y = m_followingCamera->m_cameraPosition.y + (m_relativePositionY * m_shrinkPercentage);
-
+	
 	m_rigidBody->GetBody()->SetTransform(position, m_rigidBody->GetBody()->GetAngle());
-
+	std::cout << m_rigidBody->GetBody()->GetPosition().x << std::endl;
 }
 
 void CDeathSensor::SetShrinkPercentage(float _percentage)

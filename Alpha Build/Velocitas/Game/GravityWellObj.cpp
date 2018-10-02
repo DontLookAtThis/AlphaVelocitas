@@ -5,7 +5,7 @@
 #include "Engine/Scene.h"
 #include "Engine/GameObject.h"
 
-CGravityWell::CGravityWell()
+CGravityWell::CGravityWell(float Strength)
 {
 	this->m_transform.scale = glm::vec3(0.2f, 0.2f, 0.2f);
 	m_spriteRenderer = CreateComponent<CSpriteRender>();
@@ -17,6 +17,7 @@ CGravityWell::CGravityWell()
 	m_rigidBody = CreateComponent<CRigiBody2D>();
 	m_tag = "GravityWell";
 	bHit = false;
+	m_Strength = Strength;
 }
 
 CGravityWell::~CGravityWell()
@@ -27,7 +28,7 @@ CGravityWell::~CGravityWell()
 void CGravityWell::BeginPlay()
 {
 	__super::BeginPlay();
-	m_rigidBody->CreateGravityWell(m_Scene->GetWorld(), 5.0f, true, 0.3f);
+	m_rigidBody->CreateGravityWell(m_Scene->GetWorld(), 5.0f, true, m_Strength);
 }
 
 void CGravityWell::Update(float _tick)

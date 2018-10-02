@@ -14,6 +14,7 @@
 #include "Engine/Time.h"
 #include "RailgunShot.h"
 #include "Engine/Scene.h"
+#include "Engine/SceneMgr.h"
 
 
 CSpaceShip::CSpaceShip(int playerID)
@@ -47,6 +48,22 @@ void CSpaceShip::BeginPlay()
 	//m_spriteRenderer->SetSprite(CAssetMgr::GetInstance()->GetSprite("Triangle"));
 	//m_spriteRenderer->SetProgram(CAssetMgr::GetInstance()->GetProgramID("DefaultSpriteProgram"));
 
+	if (m_name == "Player1")
+	{
+		iScore = CSceneMgr::GetInstance()->m_playerOneScore;
+	}
+	else if (m_name == "Player2")
+	{
+		iScore = CSceneMgr::GetInstance()->m_playerTwoScore;
+	}
+	else if (m_name == "Player3")
+	{
+		iScore = CSceneMgr::GetInstance()->m_playerThreeScore;
+	}
+	else if (m_name == "Player4")
+	{
+		iScore = CSceneMgr::GetInstance()->m_playerFourScore;
+	}
 }
 
 void CSpaceShip::Update(float _tick)
@@ -85,6 +102,10 @@ void CSpaceShip::Update(float _tick)
 	}
 	//-----------------
 	UseItem();
+	if (!IsAlive())
+	{
+		this->Get2DBody()->GetBody()->SetTransform(b2Vec2(-1000.0f, -10000.0f), 0);
+	}
 }
 
 void CSpaceShip::MovementChecks()
@@ -190,7 +211,6 @@ void CSpaceShip::Die()
 	this->m_isUpdating = false;
 	this->m_isActive = false;
 	this->m_isAlive = false;
-
 	//m_rigidBody->GetBody()->GetWorld()->DestroyBody(m_rigidBody->GetBody());
 }
 

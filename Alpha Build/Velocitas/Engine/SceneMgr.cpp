@@ -91,6 +91,14 @@ CScene* CSceneMgr::GetRunningScene() const
 	return m_runningScene;
 }
 
+void CSceneMgr::RestScore()
+{
+	m_playerOneScore = 0;
+	m_playerTwoScore = 0;
+	m_playerThreeScore = 0;
+	m_playerFourScore = 0;
+}
+
 CSceneMgr::CSceneMgr()
 {
 	m_runningScene = nullptr;

@@ -19,6 +19,7 @@
 #include "Engine/TextLabel.h"
 #include "Game/GravityWellObj.h"
 #include "Engine/Debug.h"
+#include "Engine/Time.h"
 //Includes
 #include <memory>
 #include "Engine/Sound.h"
@@ -69,7 +70,7 @@ void CTestScene::ConfigurateScene()
 	//GravityBlock->GetComponent<CSpriteRender>()->SetSprite("Block");
 	//GravityBlock->GetComponent<CRigiBody2D>()->CreateGravityWell(GetWorld(), 10.0f, true, 0.5f);
 
-	CGameObject* ItemCube = new CItemCubes(ITEM_GRAPPLINGHOOK);
+	CGameObject* ItemCube = new CItemCubes(ITEM_GRAVITYWELL);
 	ItemCube->SetWorld(this);
 	ItemCube->m_name = "ItemCube1";
 	ItemCube->m_tag = "ItemCube";
@@ -80,7 +81,7 @@ void CTestScene::ConfigurateScene()
 	ItemCube->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
 	ItemCube->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
 	
-	CGameObject* ItemCube2 = new CItemCubes(ITEM_GRAPPLINGHOOK);
+	CGameObject* ItemCube2 = new CItemCubes(ITEM_GRAVITYWELL);
 	ItemCube2->SetWorld(this);
 	ItemCube2->m_name = "ItemCube1";
 	ItemCube2->m_tag = "ItemCube";
@@ -91,7 +92,7 @@ void CTestScene::ConfigurateScene()
 	ItemCube2->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
 	ItemCube2->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
 
-	CGameObject* ItemCube3 = new CItemCubes(ITEM_GRAPPLINGHOOK);
+	CGameObject* ItemCube3 = new CItemCubes(ITEM_GRAVITYWELL);
 	ItemCube3->SetWorld(this);
 	ItemCube3->m_name = "ItemCube1";
 	ItemCube3->m_tag = "ItemCube";
@@ -102,7 +103,7 @@ void CTestScene::ConfigurateScene()
 	ItemCube3->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
 	ItemCube3->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
 
-	CGameObject* ItemCube4 = new CItemCubes(ITEM_GRAPPLINGHOOK);
+	CGameObject* ItemCube4 = new CItemCubes(ITEM_GRAVITYWELL);
 	ItemCube4->SetWorld(this);
 	ItemCube4->m_name = "ItemCube1";
 	ItemCube4->m_tag = "ItemCube";
@@ -175,7 +176,7 @@ void CTestScene::ConfigurateScene()
 		m_deathSensors.push_back(sensorBottom);
 	}
 
-	CGameObject* GravityWell1 = new CGravityWell();
+	CGameObject* GravityWell1 = new CGravityWell(0.8f);
 	GravityWell1->SetWorld(this);
 	GravityWell1->m_name = "GravityWell1";
 	GravityWell1->m_transform.position = glm::vec3(9.0f, -6.0f, 0.0f);
@@ -206,14 +207,13 @@ void CTestScene::BeginPlay()
 
 	for (auto senser : m_deathSensors)
 	{
-		senser->SetShrinkPercentage(0.8f);
+		senser->SetShrinkPercentage(1.0f);
 	}
 }
 
 void CTestScene::UpdateScene(float _tick)
 {
 	__super::UpdateScene(_tick);
-	CheckWin();
 	CheckCurrentGadget();
 	
 	// Make the camera to the first players position
@@ -224,6 +224,30 @@ void CTestScene::UpdateScene(float _tick)
 		m_mainCamera->m_cameraPosition.y = 
 			firstPlayer->m_transform.position.y;
 	}
+
+	int aliveCount = 0;
+	for (auto player : m_vPlayers)
+	{
+		if (player->IsAlive())
+		{
+			aliveCount++;
+		}
+	}
+	if (aliveCount != 4)
+	{
+		float currentShrinkPercent = m_deathSensors[0]->GetShrinkPercentage();
+		for (auto deathSensor : m_deathSensors)
+		{
+			if(deathSensor->GetShrinkPercentage() > 0.65f)
+			{ 
+				deathSensor->SetShrinkPercentage(currentShrinkPercent - ((1.0 / 90.0f) * 0.65f * CTime::GetInstance()->GetDeltaTime()));
+			}
+			
+		}
+	}
+
+	// Check the win condition
+	CheckWin();
 }
 
 void CTestScene::ResetScene()
@@ -323,7 +347,6 @@ void CTestScene::LoadAllPlayers()
 	player2RB->GetBody()->GetFixtureList()->SetRestitution(0.1f);
 	player2RB->CreateGravityWell(GetWorld(), 5.0f, true, 0.5f);
 	player2RB->m_bHasGravityWell = false;
-	dynamic_cast<CSpaceShip*>(Player2)->bControllerInput = false;
 
 	Player3 = new CSpaceShip(3);
 	Player3->SetWorld(this);
@@ -505,12 +528,17 @@ void CTestScene::CheckWin()
 		{
 			CSceneMgr::GetInstance()->m_playerFourScore++;
 		}
-		CSceneMgr::GetInstance()->LoadScene("Test Scene");
 
-		if (Winner->iScore == 3)
+
+		if (Winner->iScore >= 3)
 		{
 			CSceneMgr::GetInstance()->LoadScene("GameOver Scene");
+			return;
 		}
+
+
+		// Load to the next
+		CSceneMgr::GetInstance()->LoadScene("Test Scene");
 	}
 	
 
@@ -570,7 +598,11 @@ void CTestScene::CheckCurrentGadget()
 		}
 		Player1Gadget->SetText("Gadget: " + Gadget);
 	}
-	else if(dynamic_cast<CSpaceShip*>(Player2)->CurrentItem != ItemState::ITEM_NONE)
+	else
+	{
+		Player1Gadget->SetText("Gadget: ");
+	}
+	if(dynamic_cast<CSpaceShip*>(Player2)->CurrentItem != ItemState::ITEM_NONE)
 	{
 		if (dynamic_cast<CSpaceShip*>(Player2)->CurrentItem == ItemState::ITEM_GRAPPLINGHOOK)
 		{
@@ -586,7 +618,11 @@ void CTestScene::CheckCurrentGadget()
 		}
 		Player2Gadget->SetText("Gadget: " + Gadget);
 	}
-	else if (dynamic_cast<CSpaceShip*>(Player3)->CurrentItem != ItemState::ITEM_NONE)
+	else
+	{
+		Player2Gadget->SetText("Gadget: ");
+	}
+	if (dynamic_cast<CSpaceShip*>(Player3)->CurrentItem != ItemState::ITEM_NONE)
 	{
 		if (dynamic_cast<CSpaceShip*>(Player3)->CurrentItem == ItemState::ITEM_GRAPPLINGHOOK)
 		{
@@ -602,7 +638,11 @@ void CTestScene::CheckCurrentGadget()
 		}
 		Player3Gadget->SetText("Gadget: " + Gadget);
 	}
-	else if (dynamic_cast<CSpaceShip*>(Player4)->CurrentItem != ItemState::ITEM_NONE)
+	else
+	{
+		Player3Gadget->SetText("Gadget: ");
+	}
+	if (dynamic_cast<CSpaceShip*>(Player4)->CurrentItem != ItemState::ITEM_NONE)
 	{
 		if (dynamic_cast<CSpaceShip*>(Player4)->CurrentItem == ItemState::ITEM_GRAPPLINGHOOK)
 		{
@@ -617,6 +657,10 @@ void CTestScene::CheckCurrentGadget()
 			Gadget = "Rail Gun";
 		}
 		Player4Gadget->SetText("Gadget: " + Gadget);
+	}
+	else
+	{
+	Player4Gadget->SetText("Gadget: ");
 	}
 }
 

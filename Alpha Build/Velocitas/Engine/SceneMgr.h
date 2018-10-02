@@ -40,6 +40,8 @@ public:
 	void LoadScene(std::string _name);
 	CScene* GetRunningScene() const;
 
+	void RestScore();
+
 private:
 	// Member Variables
 

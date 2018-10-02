@@ -30,7 +30,7 @@ public:
 	void AddCheckPointPassed();
 	void ResetCheckPointPassed();
 	int GetCheckPointPassed() const;
-
+	void CheckDeath();
 
 	CSpriteRender* m_spriteRenderer;
 	CSpriteRender* m_GravityWell;

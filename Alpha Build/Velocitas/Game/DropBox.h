@@ -10,7 +10,7 @@ class CRigiBody2D;
 class CDropBox : public CGameObject
 {
 public:
-	CDropBox(CGameObject* User );
+	CDropBox(CGameObject* User , glm::vec3 _pos);
 	~CDropBox();
 	virtual void BeginPlay() override;
 	virtual void Update(float _tick) override;

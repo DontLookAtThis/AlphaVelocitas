@@ -359,7 +359,8 @@ void CSpaceShip::UseItem()
 			break;
 		case ITEM_DROPBOX:
 			CurrentItem = ITEM_NONE;
-			m_Scene->Instantiate(new CDropBox(this));
+			b2Vec2 dir = b2Vec2(-m_FacingDirection.x , -m_FacingDirection.y);
+			m_Scene->Instantiate(new CDropBox(this, glm::vec3(m_transform.position.x + dir.x, m_transform.position.y + dir.y, m_transform.position.z)));
 			CSound::GetInstance()->SoundMgr->playSound(CSound::GetInstance()->BoxDrop, 0, false, &CSound::GetInstance()->PowerUpChannel);
 			CSound::GetInstance()->PowerUpChannel->setVolume(0.3f);
 			break;

@@ -9,10 +9,11 @@
 #include "Engine/Input.h"
 #include "Engine/Scene.h"
 
-CDropBox::CDropBox( CGameObject* User)
+CDropBox::CDropBox( CGameObject* User, glm::vec3 _pos)
 {
 	m_transform = User->m_transform;
 	this->m_transform.scale = glm::vec3(0.5f, 0.5f, 0.5f);
+	m_transform.position = _pos;
 	m_spriteRenderer = CreateComponent<CSpriteRender>();
 	m_spriteRenderer->SetSprite("Box");
 	m_RigidBody = CreateComponent<CRigiBody2D>();

@@ -12,82 +12,91 @@
 // Mail         : richard.wul7481@mediadesign.school.nz, jacob.dew7364@mediadesign.school.nz
 //
 
-// This Include
+//
+// Bachelor of Software Engineering
+// Media Design School
+// Auckland
+// New Zealand
+//
+// (c) 2005 - 2017 Media Design School
+//
+// File Name	:	CSound.cpp
+// Description	:	main implementation for CSound
+// Author		:	Steven Zhao
+// Mail 		:	steven.zha7447@mediadesign.school.nz
+//
+
+// Library Includes //
+
+// Local Includes //
+
+// This Includes //
 #include "Sound.h"
 
-// Global Variable -----------------------------------------------------------------------------
-FMOD::System* audioMgr;
-FMOD::Sound* bgmTheme;
+// Static Variables //
 
-CSound::CSound()
+// Static Function Prototypes //
+
+// Types //
+using namespace std;
+CSound * CSound::pSound;
+CSound * CSound::GetInstance()
 {
-}
-
-
-CSound::~CSound()
-{
-}
-
-bool CSound::InitFmod()
-{
-	FMOD_RESULT result; 
-	result = FMOD::System_Create(&audioMgr);
-
-	if (result != FMOD_OK) 
-	{ 
-		return false; 
+	if (!pSound)
+	{
+		pSound = new CSound();
 	}
-	result = audioMgr->init(50, FMOD_INIT_NORMAL, 0);
+	return pSound;
+}
 
+void CSound::DestroyInstance()
+{
+	if (pSound)//If the Instance exists
+	{
+		delete pSound; //Deletes instance
+		pSound = nullptr; //Set the pointer to nullptr
+	}
+}
+
+bool CSound::Init()
+{
+	FMOD_RESULT result;
+	result = FMOD::System_Create(&SoundMgr);
 	if (result != FMOD_OK)
-	{ 
-		return false; 
-	} 
+		return false;
+
+	result = SoundMgr->init(50, FMOD_INIT_NORMAL, 0);
+	if (result != FMOD_OK)
+		return false;
 	return true;
 }
 
-void CSound::SetSoundAdress(const char* _charAdress)
-{
-	FMOD::Sound* SoundTemp = nullptr;
-
-	m_pSoundAdress.push_back(_charAdress);
-	m_pSoundPointers.push_back(SoundTemp);
-}
-
-const bool CSound::LoadAudio()
+const bool CSound::AddSound()
 {
 	FMOD_RESULT result;
-	// Sound Effects -------------------------------------------------------------------------------
-	
-		for (unsigned int i = 0; i < m_pSoundPointers.size(); i++)
-		{
-			result = audioMgr->createSound(m_pSoundAdress[i], FMOD_DEFAULT, 0, &m_pSoundPointers[i]);
-		}
-		
-	
-
-	// Theme music ---------------------------------------------------------------------------------
-	result = audioMgr->createSound("Resources/Sound/bensound-epic.mp3", FMOD_DEFAULT, 0, &bgmTheme);
-
-	bgmTheme->setMode(FMOD_LOOP_NORMAL);
-
-	return(true);
+	result = SoundMgr->createSound("Resources/Sounds/BackgroundMusic.wav", FMOD_DEFAULT, 0, &bgMusic);
+	result = SoundMgr->createSound("Resources/Sounds/BoxDrop.wav", FMOD_DEFAULT, 0, &BoxDrop);
+	bgMusic->setMode(FMOD_LOOP_NORMAL);
+	result = SoundMgr->createSound("Resources/Sounds/CollectPowerUp.wav", FMOD_DEFAULT, 0, &CollectPowerUp);
+	bgMusic->setMode(FMOD_LOOP_NORMAL);
+	result = SoundMgr->createSound("Resources/Sounds/GrappleHook.wav", FMOD_DEFAULT, 0, &GrappleHook);
+	bgMusic->setMode(FMOD_LOOP_NORMAL);
+	result = SoundMgr->createSound("Resources/Sounds/PlayerDeath.wav", FMOD_DEFAULT, 0, &PlayerDeath);
+	bgMusic->setMode(FMOD_LOOP_NORMAL);
+	result = SoundMgr->createSound("Resources/Sounds/Railgun.mp3", FMOD_DEFAULT, 0, &RailGun);
+	bgMusic->setMode(FMOD_LOOP_NORMAL);
+	return true;
 }
 
-void CSound::PlaySound()
+// Constructor //
+CSound::CSound()
 {
-	InitFmod();
-	LoadAudio();
 
-	FMOD::Channel* channel;
-	
-	audioMgr->playSound(bgmTheme, 0, false, &channel);	//main theme loop
-	channel->setVolume(1);	//master volume
-
-	for (unsigned int i = 0; i < m_pSoundPointers.size(); i++)
-	{
-		audioMgr->playSound(m_pSoundPointers[i], 0, false, &channel);	//sound FX
-		m_pSoundPointers.clear();
-	}
-	
 }
+
+// Destructor //
+CSound::~CSound()
+{
+
+}
+

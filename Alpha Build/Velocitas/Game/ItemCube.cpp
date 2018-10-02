@@ -1,6 +1,7 @@
 #include "ItemCube.h"
 #include "SpaceShip.h"
 #include "Engine/Time.h"
+#include "Engine/Sound.h"
 CItemCubes::CItemCubes(int ItemType)
 {
 	m_spriteRenderer = CreateComponent<CSpriteRender>();
@@ -63,6 +64,8 @@ void CItemCubes::OnCollisionEnter(CGameObject * CollidedObject)
 				ship->CurrentItem = m_ItemType;
 				SetActive(false);
 				m_IsTaken = true;
+				CSound::GetInstance()->SoundMgr->playSound(CSound::GetInstance()->CollectPowerUp, 0, false, &CSound::GetInstance()->PickUpSoundChannel);
+				CSound::GetInstance()->PickUpSoundChannel->setVolume(1.0f);
 			}
 		}
 	}

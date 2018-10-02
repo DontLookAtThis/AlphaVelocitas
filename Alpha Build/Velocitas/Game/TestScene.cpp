@@ -19,7 +19,7 @@
 #include "Game/GravityWellObj.h"
 //Includes
 #include <memory>
-
+#include "Engine/Sound.h"
 void CTestScene::ConfigurateScene()
 {
 	__super::ConfigurateScene();
@@ -33,7 +33,11 @@ void CTestScene::ConfigurateScene()
 	this->m_mainCamera = new CCamera();
 	
 	/** Create game objects in the scenes */
-
+	//Creating Sound
+	CSound::GetInstance()->Init();
+	CSound::GetInstance()->AddSound();
+	CSound::GetInstance()->SoundMgr->playSound(CSound::GetInstance()->bgMusic, 0, false, &CSound::GetInstance()->BgMusicChannel);
+	CSound::GetInstance()->BgMusicChannel->setVolume(0.2f);
 	//BACKGROUND----------------------------------------------------
 	CGameObject* BackGround = new CBlocks(1);
 	BackGround->SetWorld(this);

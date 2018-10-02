@@ -9,7 +9,7 @@
 // File Name    : Sound.cpp
 // Description	: 
 // Author       : Richard Wulansari & Jacob Dewse
-// Mail         : richard.wul7481@mediadesign.school.nz, jacob.dew7364@mediadesign.school.nz
+// Mail         : richard.wul7481@mediadesign.school.nz
 //
 
 #ifndef CSound_H
@@ -19,18 +19,33 @@
 
 class CSound
 {
+	// Member Functions //
 public:
+	static CSound* GetInstance();
+	static void DestroyInstance();
+	bool Init();
+	const bool AddSound();
+	FMOD::System * SoundMgr;
+	//Spliting different Channels
+	FMOD::Sound* bgMusic;
+	FMOD::Sound* BoxDrop;
+	FMOD::Sound* CollectPowerUp;
+	FMOD::Sound* GrappleHook;
+	FMOD::Sound* PlayerDeath;
+	FMOD::Sound* RailGun;
+	FMOD::Channel* BgMusicChannel;
+	FMOD::Channel* PickUpSoundChannel;
+	FMOD::Channel* PowerUpChannel;
+	FMOD::Channel* OtherChannel;
+private:
+
+
 	CSound();
 	~CSound();
+	static CSound* pSound;
+	CSound(CSound const&) = delete; //Deletes copy constructor
+	void operator = (CSound const&) = delete; //Deletes the operator assgined to the copy constructor
 
-	bool InitFmod();
-	const bool LoadAudio();
-	void PlaySound();
-	void SetSoundAdress(const char* _charAdress);
-
-private:
-	float m_intMasterVolume;
-	std::vector<const char*> m_pSoundAdress;
-	std::vector<FMOD::Sound*> m_pSoundPointers;
 };
+
 #endif // !CSound_H

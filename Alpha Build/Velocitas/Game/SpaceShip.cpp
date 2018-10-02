@@ -2,6 +2,7 @@
 // This Include
 #include "SpaceShip.h"
 #include "GrapplingHook.h"
+#include "Engine/Sound.h"
 // Engine Include
 #include "Engine/AssetMgr.h"
 #include "Engine/Component.h"
@@ -306,6 +307,8 @@ void CSpaceShip::UseItem()
 		case ITEM_RAILGUN:
 			CurrentItem = ITEM_NONE;
 			m_Scene->Instantiate(new CRailgunShot(m_FacingDirection, this));
+			CSound::GetInstance()->SoundMgr->playSound(CSound::GetInstance()->RailGun, 0, false, &CSound::GetInstance()->PowerUpChannel);
+			CSound::GetInstance()->PowerUpChannel->setVolume(0.1f);
 			break;
 		case ITEM_GRAVITYWELL:
 			CurrentItem = ITEM_NONE;
@@ -315,6 +318,8 @@ void CSpaceShip::UseItem()
 		case ITEM_GRAPPLINGHOOK:
 			CurrentItem = ITEM_NONE;
 			m_Scene->Instantiate(new CGrapplingHook(m_FacingDirection, this));
+			CSound::GetInstance()->SoundMgr->playSound(CSound::GetInstance()->GrappleHook, 0, false, &CSound::GetInstance()->PowerUpChannel);
+			CSound::GetInstance()->PowerUpChannel->setVolume(0.7f);
 			break;
 		}
 	}

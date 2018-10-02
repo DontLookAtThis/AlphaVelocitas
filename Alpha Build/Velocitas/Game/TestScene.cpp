@@ -181,13 +181,13 @@ void CTestScene::UpdateScene(float _tick)
 	CheckCurrentGadget();
 	
 	// Make the camera to the first players position
-	glm::vec3 newCameraPosition;
 	if (CGameObject* firstPlayer = m_raceCourse->GetFirstPlayer())
 	{
-		newCameraPosition = firstPlayer->m_transform.position;
+		m_mainCamera->m_cameraPosition.x = 
+			firstPlayer->m_transform.position.x;
+		m_mainCamera->m_cameraPosition.y = 
+			firstPlayer->m_transform.position.y;
 	}
-	newCameraPosition.z = m_mainCamera->GetCameraPosition().z;
-	m_mainCamera->SetCameraPosition(newCameraPosition);
 }
 
 void CTestScene::LoadAllBlocks()

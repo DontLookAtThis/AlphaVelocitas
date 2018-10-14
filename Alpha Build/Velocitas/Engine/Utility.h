@@ -17,9 +17,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <queue>
 #include <map>
-#include <memory>
 #include <chrono>
 #include <strstream>
 #include <Windows.h>
@@ -78,16 +76,6 @@ enum InputState
 	INPUT_RELEASED,			// Default State (Up) 
 	INPUT_FIRST_PRESS,		// First frame of Down state 
 	INPUT_HOLD,				// Key is held Down 
-};
-
-enum ItemState
-{
-	ITEM_NONE,
-	ITEM_RAILGUN,
-	ITEM_GRAVITYWELL,
-	ITEM_GRAPPLINGHOOK,
-	ITEM_DROPBOX,
-	ITEM_END,
 };
 
 enum InputMouse 

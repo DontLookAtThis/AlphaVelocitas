@@ -58,6 +58,12 @@ public:
 	int m_playerThreeScore = 0;
 	int m_playerFourScore = 0;
 
+
+
+	bool P1;
+	bool P2;
+	bool P3;
+	bool P4;
 };
 
 #endif // !_SCENEMGR_H

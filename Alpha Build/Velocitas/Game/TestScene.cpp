@@ -318,70 +318,79 @@ void CTestScene::LoadAllBlocks()
 
 void CTestScene::LoadAllPlayers()
 {
-	Player1 = new CSpaceShip(1);
-	Player1->SetWorld(this);
-	Player1->m_name = "Player1";
-	Player1->m_tag = "Player";
-	Player1->m_transform.scale = glm::vec3(0.65f, 0.65f, 1.0f);
-	Player1->m_transform.position = SpawnLocation1;
-	this->m_vGameObj.push_back(Player1);
-	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player1));
-	Player1->GetComponent<CSpriteRender>()->SetSprite("Player1");
-	dynamic_cast<CSpaceShip*>(Player1)->m_GravityWell->SetSprite("Gravity");
-	CRigiBody2D* player1RB = Player1->GetComponent<CRigiBody2D>();
-	player1RB->CreateBodyCircle(GetWorld(), b2_dynamicBody, false, true, 1.0f, 1.0f, 1);
-	player1RB->GetBody()->GetFixtureList()->SetRestitution(0.1f);
-	player1RB->CreateGravityWell(GetWorld(), 5.0f, true, 0.5f);
-	player1RB->m_bHasGravityWell = false;
+	if (CSceneMgr::GetInstance()->P1)
+	{
+		Player1 = new CSpaceShip(1);
+		Player1->SetWorld(this);
+		Player1->m_name = "Player1";
+		Player1->m_tag = "Player";
+		Player1->m_transform.scale = glm::vec3(0.65f, 0.65f, 1.0f);
+		Player1->m_transform.position = SpawnLocation1;
+		this->m_vGameObj.push_back(Player1);
+		this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player1));
+		Player1->GetComponent<CSpriteRender>()->SetSprite("Player1");
+		dynamic_cast<CSpaceShip*>(Player1)->m_GravityWell->SetSprite("Gravity");
+		CRigiBody2D* player1RB = Player1->GetComponent<CRigiBody2D>();
+		player1RB->CreateBodyCircle(GetWorld(), b2_dynamicBody, false, true, 1.0f, 1.0f, 1);
+		player1RB->GetBody()->GetFixtureList()->SetRestitution(0.1f);
+		player1RB->CreateGravityWell(GetWorld(), 5.0f, true, 0.5f);
+		player1RB->m_bHasGravityWell = false;
+	}
+	if (CSceneMgr::GetInstance()->P2)
+	{
+		Player2 = new CSpaceShip(2);
+		Player2->SetWorld(this);
+		Player2->m_name = "Player2";
+		Player2->m_tag = "Player";
+		Player2->m_transform.scale = glm::vec3(0.65f, 0.65f, 1.0f);
+		Player2->m_transform.position = SpawnLocation2;
+		this->m_vGameObj.push_back(Player2);
+		this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player2));
+		Player2->GetComponent<CSpriteRender>()->SetSprite("Player2");
+		dynamic_cast<CSpaceShip*>(Player2)->m_GravityWell->SetSprite("Gravity");
+		CRigiBody2D* player2RB = Player2->GetComponent<CRigiBody2D>();
+		player2RB->CreateBodyCircle(GetWorld(), b2_dynamicBody, false, true, 1.0f, 1.0f, 1);
+		player2RB->GetBody()->GetFixtureList()->SetRestitution(0.1f);
+		player2RB->CreateGravityWell(GetWorld(), 5.0f, true, 0.5f);
+		player2RB->m_bHasGravityWell = false;
+	}
+	if (CSceneMgr::GetInstance()->P3)
+	{
+		Player3 = new CSpaceShip(3);
+		Player3->SetWorld(this);
+		Player3->m_name = "Player3";
+		Player3->m_tag = "Player";
+		Player3->m_transform.scale = glm::vec3(0.65f, 0.65f, 1.0f);
+		Player3->m_transform.position = SpawnLocation3;
+		this->m_vGameObj.push_back(Player3);
+		this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player3));
+		Player3->GetComponent<CSpriteRender>()->SetSprite("Player3");
+		dynamic_cast<CSpaceShip*>(Player3)->m_GravityWell->SetSprite("Gravity");
+		CRigiBody2D* player3RB = Player3->GetComponent<CRigiBody2D>();
+		player3RB->CreateBodyCircle(GetWorld(), b2_dynamicBody, false, true, 1.0f, 1.0f, 1);
+		player3RB->GetBody()->GetFixtureList()->SetRestitution(0.1f);
+		player3RB->CreateGravityWell(GetWorld(), 5.0f, true, 0.5f);
+		player3RB->m_bHasGravityWell = false;
+	}
+	if (CSceneMgr::GetInstance()->P4)
+	{
 
-	Player2 = new CSpaceShip(2);
-	Player2->SetWorld(this);
-	Player2->m_name = "Player2";
-	Player2->m_tag = "Player";
-	Player2->m_transform.scale = glm::vec3(0.65f, 0.65f, 1.0f);
-	Player2->m_transform.position = SpawnLocation2;
-	this->m_vGameObj.push_back(Player2);
-	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player2));
-	Player2->GetComponent<CSpriteRender>()->SetSprite("Player2");
-	dynamic_cast<CSpaceShip*>(Player2)->m_GravityWell->SetSprite("Gravity");
-	CRigiBody2D* player2RB = Player2->GetComponent<CRigiBody2D>();
-	player2RB->CreateBodyCircle(GetWorld(), b2_dynamicBody, false, true, 1.0f, 1.0f, 1);
-	player2RB->GetBody()->GetFixtureList()->SetRestitution(0.1f);
-	player2RB->CreateGravityWell(GetWorld(), 5.0f, true, 0.5f);
-	player2RB->m_bHasGravityWell = false;
-
-	Player3 = new CSpaceShip(3);
-	Player3->SetWorld(this);
-	Player3->m_name = "Player3";
-	Player3->m_tag = "Player";
-	Player3->m_transform.scale = glm::vec3(0.65f, 0.65f, 1.0f);
-	Player3->m_transform.position = SpawnLocation3;
-	this->m_vGameObj.push_back(Player3);
-	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player3));
-	Player3->GetComponent<CSpriteRender>()->SetSprite("Player3");
-	dynamic_cast<CSpaceShip*>(Player3)->m_GravityWell->SetSprite("Gravity");
-	CRigiBody2D* player3RB = Player3->GetComponent<CRigiBody2D>();
-	player3RB->CreateBodyCircle(GetWorld(), b2_dynamicBody, false, true, 1.0f, 1.0f, 1);
-	player3RB->GetBody()->GetFixtureList()->SetRestitution(0.1f);
-	player3RB->CreateGravityWell(GetWorld(), 5.0f, true, 0.5f);
-	player3RB->m_bHasGravityWell = false;
-
-	Player4 = new CSpaceShip(4);
-	Player4->SetWorld(this);
-	Player4->m_name = "Player4";
-	Player4->m_tag = "Player";
-	Player4->m_transform.scale = glm::vec3(0.65f, 0.65f, 1.0f);
-	Player4->m_transform.position = SpawnLocation4;
-	this->m_vGameObj.push_back(Player4);
-	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player4));
-	Player4->GetComponent<CSpriteRender>()->SetSprite("Player4");
-	dynamic_cast<CSpaceShip*>(Player4)->m_GravityWell->SetSprite("Gravity");
-	CRigiBody2D* player4RB = Player4->GetComponent<CRigiBody2D>();
-	player4RB->CreateBodyCircle(GetWorld(), b2_dynamicBody, false, true, 1.0f, 1.0f, 1);
-	player4RB->GetBody()->GetFixtureList()->SetRestitution(0.1f);
-	player4RB->CreateGravityWell(GetWorld(), 5.0f, true, 0.5f);
-	player4RB->m_bHasGravityWell = false;
-
+		Player4 = new CSpaceShip(4);
+		Player4->SetWorld(this);
+		Player4->m_name = "Player4";
+		Player4->m_tag = "Player";
+		Player4->m_transform.scale = glm::vec3(0.65f, 0.65f, 1.0f);
+		Player4->m_transform.position = SpawnLocation4;
+		this->m_vGameObj.push_back(Player4);
+		this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player4));
+		Player4->GetComponent<CSpriteRender>()->SetSprite("Player4");
+		dynamic_cast<CSpaceShip*>(Player4)->m_GravityWell->SetSprite("Gravity");
+		CRigiBody2D* player4RB = Player4->GetComponent<CRigiBody2D>();
+		player4RB->CreateBodyCircle(GetWorld(), b2_dynamicBody, false, true, 1.0f, 1.0f, 1);
+		player4RB->GetBody()->GetFixtureList()->SetRestitution(0.1f);
+		player4RB->CreateGravityWell(GetWorld(), 5.0f, true, 0.5f);
+		player4RB->m_bHasGravityWell = false;
+	}
 }
 
 void CTestScene::LoadUserInterface()
@@ -584,105 +593,121 @@ void CTestScene::CheckWin()
 
 void CTestScene::CheckCurrentGadget()
 {
-	if (dynamic_cast<CSpaceShip*>(Player1)->CurrentItem != ItemState::ITEM_NONE)
+	if (CSceneMgr::GetInstance()->P1)
 	{
-		if (dynamic_cast<CSpaceShip*>(Player1)->CurrentItem == ItemState::ITEM_GRAPPLINGHOOK)
+		if (dynamic_cast<CSpaceShip*>(Player1)->CurrentItem != ItemState::ITEM_NONE)
 		{
-			Gadget = "Hook";
+			if (dynamic_cast<CSpaceShip*>(Player1)->CurrentItem == ItemState::ITEM_GRAPPLINGHOOK)
+			{
+				Gadget = "Hook";
+			}
+			else if (dynamic_cast<CSpaceShip*>(Player1)->CurrentItem == ItemState::ITEM_GRAVITYWELL)
+			{
+				Gadget = "Grav Well";
+			}
+			else if (dynamic_cast<CSpaceShip*>(Player1)->CurrentItem == ItemState::ITEM_RAILGUN)
+			{
+				Gadget = "Rail Gun";
+			}
+			else if (dynamic_cast<CSpaceShip*>(Player1)->CurrentItem == ItemState::ITEM_DROPBOX)
+			{
+				Gadget = "Drop Box";
+			}
+
+			Player1Gadget->SetText("Gadget: " + Gadget);
 		}
-		else if (dynamic_cast<CSpaceShip*>(Player1)->CurrentItem == ItemState::ITEM_GRAVITYWELL)
+		else
 		{
-			Gadget = "Grav Well";
+			Player1Gadget->SetText("Gadget: ");
 		}
-		else if (dynamic_cast<CSpaceShip*>(Player1)->CurrentItem == ItemState::ITEM_RAILGUN)
+	}
+	if (CSceneMgr::GetInstance()->P2)
+	{
+		if (dynamic_cast<CSpaceShip*>(Player2)->CurrentItem != ItemState::ITEM_NONE)
 		{
-			Gadget = "Rail Gun";
+			if (dynamic_cast<CSpaceShip*>(Player2)->CurrentItem == ItemState::ITEM_GRAPPLINGHOOK)
+			{
+				Gadget = "Hook";
+			}
+			else if (dynamic_cast<CSpaceShip*>(Player2)->CurrentItem == ItemState::ITEM_GRAVITYWELL)
+			{
+				Gadget = "Grav Well";
+			}
+			else if (dynamic_cast<CSpaceShip*>(Player2)->CurrentItem == ItemState::ITEM_RAILGUN)
+			{
+				Gadget = "Rail Gun";
+			}
+			else if (dynamic_cast<CSpaceShip*>(Player2)->CurrentItem == ItemState::ITEM_DROPBOX)
+			{
+				Gadget = "Drop Box";
+			}
+
+			Player2Gadget->SetText("Gadget: " + Gadget);
 		}
-		else if (dynamic_cast<CSpaceShip*>(Player1)->CurrentItem == ItemState::ITEM_DROPBOX)
+		else
 		{
-			Gadget = "Drop Box";
+			Player2Gadget->SetText("Gadget: ");
 		}
 
-		Player1Gadget->SetText("Gadget: " + Gadget);
 	}
-	else
+	if (CSceneMgr::GetInstance()->P3)
 	{
-		Player1Gadget->SetText("Gadget: ");
+		if (dynamic_cast<CSpaceShip*>(Player3)->CurrentItem != ItemState::ITEM_NONE)
+		{
+			if (dynamic_cast<CSpaceShip*>(Player3)->CurrentItem == ItemState::ITEM_GRAPPLINGHOOK)
+			{
+				Gadget = "Hook";
+			}
+			else if (dynamic_cast<CSpaceShip*>(Player3)->CurrentItem == ItemState::ITEM_GRAVITYWELL)
+			{
+				Gadget = "Grav Well";
+			}
+			else if (dynamic_cast<CSpaceShip*>(Player3)->CurrentItem == ItemState::ITEM_RAILGUN)
+			{
+				Gadget = "Rail Gun";
+			}
+			else if (dynamic_cast<CSpaceShip*>(Player3)->CurrentItem == ItemState::ITEM_DROPBOX)
+			{
+				Gadget = "Drop Box";
+			}
+
+			Player3Gadget->SetText("Gadget: " + Gadget);
+		}
+		else
+		{
+			Player3Gadget->SetText("Gadget: ");
+		}
+
 	}
-	if(dynamic_cast<CSpaceShip*>(Player2)->CurrentItem != ItemState::ITEM_NONE)
+	if (CSceneMgr::GetInstance()->P4)
 	{
-		if (dynamic_cast<CSpaceShip*>(Player2)->CurrentItem == ItemState::ITEM_GRAPPLINGHOOK)
+		if (dynamic_cast<CSpaceShip*>(Player4)->CurrentItem != ItemState::ITEM_NONE)
 		{
-			Gadget = "Hook";
+			if (dynamic_cast<CSpaceShip*>(Player4)->CurrentItem == ItemState::ITEM_GRAPPLINGHOOK)
+			{
+				Gadget = "Hook";
+			}
+			else if (dynamic_cast<CSpaceShip*>(Player4)->CurrentItem == ItemState::ITEM_GRAVITYWELL)
+			{
+				Gadget = "Grav Well";
+			}
+			else if (dynamic_cast<CSpaceShip*>(Player4)->CurrentItem == ItemState::ITEM_RAILGUN)
+			{
+				Gadget = "Rail Gun";
+			}
+			else if (dynamic_cast<CSpaceShip*>(Player4)->CurrentItem == ItemState::ITEM_DROPBOX)
+			{
+				Gadget = "Drop Box";
+			}
+			Player4Gadget->SetText("Gadget: " + Gadget);
 		}
-		else if (dynamic_cast<CSpaceShip*>(Player2)->CurrentItem == ItemState::ITEM_GRAVITYWELL)
+		else
 		{
-			Gadget = "Grav Well";
+			Player4Gadget->SetText("Gadget: ");
 		}
-		else if (dynamic_cast<CSpaceShip*>(Player2)->CurrentItem == ItemState::ITEM_RAILGUN)
-		{
-			Gadget = "Rail Gun";
-		}
-		else if (dynamic_cast<CSpaceShip*>(Player2)->CurrentItem == ItemState::ITEM_DROPBOX)
-		{
-			Gadget = "Drop Box";
-		}
-		
-		Player2Gadget->SetText("Gadget: " + Gadget);
 	}
-	else
-	{
-		Player2Gadget->SetText("Gadget: ");
-	}
-	if (dynamic_cast<CSpaceShip*>(Player3)->CurrentItem != ItemState::ITEM_NONE)
-	{
-		if (dynamic_cast<CSpaceShip*>(Player3)->CurrentItem == ItemState::ITEM_GRAPPLINGHOOK)
-		{
-			Gadget = "Hook";
-		}
-		else if (dynamic_cast<CSpaceShip*>(Player3)->CurrentItem == ItemState::ITEM_GRAVITYWELL)
-		{
-			Gadget = "Grav Well";
-		}
-		else if (dynamic_cast<CSpaceShip*>(Player3)->CurrentItem == ItemState::ITEM_RAILGUN)
-		{
-			Gadget = "Rail Gun";
-		}
-		else if (dynamic_cast<CSpaceShip*>(Player3)->CurrentItem == ItemState::ITEM_DROPBOX)
-		{
-			Gadget = "Drop Box";
-		}
-		
-		Player3Gadget->SetText("Gadget: " + Gadget);
-	}
-	else
-	{
-		Player3Gadget->SetText("Gadget: ");
-	}
-	if (dynamic_cast<CSpaceShip*>(Player4)->CurrentItem != ItemState::ITEM_NONE)
-	{
-		if (dynamic_cast<CSpaceShip*>(Player4)->CurrentItem == ItemState::ITEM_GRAPPLINGHOOK)
-		{
-			Gadget = "Hook";
-		}
-		else if (dynamic_cast<CSpaceShip*>(Player4)->CurrentItem == ItemState::ITEM_GRAVITYWELL)
-		{
-			Gadget = "Grav Well";
-		}
-		else if (dynamic_cast<CSpaceShip*>(Player4)->CurrentItem == ItemState::ITEM_RAILGUN)
-		{
-			Gadget = "Rail Gun";
-		}
-		else if (dynamic_cast<CSpaceShip*>(Player4)->CurrentItem == ItemState::ITEM_DROPBOX)
-		{
-			Gadget = "Drop Box";
-		}
-		Player4Gadget->SetText("Gadget: " + Gadget);
-	}
-	else
-	{
-	Player4Gadget->SetText("Gadget: ");
-	}
+
+
 }
 
 void CTestScene::CreateBlocks(int iBlockID, std::string Name,  std::string SpriteName, Transform Transform,std::string Tag )

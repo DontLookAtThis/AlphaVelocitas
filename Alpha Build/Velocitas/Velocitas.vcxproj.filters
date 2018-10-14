@@ -204,6 +204,12 @@
     <ClInclude Include="Game\DropBox.h">
       <Filter>Game\LevelObjects</Filter>
     </ClInclude>
+    <ClInclude Include="Game\MainMenu.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\ConnectionMenu.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Camera.cpp">
@@ -299,6 +305,12 @@
     <ClCompile Include="Game\DeathSensor.cpp" />
     <ClCompile Include="Game\DropBox.cpp">
       <Filter>Game\LevelObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\MainMenu.cpp">
+      <Filter>Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\ConnectionMenu.cpp">
+      <Filter>Game\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -51,7 +51,7 @@ void CGameOver::UpdateScene(float _tick)
 	if (CInput::GetInstance()->g_cKeyState[(unsigned char)'r'] == INPUT_FIRST_PRESS)
 	{
 		CSceneMgr::GetInstance()->RestScore();
-		CSceneMgr::GetInstance()->LoadScene("Test Scene");
+		CSceneMgr::GetInstance()->LoadScene("MainMenu");
 	}
 
 }

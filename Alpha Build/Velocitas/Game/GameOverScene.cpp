@@ -26,10 +26,17 @@ void CGameOver::ConfigurateScene()
 
 	CTextLabel* GameOver = new CTextLabel("SpaceFont");
 	GameOver->SetText("Game Over");
-	GameOver->SetPosition(glm::vec2((util::SCR_WIDTH / 4) + 180.0f, util::SCR_HEIGHT / 2));
+	GameOver->SetPosition(glm::vec2((util::SCR_WIDTH / 4) + 180.0f, util::SCR_HEIGHT / 2 + 100.0f));
 	GameOver->SetScale(1.0f);
 	GameOver->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(GameOver);
+
+	CTextLabel* PressButtonToGoBack = new CTextLabel("SpaceFont");
+	PressButtonToGoBack->SetText("Press A to Continue");
+	PressButtonToGoBack->SetPosition(glm::vec2((util::SCR_WIDTH / 4), util::SCR_HEIGHT / 2 - 100.0f));
+	PressButtonToGoBack->SetScale(1.0f);
+	PressButtonToGoBack->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
+	m_vTextLabel.push_back(PressButtonToGoBack);
 
 	/*CTextLabel* WinnerText = new CTextLabel("SpaceFont");
 	WinnerText->SetText("Congradulations" + Winner->m_name);
@@ -48,7 +55,8 @@ void CGameOver::UpdateScene(float _tick)
 {
 	__super::UpdateScene(_tick);
 
-	if (CInput::GetInstance()->g_cKeyState[(unsigned char)'r'] == INPUT_FIRST_PRESS)
+	if (CInput::GetInstance()->g_cKeyState[(unsigned char)'a'] == INPUT_FIRST_PRESS
+		|| CInput::GetInstance()->Players[0]->ControllerButtons[BOTTOM_FACE_BUTTON] == INPUT_FIRST_PRESS)
 	{
 		CSceneMgr::GetInstance()->RestScore();
 		CSceneMgr::GetInstance()->LoadScene("MainMenu");

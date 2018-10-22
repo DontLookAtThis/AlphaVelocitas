@@ -52,6 +52,7 @@
     <ClInclude Include="Game\GrapplingHook.h" />
     <ClInclude Include="Game\GravityWellObj.h" />
     <ClInclude Include="Game\ItemCube.h" />
+    <ClInclude Include="Game\Level1.h" />
     <ClInclude Include="Game\MainMenu.h" />
     <ClInclude Include="Game\RaceCourse.h" />
     <ClInclude Include="Game\RailgunShot.h" />
@@ -88,6 +89,7 @@
     <ClCompile Include="Game\GrapplingHook.cpp" />
     <ClCompile Include="Game\GravityWellObj.cpp" />
     <ClCompile Include="Game\ItemCube.cpp" />
+    <ClCompile Include="Game\Level1.cpp" />
     <ClCompile Include="Game\MainMenu.cpp" />
     <ClCompile Include="Game\RaceCourse.cpp" />
     <ClCompile Include="Game\RailgunShot.cpp" />

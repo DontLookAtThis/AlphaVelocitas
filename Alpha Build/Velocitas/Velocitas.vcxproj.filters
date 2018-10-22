@@ -100,6 +100,12 @@
     <Filter Include="Game\Scenes\GameOverScene">
       <UniqueIdentifier>{04f7ff9e-1ac1-4cfa-be1d-88c56e31a529}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\LevelObjects\PowerUps">
+      <UniqueIdentifier>{4be41443-d178-4eca-98ca-6c40809a3f82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\Level1">
+      <UniqueIdentifier>{cd6359cf-0771-4262-aef7-d1132474c1d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Engine\Commenting Header.txt">
@@ -185,30 +191,33 @@
     <ClInclude Include="Game\RaceCourse.h">
       <Filter>Game\RaceCourse</Filter>
     </ClInclude>
-    <ClInclude Include="Game\ItemCube.h">
-      <Filter>Game\LevelObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\RailgunShot.h">
-      <Filter>Game\LevelObjects</Filter>
-    </ClInclude>
     <ClInclude Include="Game\GameOverScene.h">
       <Filter>Game\Scenes\GameOverScene</Filter>
     </ClInclude>
-    <ClInclude Include="Game\GrapplingHook.h">
-      <Filter>Game\LevelObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\GravityWellObj.h">
-      <Filter>Game\LevelObjects</Filter>
-    </ClInclude>
     <ClInclude Include="Game\DeathSensor.h" />
-    <ClInclude Include="Game\DropBox.h">
-      <Filter>Game\LevelObjects</Filter>
-    </ClInclude>
     <ClInclude Include="Game\MainMenu.h">
       <Filter>Game\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Game\ConnectionMenu.h">
       <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\DropBox.h">
+      <Filter>Game\LevelObjects\PowerUps</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GrapplingHook.h">
+      <Filter>Game\LevelObjects\PowerUps</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GravityWellObj.h">
+      <Filter>Game\LevelObjects\PowerUps</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\ItemCube.h">
+      <Filter>Game\LevelObjects\PowerUps</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\RailgunShot.h">
+      <Filter>Game\LevelObjects\PowerUps</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Level1.h">
+      <Filter>Game\Scenes\Level1</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -287,30 +296,33 @@
     <ClCompile Include="Game\RaceCourse.cpp">
       <Filter>Game\RaceCourse</Filter>
     </ClCompile>
-    <ClCompile Include="Game\ItemCube.cpp">
-      <Filter>Game\LevelObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\RailgunShot.cpp">
-      <Filter>Game\LevelObjects</Filter>
-    </ClCompile>
     <ClCompile Include="Game\GameOverScene.cpp">
       <Filter>Game\Scenes\GameOverScene</Filter>
     </ClCompile>
-    <ClCompile Include="Game\GrapplingHook.cpp">
-      <Filter>Game\LevelObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\GravityWellObj.cpp">
-      <Filter>Game\LevelObjects</Filter>
-    </ClCompile>
     <ClCompile Include="Game\DeathSensor.cpp" />
-    <ClCompile Include="Game\DropBox.cpp">
-      <Filter>Game\LevelObjects</Filter>
-    </ClCompile>
     <ClCompile Include="Game\MainMenu.cpp">
       <Filter>Game\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Game\ConnectionMenu.cpp">
       <Filter>Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\DropBox.cpp">
+      <Filter>Game\LevelObjects\PowerUps</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GrapplingHook.cpp">
+      <Filter>Game\LevelObjects\PowerUps</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GravityWellObj.cpp">
+      <Filter>Game\LevelObjects\PowerUps</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\ItemCube.cpp">
+      <Filter>Game\LevelObjects\PowerUps</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\RailgunShot.cpp">
+      <Filter>Game\LevelObjects\PowerUps</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Level1.cpp">
+      <Filter>Game\Scenes\Level1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

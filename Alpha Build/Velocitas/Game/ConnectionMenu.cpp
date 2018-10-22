@@ -70,6 +70,7 @@ void CConnectionMenu::ConfigurateScene()
 	this->m_vGameObj.push_back(Player2);
 	Player2->GetComponent<CSpriteRender>()->SetSprite("Player2");
 	Player2->SetActive(false);
+	
 
 	Player3 = new CBlocks(1);
 	Player3->SetWorld(this);
@@ -144,10 +145,11 @@ void CConnectionMenu::UpdateScene(float _tick)
 		Player1Connected = !Player1Connected;
 		Player1->SetActive(Player1Connected);
 	}
-	if (CInput::GetInstance()->Players[1]->ControllerButtons[BOTTOM_FACE_BUTTON] == INPUT_FIRST_PRESS)
+	if (CInput::GetInstance()->Players[1]->ControllerButtons[BOTTOM_FACE_BUTTON] == INPUT_FIRST_PRESS || CInput::GetInstance()->g_cKeyState[(unsigned char)'k'] == INPUT_FIRST_PRESS)
 	{
 		Player2Connected = !Player2Connected;
 		Player2->SetActive(Player2Connected);
+		
 	}
 	if (CInput::GetInstance()->Players[2]->ControllerButtons[BOTTOM_FACE_BUTTON] == INPUT_FIRST_PRESS)
 	{
@@ -173,7 +175,7 @@ void CConnectionMenu::UpdateScene(float _tick)
 			CSceneMgr::GetInstance()->P2 = Player2Connected;
 			CSceneMgr::GetInstance()->P3 = Player3Connected;
 			CSceneMgr::GetInstance()->P4 = Player4Connected;
-			CSceneMgr::GetInstance()->LoadScene("Test Scene");
+			CSceneMgr::GetInstance()->LoadScene("Level1");
 		}
 		if (CInput::GetInstance()->Players[1]->ControllerButtons[TOP_FACE_BUTTON] == INPUT_FIRST_PRESS)
 		{
@@ -181,7 +183,7 @@ void CConnectionMenu::UpdateScene(float _tick)
 			CSceneMgr::GetInstance()->P2 = Player2Connected;
 			CSceneMgr::GetInstance()->P3 = Player3Connected;
 			CSceneMgr::GetInstance()->P4 = Player4Connected;
-			CSceneMgr::GetInstance()->LoadScene("Test Scene");
+			CSceneMgr::GetInstance()->LoadScene("Level1");
 		}
 		if (CInput::GetInstance()->Players[2]->ControllerButtons[TOP_FACE_BUTTON] == INPUT_FIRST_PRESS)
 		{
@@ -189,7 +191,7 @@ void CConnectionMenu::UpdateScene(float _tick)
 			CSceneMgr::GetInstance()->P2 = Player2Connected;
 			CSceneMgr::GetInstance()->P3 = Player3Connected;
 			CSceneMgr::GetInstance()->P4 = Player4Connected;
-			CSceneMgr::GetInstance()->LoadScene("Test Scene");
+			CSceneMgr::GetInstance()->LoadScene("Level1");
 		}
 		if (CInput::GetInstance()->Players[3]->ControllerButtons[TOP_FACE_BUTTON] == INPUT_FIRST_PRESS)
 		{
@@ -197,7 +199,7 @@ void CConnectionMenu::UpdateScene(float _tick)
 			CSceneMgr::GetInstance()->P2 = Player2Connected;
 			CSceneMgr::GetInstance()->P3 = Player3Connected;
 			CSceneMgr::GetInstance()->P4 = Player4Connected;
-			CSceneMgr::GetInstance()->LoadScene("Test Scene");
+			CSceneMgr::GetInstance()->LoadScene("Level1");
 		}
 	}
 }

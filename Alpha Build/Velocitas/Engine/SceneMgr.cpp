@@ -10,6 +10,7 @@
 #include "Game/GameOverScene.h"
 #include "Game/MainMenu.h"
 #include "Game/ConnectionMenu.h"
+#include "Game/Level1.h"
 // Static Variable
 CSceneMgr* CSceneMgr::s_pSceneMgr = nullptr;
 
@@ -34,6 +35,7 @@ void CSceneMgr::InitializeScenes()
 	/** Create scenes that is going to build in the game */
 	CreateNewScene("MainMenu", new CMainMenu());
 	CreateNewScene("Test Scene", new CTestScene());
+	CreateNewScene("Level1", new CLevel1());
 	CreateNewScene("GameOver Scene", new CGameOver());
 	CreateNewScene("ConnectionScene", new CConnectionMenu());
 
@@ -41,7 +43,7 @@ void CSceneMgr::InitializeScenes()
 	
 	if (!m_scenes.empty())
 	{
-		LoadScene("MainMenu");
+		LoadScene("Level1");
 	}
 	else
 	{

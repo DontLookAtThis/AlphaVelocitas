@@ -95,7 +95,7 @@ CScene* CSceneMgr::GetRunningScene() const
 	return m_runningScene;
 }
 
-void CSceneMgr::RestScore()
+void CSceneMgr::ResetScore()
 {
 	m_playerOneScore = 0;
 	m_playerTwoScore = 0;

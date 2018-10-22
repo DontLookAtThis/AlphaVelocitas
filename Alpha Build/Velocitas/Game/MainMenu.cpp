@@ -116,6 +116,7 @@ void CMainMenu::UpdateScene(float _tick)
 		if (CInput::GetInstance()->g_cMouseState[0] == INPUT_FIRST_PRESS)
 		{
 			CSceneMgr::GetInstance()->LoadScene("ConnectionScene");
+			return;
 		}
 	}
 
@@ -133,18 +134,22 @@ void CMainMenu::UpdateScene(float _tick)
 	if (CInput::GetInstance()->Players[0]->ControllerButtons[BOTTOM_FACE_BUTTON] == INPUT_FIRST_PRESS)
 	{
 		CSceneMgr::GetInstance()->LoadScene("ConnectionScene");
+		return;
 	}
 	if (CInput::GetInstance()->Players[1]->ControllerButtons[BOTTOM_FACE_BUTTON] == INPUT_FIRST_PRESS)
 	{
 		CSceneMgr::GetInstance()->LoadScene("ConnectionScene");
+		return;
 	}
 	if (CInput::GetInstance()->Players[2]->ControllerButtons[BOTTOM_FACE_BUTTON] == INPUT_FIRST_PRESS)
 	{
 		CSceneMgr::GetInstance()->LoadScene("ConnectionScene");
+		return;
 	}
 	if (CInput::GetInstance()->Players[3]->ControllerButtons[BOTTOM_FACE_BUTTON] == INPUT_FIRST_PRESS)
 	{
 		CSceneMgr::GetInstance()->LoadScene("ConnectionScene");
+		return;
 	}
 
 	if (CInput::GetInstance()->Players[0]->ControllerButtons[TOP_FACE_BUTTON] == INPUT_FIRST_PRESS)

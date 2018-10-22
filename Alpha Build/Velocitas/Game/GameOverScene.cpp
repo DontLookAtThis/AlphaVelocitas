@@ -55,10 +55,25 @@ void CGameOver::UpdateScene(float _tick)
 {
 	__super::UpdateScene(_tick);
 
-	if (CInput::GetInstance()->g_cKeyState[(unsigned char)'a'] == INPUT_FIRST_PRESS
-		|| CInput::GetInstance()->Players[0]->ControllerButtons[BOTTOM_FACE_BUTTON] == INPUT_FIRST_PRESS)
+
+	if (CInput::GetInstance()->Players[0]->ControllerButtons[BOTTOM_FACE_BUTTON] == INPUT_FIRST_PRESS)
 	{
-		CSceneMgr::GetInstance()->RestScore();
 		CSceneMgr::GetInstance()->LoadScene("MainMenu");
+		return;
+	}
+	if (CInput::GetInstance()->Players[1]->ControllerButtons[BOTTOM_FACE_BUTTON] == INPUT_FIRST_PRESS)
+	{
+		CSceneMgr::GetInstance()->LoadScene("MainMenu");
+		return;
+	}
+	if (CInput::GetInstance()->Players[2]->ControllerButtons[BOTTOM_FACE_BUTTON] == INPUT_FIRST_PRESS)
+	{
+		CSceneMgr::GetInstance()->LoadScene("MainMenu");
+		return;
+	}
+	if (CInput::GetInstance()->Players[3]->ControllerButtons[BOTTOM_FACE_BUTTON] == INPUT_FIRST_PRESS)
+	{
+		CSceneMgr::GetInstance()->LoadScene("MainMenu");
+		return;
 	}
 }

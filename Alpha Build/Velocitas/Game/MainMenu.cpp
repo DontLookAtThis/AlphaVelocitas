@@ -36,6 +36,7 @@ void CMainMenu::ConfigurateScene()
 
 	this->m_mainCamera = new CCamera();
 
+
 	CGameObject* BackGround = new CBlocks(1);
 	BackGround->SetWorld(this);
 	BackGround->m_name = "BackGround";
@@ -76,7 +77,7 @@ void CMainMenu::ConfigurateScene()
 
 
 	Play = new CTextLabel("SpaceFont");
-	Play->SetText("Play - A");
+	Play->SetText("Play - X");
 	glm::vec3 pos = glm::vec3(0.0f, 0.0f, -1.0f);
 	pos *= util::PIXELUNIT;
 	Play->SetPosition({ pos.x + (util::SCR_WIDTH/2) - 140.0f, pos.y + (util::SCR_HEIGHT /2) - 20.0f});
@@ -97,17 +98,43 @@ void CMainMenu::ConfigurateScene()
 	Velocitas->SetScale(2.0f);
 	Velocitas->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Velocitas);
-
 }
 
 void CMainMenu::BeginPlay()
 {
 	__super::BeginPlay();
+
+	if (CInput::GetInstance())
+	{
+		if (CInput::GetInstance()->Players.size() > 0)
+		{
+			CInput::GetInstance()->Players[0]->ControllerButtons[TOP_FACE_BUTTON] = INPUT_RELEASED;
+			CInput::GetInstance()->Players[0]->ControllerButtons[LEFT_FACE_BUTTON] = INPUT_RELEASED;
+		}
+		if (CInput::GetInstance()->Players.size() > 1)
+		{
+			CInput::GetInstance()->Players[1]->ControllerButtons[TOP_FACE_BUTTON] = INPUT_RELEASED;
+			CInput::GetInstance()->Players[1]->ControllerButtons[LEFT_FACE_BUTTON] = INPUT_RELEASED;
+		}
+		if (CInput::GetInstance()->Players.size() > 2)
+		{
+			CInput::GetInstance()->Players[2]->ControllerButtons[TOP_FACE_BUTTON] = INPUT_RELEASED;
+			CInput::GetInstance()->Players[2]->ControllerButtons[LEFT_FACE_BUTTON] = INPUT_RELEASED;
+		}
+		if (CInput::GetInstance()->Players.size() > 3)
+		{
+			CInput::GetInstance()->Players[3]->ControllerButtons[TOP_FACE_BUTTON] = INPUT_RELEASED;
+			CInput::GetInstance()->Players[3]->ControllerButtons[LEFT_FACE_BUTTON] = INPUT_RELEASED;
+		}
+	}
+
 }
 
 void CMainMenu::UpdateScene(float _tick)
 {
 	__super::UpdateScene(_tick);
+
+
 	m_mouseX = CInput::GetInstance()->MouseX;
 	m_mouseY = CInput::GetInstance()->MouseY;
 	m_mouseX = m_mouseX - (util::SCR_WIDTH / 2);
@@ -126,6 +153,7 @@ void CMainMenu::UpdateScene(float _tick)
 		if (CInput::GetInstance()->g_cMouseState[0] == INPUT_FIRST_PRESS)
 		{
 			CSceneMgr::GetInstance()->LoadScene("ConnectionScene");
+			return;
 		}
 	}
 
@@ -140,21 +168,25 @@ void CMainMenu::UpdateScene(float _tick)
 		}
 	}
 
-	if (CInput::GetInstance()->Players[0]->ControllerButtons[BOTTOM_FACE_BUTTON] == INPUT_FIRST_PRESS)
+	if (CInput::GetInstance()->Players[0]->ControllerButtons[LEFT_FACE_BUTTON] == INPUT_FIRST_PRESS)
 	{
 		CSceneMgr::GetInstance()->LoadScene("ConnectionScene");
+		return;
 	}
-	if (CInput::GetInstance()->Players[1]->ControllerButtons[BOTTOM_FACE_BUTTON] == INPUT_FIRST_PRESS)
+	if (CInput::GetInstance()->Players[1]->ControllerButtons[LEFT_FACE_BUTTON] == INPUT_FIRST_PRESS)
 	{
 		CSceneMgr::GetInstance()->LoadScene("ConnectionScene");
+		return;
 	}
-	if (CInput::GetInstance()->Players[2]->ControllerButtons[BOTTOM_FACE_BUTTON] == INPUT_FIRST_PRESS)
+	if (CInput::GetInstance()->Players[2]->ControllerButtons[LEFT_FACE_BUTTON] == INPUT_FIRST_PRESS)
 	{
 		CSceneMgr::GetInstance()->LoadScene("ConnectionScene");
+		return;
 	}
-	if (CInput::GetInstance()->Players[3]->ControllerButtons[BOTTOM_FACE_BUTTON] == INPUT_FIRST_PRESS)
+	if (CInput::GetInstance()->Players[3]->ControllerButtons[LEFT_FACE_BUTTON] == INPUT_FIRST_PRESS)
 	{
 		CSceneMgr::GetInstance()->LoadScene("ConnectionScene");
+		return;
 	}
 
 	if (CInput::GetInstance()->Players[0]->ControllerButtons[TOP_FACE_BUTTON] == INPUT_FIRST_PRESS)

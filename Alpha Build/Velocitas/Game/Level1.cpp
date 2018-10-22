@@ -20,9 +20,11 @@
 #include "Game/GravityWellObj.h"
 #include "Engine/Debug.h"
 #include "Engine/Time.h"
+
 //Includes
 #include <memory>
 #include "Engine/Sound.h"
+
 void CLevel1::ConfigurateScene()
 {
 	__super::ConfigurateScene();
@@ -37,10 +39,10 @@ void CLevel1::ConfigurateScene()
 
 	/** Create game objects in the scenes */
 	//Creating Sound
-	//CSound::GetInstance()->Init();
-	//CSound::GetInstance()->AddSound();
-	//CSound::GetInstance()->SoundMgr->playSound(CSound::GetInstance()->bgMusic, 0, false, &CSound::GetInstance()->BgMusicChannel);
-	//CSound::GetInstance()->BgMusicChannel->setVolume(0.1f);
+	CSound::GetInstance()->Init();
+	CSound::GetInstance()->AddSound();
+	CSound::GetInstance()->SoundMgr->playSound(CSound::GetInstance()->bgMusic, 0, false, &CSound::GetInstance()->BgMusicChannel);
+	CSound::GetInstance()->BgMusicChannel->setVolume(0.1f);
 
 	//BACKGROUND----------------------------------------------------
 	CGameObject* BackGround = new CBlocks(1);
@@ -83,37 +85,53 @@ void CLevel1::ConfigurateScene()
 		m_vGameObj.push_back(checkPoint_1);
 		m_raceCourse->AddCheckPoint((CCheckPoint*)checkPoint_1);
 		checkPoint_1->m_name = "CheckPoint_1";
-		checkPoint_1->m_transform.position = glm::vec3(14.5f, 5.5f, 0.0f);
-		checkPoint_1->m_transform.scale = glm::vec3(5.0f, 1.0f, 0.0f);
+		checkPoint_1->m_transform.position = glm::vec3(7.0f, 7.5f, 0.0f);
+		checkPoint_1->m_transform.scale = glm::vec3(1.0f, 4.0f, 0.0f);
 
 		CGameObject* checkPoint_2 = new CCheckPoint();
 		checkPoint_2->SetWorld(this);
 		m_vGameObj.push_back(checkPoint_2);
 		m_raceCourse->AddCheckPoint((CCheckPoint*)checkPoint_2);
 		checkPoint_2->m_name = "CheckPoint_2";
-		checkPoint_2->m_transform.position = glm::vec3(-10.0f, 8.5f, 0.0f);
-		checkPoint_2->m_transform.scale = glm::vec3(1.0f, 3.0f, 0.0f);
+		checkPoint_2->m_transform.position = glm::vec3(4.0f, -26.0f, 0.0f);
+		checkPoint_2->m_transform.scale = glm::vec3(1.0f, 4.0f, 0.0f);
 
 		CGameObject* checkPoint_3 = new CCheckPoint();
 		checkPoint_3->SetWorld(this);
 		m_vGameObj.push_back(checkPoint_3);
 		m_raceCourse->AddCheckPoint((CCheckPoint*)checkPoint_3);
 		checkPoint_3->m_name = "CheckPoint_3";
-		checkPoint_3->m_transform.position = glm::vec3(-14.5f, -5.5f, 0.0f);
-		checkPoint_3->m_transform.scale = glm::vec3(5.0f, 1.0f, 0.0f);
+		checkPoint_3->m_transform.position = glm::vec3(-23.0f, -23.0f, 0.0f);
+		checkPoint_3->m_transform.scale = glm::vec3(1.0f, 4.0f, 0.0f);
 
 		CGameObject* checkPoint_4 = new CCheckPoint();
 		checkPoint_4->SetWorld(this);
 		m_vGameObj.push_back(checkPoint_4);
 		m_raceCourse->AddCheckPoint((CCheckPoint*)checkPoint_4);
 		checkPoint_4->m_name = "CheckPoint_4";
-		checkPoint_4->m_transform.position = glm::vec3(10.0f, -8.5f, 0.0f);
-		checkPoint_4->m_transform.scale = glm::vec3(1.0f, 3.0f, 0.0f);
+		checkPoint_4->m_transform.position = glm::vec3(-23.0f, 7.0f, 0.0f);
+		checkPoint_4->m_transform.scale = glm::vec3(1.0f, 6.0f, 0.0f);
+
+		CGameObject* checkPoint_5 = new CCheckPoint();
+		checkPoint_5->SetWorld(this);
+		m_vGameObj.push_back(checkPoint_5);
+		m_raceCourse->AddCheckPoint((CCheckPoint*)checkPoint_5);
+		checkPoint_5->m_name = "CheckPoint_5";
+		checkPoint_5->m_transform.position = glm::vec3(-16.0f, -9.5f, 0.0f);
+		checkPoint_5->m_transform.scale = glm::vec3(1.0f, 5.0f, 0.0f);
+
+		CGameObject* checkPoint_6 = new CCheckPoint();
+		checkPoint_6->SetWorld(this);
+		m_vGameObj.push_back(checkPoint_6);
+		m_raceCourse->AddCheckPoint((CCheckPoint*)checkPoint_6);
+		checkPoint_6->m_name = "CheckPoint_6";
+		checkPoint_6->m_transform.position = glm::vec3(-5.0f, 7.5f, 0.0f);
+		checkPoint_6->m_transform.scale = glm::vec3(1.0f, 4.0f, 0.0f);
 	}
 
 	/** Configurate Death Sensor */
 	{
-		/*CDeathSensor* sensorLeft = new CDeathSensor(CAM_LEFT);
+		CDeathSensor* sensorLeft = new CDeathSensor(CAM_LEFT);
 		sensorLeft->SetWorld(this);
 		m_vGameObj.push_back(sensorLeft);
 		m_deathSensors.push_back(sensorLeft);
@@ -131,47 +149,19 @@ void CLevel1::ConfigurateScene()
 		CDeathSensor* sensorBottom = new CDeathSensor(CAM_BOTTOM);
 		sensorBottom->SetWorld(this);
 		m_vGameObj.push_back(sensorBottom);
-		m_deathSensors.push_back(sensorBottom);*/
+		m_deathSensors.push_back(sensorBottom);
 	}
 
-
-
-	CGameObject* Player1 = new CSpaceShip(1);
-	Player1->SetWorld(this);
-	Player1->m_name = "Player1";
-	Player1->m_tag = "Player";
-	Player1->m_transform.scale = glm::vec3(0.65f, 0.65f, 1.0f);
-	Player1->m_transform.position = glm::vec3(-5.0f, 9.5f, 0.0f);
-	this->m_vGameObj.push_back(Player1);
-	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player1));
-	Player1->GetComponent<CSpriteRender>()->SetSprite("Triangle");
-	Player1->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
-	Player1->GetComponent<CRigiBody2D>()->GetBody()->GetFixtureList()->SetRestitution(0.3f);
-
-	//LoadAllPlayers();
+	LoadAllPlayers();
 	LoadAllGravWell();
 	LoadAllBlocks();
 	LoadUserInterface();
 	LoadAllPowerUps();
-	/** Create a example text */
-	//CTextLabel* newTextLabel = new CTextLabel("FontName");
-	//m_vTextLabel.push_back(newTextLabel);
-	//newTextLabel->SetText("Whatever text here");
-
-
 }
 
 void CLevel1::BeginPlay()
 {
 	__super::BeginPlay();
-
-	if (CGameObject* firstPlayer = m_raceCourse->GetFirstPlayer())
-	{
-		m_mainCamera->m_cameraPosition.x =
-			firstPlayer->m_transform.position.x;
-		m_mainCamera->m_cameraPosition.y =
-			firstPlayer->m_transform.position.y;
-	}
 
 	for (auto senser : m_deathSensors)
 	{
@@ -187,35 +177,39 @@ void CLevel1::UpdateScene(float _tick)
 	// Make the camera to the first players position
 	if (CGameObject* firstPlayer = m_raceCourse->GetFirstPlayer())
 	{
-		m_mainCamera->m_cameraPosition.x =
-			firstPlayer->m_transform.position.x;
-		m_mainCamera->m_cameraPosition.y =
-			firstPlayer->m_transform.position.y;
+		if (m_mainCamera->m_cameraPosition != firstPlayer->m_transform.position)
+		{
+			glm::vec2 playerPos = { firstPlayer->m_transform.position.x, firstPlayer->m_transform.position.y };
+			glm::vec2 camPos = { m_mainCamera->m_cameraPosition.x, m_mainCamera->m_cameraPosition.y };
+			glm::vec2 direction = playerPos - camPos;
+			glm::vec2 moveAmount = direction * 0.1f;
+
+			m_mainCamera->m_cameraPosition += glm::vec3(moveAmount, 0.0f);
+		}
 	}
 
 	int aliveCount = 0;
-	//for (auto player : m_vPlayers)
-	//{
-	//	if (player->IsAlive())
-	//	{
-	//		aliveCount++;
-	//	}
-	//}
-	//if (aliveCount != 4)
-	//{
-	//	float currentShrinkPercent = m_deathSensors[0]->GetShrinkPercentage();
-	//	for (auto deathSensor : m_deathSensors)
-	//	{
-	//		if (deathSensor->GetShrinkPercentage() > 0.65f)
-	//		{
-	//			deathSensor->SetShrinkPercentage(currentShrinkPercent - ((1.0 / 90.0f) * 0.65f * CTime::GetInstance()->GetDeltaTime()));
-	//		}
-
-	//	}
-	//}
+	for (auto player : m_vPlayers)
+	{
+		if (player->IsAlive())
+		{
+			aliveCount++;
+		}
+	}
+	if (aliveCount != 4)
+	{
+		float currentShrinkPercent = m_deathSensors[0]->GetShrinkPercentage();
+		for (auto deathSensor : m_deathSensors)
+		{
+			if (deathSensor->GetShrinkPercentage() > 0.65f)
+			{
+				deathSensor->SetShrinkPercentage(currentShrinkPercent - ((1.0 / 90.0f) * 0.65f * CTime::GetInstance()->GetDeltaTime()));
+			}
+		}
+	}
 
 	// Check the win condition
-	//CheckWin();
+	CheckWin();
 }
 
 void CLevel1::ResetScene()
@@ -312,6 +306,7 @@ void CLevel1::LoadAllBlocks()
 	//First turn on the right
 	CreateBlocks(1, "OuterRight1", "9Block", { {13.0f,7.5f,0.0f},{0.0f,0.0f,-55.0f},{0.5f,0.5f,0.5f} });
 	CreateBlocks(1, "OuterRight2", "11Block", { {12.5f,-0.1f,0.0f},{0.0f,0.0f,55.0f},{0.5f,0.5f,0.5f} });
+
 	//Second turn on the right
 	CreateBlocks(1, "OuterRight3", "5Block", { {9.43f,-6.8f,0.0f},{0.0f,0.0f,90.0f},{0.5f,0.5f,0.5f} });
 	CreateBlocks(1, "OuterRight5", "7Block", { {9.1f,-16.7f,0.0f},{0.0f,0.0f,45.0f},{0.5f,0.5f,0.5f} });
@@ -396,7 +391,7 @@ void CLevel1::LoadAllPlayers()
 		Player1->m_name = "Player1";
 		Player1->m_tag = "Player";
 		Player1->m_transform.scale = glm::vec3(0.65f, 0.65f, 1.0f);
-		Player1->m_transform.position = SpawnLocation1;
+		Player1->m_transform.position = m_spawnLocation1;
 		this->m_vGameObj.push_back(Player1);
 		this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player1));
 		Player1->GetComponent<CSpriteRender>()->SetSprite("Player1");
@@ -414,7 +409,7 @@ void CLevel1::LoadAllPlayers()
 		Player2->m_name = "Player2";
 		Player2->m_tag = "Player";
 		Player2->m_transform.scale = glm::vec3(0.65f, 0.65f, 1.0f);
-		Player2->m_transform.position = SpawnLocation2;
+		Player2->m_transform.position = m_spawnLocation2;
 		this->m_vGameObj.push_back(Player2);
 		this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player2));
 		dynamic_cast<CSpaceShip*>(Player2)->bControllerInput = false;
@@ -434,7 +429,7 @@ void CLevel1::LoadAllPlayers()
 		Player3->m_name = "Player3";
 		Player3->m_tag = "Player";
 		Player3->m_transform.scale = glm::vec3(0.65f, 0.65f, 1.0f);
-		Player3->m_transform.position = SpawnLocation3;
+		Player3->m_transform.position = m_spawnLocation3;
 		this->m_vGameObj.push_back(Player3);
 		this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player3));
 		Player3->GetComponent<CSpriteRender>()->SetSprite("Player3");
@@ -453,7 +448,7 @@ void CLevel1::LoadAllPlayers()
 		Player4->m_name = "Player4";
 		Player4->m_tag = "Player";
 		Player4->m_transform.scale = glm::vec3(0.65f, 0.65f, 1.0f);
-		Player4->m_transform.position = SpawnLocation4;
+		Player4->m_transform.position = m_spawnLocation4;
 		this->m_vGameObj.push_back(Player4);
 		this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player4));
 		Player4->GetComponent<CSpriteRender>()->SetSprite("Player4");
@@ -622,7 +617,7 @@ void CLevel1::CheckWin()
 
 
 		// Load to the next
-		CSceneMgr::GetInstance()->LoadScene("Test Scene");
+		CSceneMgr::GetInstance()->LoadScene("Level1");
 	}
 
 
@@ -783,19 +778,17 @@ void CLevel1::CheckCurrentGadget()
 
 }
 
-void CLevel1::CreateBlocks(int iBlockID, std::string Name, std::string SpriteName, Transform Transform, std::string Tag)
+void CLevel1::CreateBlocks(int _iBlockID, std::string _name, std::string _spriteName, Transform _transform, std::string _tag)
 {
 	//std::shared_ptr<CBlocks>Blocks = std::make_shared<CBlocks>(iBlockID);
-	CBlocks* Blocks = new CBlocks(iBlockID);
+	CBlocks* Blocks = new CBlocks(_iBlockID);
 	Blocks->SetWorld(this);
-	Blocks->m_name = Name;
-	Blocks->m_tag = Tag;
-	Blocks->m_transform.position = Transform.position;
-	Blocks->m_transform.rotation.x = Transform.rotation.x;
-	Blocks->m_transform.rotation.y = Transform.rotation.y;
-	Blocks->m_transform.rotation.z = Transform.rotation.z;
-	Blocks->m_transform.scale = Transform.scale;
+	Blocks->m_name = _name;
+	Blocks->m_tag = _tag;
+	Blocks->m_transform.position = _transform.position;
+	Blocks->m_transform.rotation = _transform.rotation;
+	Blocks->m_transform.scale = _transform.scale;
 	this->m_vGameObj.push_back(std::move(Blocks));
-	Blocks->GetComponent<CSpriteRender>()->SetSprite(SpriteName);
+	Blocks->GetComponent<CSpriteRender>()->SetSprite(_spriteName);
 	Blocks->GetComponent<CRigiBody2D>()->CreateBody(GetWorld(), b2_staticBody);
 }

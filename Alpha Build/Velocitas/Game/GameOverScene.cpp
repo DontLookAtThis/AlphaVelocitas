@@ -61,5 +61,4 @@ void CGameOver::UpdateScene(float _tick)
 		CSceneMgr::GetInstance()->RestScore();
 		CSceneMgr::GetInstance()->LoadScene("MainMenu");
 	}
-
 }

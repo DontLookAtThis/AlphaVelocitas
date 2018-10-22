@@ -26,13 +26,13 @@ public:
 	void Reset();
 	void CheckWin();
 	void CheckCurrentGadget();
-	void CreateBlocks(int iBlockID, std::string Name, std::string SpriteName, Transform Transform, std::string Tag = "Block");
+	void CreateBlocks(int _iBlockID, std::string _name, std::string _spriteName, Transform _transform, std::string _tag = "Block");
 
 	//For the players
-	glm::vec3 SpawnLocation1 = { -5.0f, 9.5f, 0.0f };
-	glm::vec3 SpawnLocation2 = { -5.0f, 8.2f, 0.0f };
-	glm::vec3 SpawnLocation3 = { -5.0f, 6.8f, 0.0f };
-	glm::vec3 SpawnLocation4 = { -5.0f, 5.5f, 0.0f };
+	glm::vec3 m_spawnLocation1 = { -5.0f, 9.5f, 0.0f };
+	glm::vec3 m_spawnLocation2 = { -5.0f, 8.2f, 0.0f };
+	glm::vec3 m_spawnLocation3 = { -5.0f, 6.8f, 0.0f };
+	glm::vec3 m_spawnLocation4 = { -5.0f, 5.5f, 0.0f };
 
 	bool IsGameWon = false;
 
@@ -45,7 +45,7 @@ public:
 private:
 	CGameObject* Player1;
 	CGameObject* Player2;
-	CGameObject* Player3;
+	CGameObject* Player3; 
 	CGameObject* Player4;
 
 	CTextLabel* Player1Score;

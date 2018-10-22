@@ -36,6 +36,7 @@ void CMainMenu::ConfigurateScene()
 
 	this->m_mainCamera = new CCamera();
 
+	
 
 	CGameObject* BackGround = new CBlocks(1);
 	BackGround->SetWorld(this);
@@ -46,7 +47,6 @@ void CMainMenu::ConfigurateScene()
 	this->m_vGameObj.push_back(BackGround);
 	BackGround->GetComponent<CSpriteRender>()->SetSprite("Background");
 
-
 	Button1 = new CBlocks(1);
 	Button1->SetWorld(this);
 	Button1->m_name = "BackGround";
@@ -55,7 +55,6 @@ void CMainMenu::ConfigurateScene()
 	Button1->m_transform.scale = glm::vec3(4.0f, 1.0f, 1.0f);
 	this->m_vGameObj.push_back(Button1);
 	Button1->GetComponent<CSpriteRender>()->SetSprite("Block");
-
 
 	Button2 = new CBlocks(1);
 	Button2->SetWorld(this);
@@ -66,55 +65,90 @@ void CMainMenu::ConfigurateScene()
 	this->m_vGameObj.push_back(Button2);
 	Button2->GetComponent<CSpriteRender>()->SetSprite("Block");
 
+	Button3 = new CBlocks(1);
+	Button3->SetWorld(this);
+	Button3->m_name = "BackGround";
+	Button3->m_tag = "BackGround";
+	Button3->m_transform.position = glm::vec3(0.0f, -6.0f, -1.0f);
+	Button3->m_transform.scale = glm::vec3(4.0f, 1.0f, 1.0f);
+	this->m_vGameObj.push_back(Button3);
+	Button3->GetComponent<CSpriteRender>()->SetSprite("Block");
+
+
 	Play = new CTextLabel("SpaceFont");
 	Play->SetText("Play - X");
 	glm::vec3 pos = glm::vec3(0.0f, 0.0f, -1.0f);
 	pos *= util::PIXELUNIT;
-	Play->SetPosition({ pos.x + (util::SCR_WIDTH/2) - 140.0f, pos.y + (util::SCR_HEIGHT /2) - 20.0f});
+	Play->SetPosition({ pos.x + (util::SCR_WIDTH/2) - 130.0f, pos.y + (util::SCR_HEIGHT /2) - 25.0f});
 	Play->SetScale(0.7f);
 	Play->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Play);
+	Play->ControlsActive = false;
 
 	Quit = new CTextLabel("SpaceFont");
 	Quit->SetText("Quit - Y");
-	Quit->SetPosition({ pos.x + (util::SCR_WIDTH / 2) - 140.0f, pos.y + (util::SCR_HEIGHT / 2) - 140.0f });
+	Quit->SetPosition({ pos.x + (util::SCR_WIDTH / 2) - 120.0f, pos.y + (util::SCR_HEIGHT / 2) - 145.0f });
 	Quit->SetScale(0.7f);
 	Quit->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Quit);
+	Quit->ControlsActive = false;
 
 	Velocitas = new CTextLabel("SpaceFont");
 	Velocitas->SetText("Velocitas");
-	Velocitas->SetPosition({ pos.x + (util::SCR_WIDTH / 2) - 450.0f, pos.y + (util::SCR_HEIGHT / 2) + 80.0f });
+	Velocitas->SetPosition({ pos.x + (util::SCR_WIDTH / 2) - 450.0f, pos.y + (util::SCR_HEIGHT / 2) + 150.0f });
 	Velocitas->SetScale(2.0f);
 	Velocitas->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Velocitas);
+	Velocitas->ControlsActive = false;
+
+	Controls = new CTextLabel("SpaceFont");
+	Controls->SetText("Controls - B");
+	Controls->SetPosition({ pos.x + (util::SCR_WIDTH / 2) - 152.5f, pos.y + (util::SCR_HEIGHT / 2) - 255.0f });
+	Controls->SetScale(0.5f);
+	Controls->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
+	m_vTextLabel.push_back(Controls);
+	Controls->ControlsActive = false;
+
+	ControlMenu = new CBlocks(2);
+	ControlMenu->SetWorld(this);
+	ControlMenu->m_name = "BackGround";
+	ControlMenu->m_tag = "BackGround";
+	ControlMenu->m_transform.position = glm::vec3(0.0f, 0.0f, -1.0f);
+	ControlMenu->m_transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
+	this->m_vGameObj.push_back(ControlMenu);
+	ControlMenu->GetComponent<CSpriteRender>()->SetSprite("ControlMenu");
+	ControlMenu->SetActive(false);
 }
 
 void CMainMenu::BeginPlay()
 {
 	__super::BeginPlay();
-
+	
 	if (CInput::GetInstance())
 	{
 		if (CInput::GetInstance()->Players.size() > 0)
 		{
 			CInput::GetInstance()->Players[0]->ControllerButtons[TOP_FACE_BUTTON] = INPUT_RELEASED;
 			CInput::GetInstance()->Players[0]->ControllerButtons[LEFT_FACE_BUTTON] = INPUT_RELEASED;
+			CInput::GetInstance()->Players[0]->ControllerButtons[RIGHT_FACE_BUTTON] = INPUT_RELEASED;
 		}
 		if (CInput::GetInstance()->Players.size() > 1)
 		{
 			CInput::GetInstance()->Players[1]->ControllerButtons[TOP_FACE_BUTTON] = INPUT_RELEASED;
 			CInput::GetInstance()->Players[1]->ControllerButtons[LEFT_FACE_BUTTON] = INPUT_RELEASED;
+			CInput::GetInstance()->Players[1]->ControllerButtons[RIGHT_FACE_BUTTON] = INPUT_RELEASED;
 		}
 		if (CInput::GetInstance()->Players.size() > 2)
 		{
 			CInput::GetInstance()->Players[2]->ControllerButtons[TOP_FACE_BUTTON] = INPUT_RELEASED;
 			CInput::GetInstance()->Players[2]->ControllerButtons[LEFT_FACE_BUTTON] = INPUT_RELEASED;
+			CInput::GetInstance()->Players[2]->ControllerButtons[RIGHT_FACE_BUTTON] = INPUT_RELEASED;
 		}
 		if (CInput::GetInstance()->Players.size() > 3)
 		{
 			CInput::GetInstance()->Players[3]->ControllerButtons[TOP_FACE_BUTTON] = INPUT_RELEASED;
 			CInput::GetInstance()->Players[3]->ControllerButtons[LEFT_FACE_BUTTON] = INPUT_RELEASED;
+			CInput::GetInstance()->Players[3]->ControllerButtons[RIGHT_FACE_BUTTON] = INPUT_RELEASED;
 		}
 	}
 
@@ -179,6 +213,84 @@ void CMainMenu::UpdateScene(float _tick)
 		return;
 	}
 
+	if (CInput::GetInstance()->Players[0]->ControllerButtons[RIGHT_FACE_BUTTON] == INPUT_FIRST_PRESS && bControlsMenu != true)
+	{
+		Controls->ControlsActive = true;
+		Velocitas->ControlsActive = true;
+		Play->ControlsActive = true;
+		Quit->ControlsActive = true;
+		bControlsMenu = true;
+		ControlMenu->SetActive(true);
+	}
+	else if(CInput::GetInstance()->Players[0]->ControllerButtons[RIGHT_FACE_BUTTON] == INPUT_FIRST_PRESS && bControlsMenu == true)
+	{
+		Controls->ControlsActive = false;
+		Velocitas->ControlsActive = false;
+		Play->ControlsActive = false;
+		Quit->ControlsActive = false;
+		bControlsMenu = false;
+		ControlMenu->SetActive(false);
+	}
+	if (CInput::GetInstance()->Players[1]->ControllerButtons[RIGHT_FACE_BUTTON] == INPUT_FIRST_PRESS && bControlsMenu != true)
+	{
+		Controls->ControlsActive = true;
+		Velocitas->ControlsActive = true;
+		Play->ControlsActive = true;
+		Quit->ControlsActive = true;
+		bControlsMenu = true;
+		ControlMenu->SetActive(true);
+	}
+	else if (CInput::GetInstance()->Players[1]->ControllerButtons[RIGHT_FACE_BUTTON] == INPUT_FIRST_PRESS  && bControlsMenu == true)
+	{
+		Controls->ControlsActive = false;
+		Velocitas->ControlsActive = false;
+		Play->ControlsActive = false;
+		Quit->ControlsActive = false;
+		bControlsMenu = false;
+		ControlMenu->SetActive(false);
+
+	}
+	if (CInput::GetInstance()->Players[2]->ControllerButtons[RIGHT_FACE_BUTTON] == INPUT_FIRST_PRESS && bControlsMenu != true)
+	{
+		Controls->ControlsActive = true;
+		Velocitas->ControlsActive = true;
+		Play->ControlsActive = true;
+		Quit->ControlsActive = true;
+		bControlsMenu = true;
+		ControlMenu->SetActive(true);
+	}
+	else if (CInput::GetInstance()->Players[2]->ControllerButtons[RIGHT_FACE_BUTTON] == INPUT_FIRST_PRESS  && bControlsMenu == true)
+		{
+			Controls->ControlsActive = false;
+			Velocitas->ControlsActive = false;
+			Play->ControlsActive = false;
+			Quit->ControlsActive = false;
+			bControlsMenu = false;
+			ControlMenu->SetActive(false);
+		}
+	if (CInput::GetInstance()->Players[3]->ControllerButtons[RIGHT_FACE_BUTTON] == INPUT_FIRST_PRESS && bControlsMenu != true)
+	{
+		Controls->ControlsActive = true;
+		Velocitas->ControlsActive = true;
+		Play->ControlsActive = true;
+		bControlsMenu = true;
+		Quit->ControlsActive = true;
+		ControlMenu->SetActive(true);
+	}
+	else if (CInput::GetInstance()->Players[3]->ControllerButtons[RIGHT_FACE_BUTTON] == INPUT_FIRST_PRESS  && bControlsMenu == true)
+	{
+		Controls->ControlsActive = false;
+		Velocitas->ControlsActive = false;
+		Play->ControlsActive = false;
+		Quit->ControlsActive = false;
+		bControlsMenu = false;
+		ControlMenu->SetActive(false);
+	}
+
+
+	
+	
+
 	if (CInput::GetInstance()->Players[0]->ControllerButtons[TOP_FACE_BUTTON] == INPUT_FIRST_PRESS)
 	{
 		exit(0);
@@ -195,6 +307,8 @@ void CMainMenu::UpdateScene(float _tick)
 	{
 		exit(0);
 	}
+
+
 }
 
 void CMainMenu::ResetScene()

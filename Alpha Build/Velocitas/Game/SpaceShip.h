@@ -18,7 +18,7 @@ public:
 	bool bIsHeld;	
 	bool bControllerInput;
 	int CurrentItem;
-
+	float m_fCurrentRotation;
 
 	virtual void BeginPlay() override;
 	virtual void Update(float _tick) override;
@@ -54,7 +54,7 @@ private:
 	bool bRightPressed;
 	bool bFirePressed;
 	int m_iPlayerID;
-	float m_fCurrentRotation;
+
 	//TIMERS
 	float m_fInputReEnabletime;
 	float m_fGravityWellDuration;

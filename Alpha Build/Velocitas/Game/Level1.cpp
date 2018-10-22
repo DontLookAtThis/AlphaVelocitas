@@ -401,6 +401,7 @@ void CLevel1::LoadAllPlayers()
 		player1RB->GetBody()->GetFixtureList()->SetRestitution(0.1f);
 		player1RB->CreateGravityWell(GetWorld(), 5.0f, true, 0.5f);
 		player1RB->m_bHasGravityWell = false;
+		dynamic_cast<CSpaceShip*>(Player1)->m_fCurrentRotation = 270.0f;
 	}
 	if (CSceneMgr::GetInstance()->P2)
 	{
@@ -412,7 +413,6 @@ void CLevel1::LoadAllPlayers()
 		Player2->m_transform.position = m_spawnLocation2;
 		this->m_vGameObj.push_back(Player2);
 		this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player2));
-		dynamic_cast<CSpaceShip*>(Player2)->bControllerInput = false;
 		Player2->GetComponent<CSpriteRender>()->SetSprite("Player2");
 		dynamic_cast<CSpaceShip*>(Player2)->m_GravityWell->SetSprite("Gravity");
 		CRigiBody2D* player2RB = Player2->GetComponent<CRigiBody2D>();
@@ -420,7 +420,7 @@ void CLevel1::LoadAllPlayers()
 		player2RB->GetBody()->GetFixtureList()->SetRestitution(0.1f);
 		player2RB->CreateGravityWell(GetWorld(), 5.0f, true, 0.5f);
 		player2RB->m_bHasGravityWell = false;
-
+		dynamic_cast<CSpaceShip*>(Player2)->m_fCurrentRotation = 270.0f;
 	}
 	if (CSceneMgr::GetInstance()->P3)
 	{
@@ -439,6 +439,7 @@ void CLevel1::LoadAllPlayers()
 		player3RB->GetBody()->GetFixtureList()->SetRestitution(0.1f);
 		player3RB->CreateGravityWell(GetWorld(), 5.0f, true, 0.5f);
 		player3RB->m_bHasGravityWell = false;
+		dynamic_cast<CSpaceShip*>(Player3)->m_fCurrentRotation = 270.0f;
 	}
 	if (CSceneMgr::GetInstance()->P4)
 	{
@@ -458,6 +459,7 @@ void CLevel1::LoadAllPlayers()
 		player4RB->GetBody()->GetFixtureList()->SetRestitution(0.1f);
 		player4RB->CreateGravityWell(GetWorld(), 5.0f, true, 0.5f);
 		player4RB->m_bHasGravityWell = false;
+		dynamic_cast<CSpaceShip*>(Player4)->m_fCurrentRotation = 270.0f;
 	}
 }
 

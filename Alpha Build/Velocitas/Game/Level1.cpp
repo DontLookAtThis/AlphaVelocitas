@@ -258,7 +258,7 @@ void CLevel1::LoadAllGravWell()
 	CGameObject* GravityWell3 = new CGravityWell(0.6f);
 	GravityWell3->SetWorld(this);
 	GravityWell3->m_name = "GravityWell1";
-	GravityWell3->m_transform.position = glm::vec3(1.5f, -16.0f, 0.0f);
+	GravityWell3->m_transform.position = glm::vec3(7.0f, -19.0f, 0.0f);
 	GravityWell3->m_transform.scale = glm::vec3(0.14f, 0.14f, 0.0f);
 	Instantiate(GravityWell3);
 }

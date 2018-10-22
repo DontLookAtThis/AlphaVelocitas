@@ -19,7 +19,8 @@ public:
 	void SetPosition(glm::vec2 _position);
 	void SetColor(glm::vec3 _color);
 	void SetScale(GLfloat _scale);
-	
+	bool ControlsActive;
+
 private:
 	
 	Text* m_textObj;

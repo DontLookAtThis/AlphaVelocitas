@@ -48,6 +48,7 @@ void CAssetMgr::InitializeAssets()
 	CreateSprite("Sling", "Resources/Sprites/Slingshot.png");
 	CreateSprite("Gravity", "Resources/Sprites/Glass elements/elementGlass005.png");
 	CreateSprite("DeathSensor", "Resources/Sprites/DeathSensor.png");
+	CreateSprite("ControlMenu", "Resources/Sprites/ControlsMenu.png");
 
 	//Player Sprite
 	CreateSprite("Player1", "Resources/Sprites/Player1.png");

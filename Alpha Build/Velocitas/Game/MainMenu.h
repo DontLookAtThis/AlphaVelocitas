@@ -14,7 +14,7 @@ public:
 	virtual void UpdateScene(float _tick) override;
 	virtual void ResetScene() override;
 
-
+	CTextLabel* Control;
 
 private:
 
@@ -22,9 +22,11 @@ private:
 	CGameObject* Button2;
 	CGameObject* Button3;
 	CTextLabel* Play;
+	CTextLabel* Controls;
 	CTextLabel* Quit;
 	CTextLabel* Velocitas;
-
+	CGameObject* ControlMenu;
+	bool bControlsMenu = false;
 	float m_mouseX;
 	float m_mouseY;
 };

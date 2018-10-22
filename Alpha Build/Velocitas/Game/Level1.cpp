@@ -391,6 +391,7 @@ void CLevel1::LoadAllPlayers()
 		Player1->m_name = "Player1";
 		Player1->m_tag = "Player";
 		Player1->m_transform.scale = glm::vec3(0.65f, 0.65f, 1.0f);
+		dynamic_cast<CSpaceShip*>(Player1)->SetShipRotation(-90.0f);
 		Player1->m_transform.position = m_spawnLocation1;
 		this->m_vGameObj.push_back(Player1);
 		this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player1));
@@ -409,6 +410,7 @@ void CLevel1::LoadAllPlayers()
 		Player2->m_name = "Player2";
 		Player2->m_tag = "Player";
 		Player2->m_transform.scale = glm::vec3(0.65f, 0.65f, 1.0f);
+		dynamic_cast<CSpaceShip*>(Player2)->SetShipRotation(-90.0f);
 		Player2->m_transform.position = m_spawnLocation2;
 		this->m_vGameObj.push_back(Player2);
 		this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player2));
@@ -429,6 +431,7 @@ void CLevel1::LoadAllPlayers()
 		Player3->m_name = "Player3";
 		Player3->m_tag = "Player";
 		Player3->m_transform.scale = glm::vec3(0.65f, 0.65f, 1.0f);
+		dynamic_cast<CSpaceShip*>(Player3)->SetShipRotation(-90.0f);
 		Player3->m_transform.position = m_spawnLocation3;
 		this->m_vGameObj.push_back(Player3);
 		this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player3));
@@ -448,6 +451,7 @@ void CLevel1::LoadAllPlayers()
 		Player4->m_name = "Player4";
 		Player4->m_tag = "Player";
 		Player4->m_transform.scale = glm::vec3(0.65f, 0.65f, 1.0f);
+		dynamic_cast<CSpaceShip*>(Player4)->SetShipRotation(-90.0f);
 		Player4->m_transform.position = m_spawnLocation4;
 		this->m_vGameObj.push_back(Player4);
 		this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player4));

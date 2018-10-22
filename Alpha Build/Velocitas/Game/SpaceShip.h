@@ -35,6 +35,10 @@ public:
 	int GetCheckPointPassed() const;
 	void Die();
 
+	// Get and set the rotation of the ship
+	float GetShipRotation() const;
+	void SetShipRotation(float _value);
+
 	CSpriteRender* m_spriteRenderer;
 	CSpriteRender* m_GravityWell;
 	int iScore = 0;

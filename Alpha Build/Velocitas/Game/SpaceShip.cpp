@@ -215,6 +215,16 @@ void CSpaceShip::Die()
 	//m_rigidBody->GetBody()->GetWorld()->DestroyBody(m_rigidBody->GetBody());
 }
 
+float CSpaceShip::GetShipRotation() const
+{
+	return m_fCurrentRotation;
+}
+
+void CSpaceShip::SetShipRotation(float _value)
+{
+	m_fCurrentRotation = _value;
+}
+
 void CSpaceShip::Movement(float _tick)
 {
 	float Right = 0;

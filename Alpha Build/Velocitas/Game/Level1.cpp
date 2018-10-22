@@ -1,6 +1,5 @@
-
 // This Include
-#include "TestScene.h"
+#include "Level1.h"
 
 // Inlcude the game classes
 #include "Game/GameClasses.h"
@@ -21,13 +20,10 @@
 #include "Game/GravityWellObj.h"
 #include "Engine/Debug.h"
 #include "Engine/Time.h"
-
 //Includes
 #include <memory>
 #include "Engine/Sound.h"
-
-
-void CTestScene::ConfigurateScene()
+void CLevel1::ConfigurateScene()
 {
 	__super::ConfigurateScene();
 
@@ -41,10 +37,11 @@ void CTestScene::ConfigurateScene()
 
 	/** Create game objects in the scenes */
 	//Creating Sound
-	CSound::GetInstance()->Init();
-	CSound::GetInstance()->AddSound();
-	CSound::GetInstance()->SoundMgr->playSound(CSound::GetInstance()->bgMusic, 0, false, &CSound::GetInstance()->BgMusicChannel);
-	CSound::GetInstance()->BgMusicChannel->setVolume(0.1f);
+	//CSound::GetInstance()->Init();
+	//CSound::GetInstance()->AddSound();
+	//CSound::GetInstance()->SoundMgr->playSound(CSound::GetInstance()->bgMusic, 0, false, &CSound::GetInstance()->BgMusicChannel);
+	//CSound::GetInstance()->BgMusicChannel->setVolume(0.1f);
+
 	//BACKGROUND----------------------------------------------------
 	CGameObject* BackGround = new CBlocks(1);
 	BackGround->SetWorld(this);
@@ -54,71 +51,27 @@ void CTestScene::ConfigurateScene()
 	BackGround->m_transform.scale = glm::vec3(2.0f, 2.0f, 2.0f);
 	this->m_vGameObj.push_back(BackGround);
 	BackGround->GetComponent<CSpriteRender>()->SetSprite("Background");
+
+	CGameObject* BackGround1 = new CBlocks(2);
+	BackGround1->SetWorld(this);
+	BackGround1->m_name = "BackGround1";
+	BackGround1->m_tag = "BackGround1";
+	BackGround1->m_transform.position = glm::vec3(0.0f, -22.0f, -1.0f);
+	BackGround1->m_transform.scale = glm::vec3(2.0f, 2.0f, 2.0f);
+	this->m_vGameObj.push_back(BackGround1);
+	BackGround1->GetComponent<CSpriteRender>()->SetSprite("Background");
+
+	CGameObject* BackGround2 = new CBlocks(2);
+	BackGround2->SetWorld(this);
+	BackGround2->m_name = "BackGround1";
+	BackGround2->m_tag = "BackGround1";
+	BackGround2->m_transform.position = glm::vec3(-22.0f, -22.0f, -1.0f);
+	BackGround2->m_transform.scale = glm::vec3(2.0f, 3.0f, 2.0f);
+	this->m_vGameObj.push_back(BackGround2);
+	BackGround2->GetComponent<CSpriteRender>()->SetSprite("Background");
 	//--------------------------------------------------------------
 
-	//CTextLabel* Test = new CTextLabel("SpaceFont");
-	//Test->SetText("Testing Text");
-	//Test->SetPosition(glm::vec2((util::SCR_WIDTH /4) + 100.0f, util::SCR_HEIGHT/2));
-	//Test->SetScale(1.0f);
-	//Test->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
-	//m_vTextLabel.push_back(Test);
 
-	//CGameObject* GravityBlock = new CBlocks(3);
-	//GravityBlock->SetWorld(this);
-	//GravityBlock->m_name = "Block1";
-	//GravityBlock->m_tag = "Block";
-	//GravityBlock->m_transform.position = glm::vec3(0.0f, 0.0f, 0.0f);
-	//GravityBlock->m_transform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
-	//GravityBlock->m_transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
-	//this->m_vGameObj.push_back(GravityBlock);
-	//GravityBlock->GetComponent<CSpriteRender>()->SetSprite("Block");
-	//GravityBlock->GetComponent<CRigiBody2D>()->CreateGravityWell(GetWorld(), 10.0f, true, 0.5f);
-
-
-	CGameObject* ItemCube = new CItemCubes(ITEM_NONE);
-	ItemCube->SetWorld(this);
-	ItemCube->m_name = "ItemCube1";
-	ItemCube->m_tag = "ItemCube";
-	ItemCube->m_transform.position = glm::vec3(10.0f, 10.0f, 0.0f);
-	ItemCube->m_transform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
-	ItemCube->m_transform.scale = glm::vec3(0.3f, 0.1f, 0.5f);
-	this->m_vGameObj.push_back(ItemCube);
-	ItemCube->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
-	ItemCube->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
-	
-	CGameObject* ItemCube2 = new CItemCubes(ITEM_NONE);
-	ItemCube2->SetWorld(this);
-	ItemCube2->m_name = "ItemCube1";
-	ItemCube2->m_tag = "ItemCube";
-	ItemCube2->m_transform.position = glm::vec3(10.0f, 9.0f, 0.0f);
-	ItemCube2->m_transform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
-	ItemCube2->m_transform.scale = glm::vec3(0.3f, 0.1f, 0.5f);
-	this->m_vGameObj.push_back(ItemCube2);
-	ItemCube2->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
-	ItemCube2->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
-
-	CGameObject* ItemCube3 = new CItemCubes(ITEM_NONE);
-	ItemCube3->SetWorld(this);
-	ItemCube3->m_name = "ItemCube1";
-	ItemCube3->m_tag = "ItemCube";
-	ItemCube3->m_transform.position = glm::vec3(10.0f, 8.0f, 0.0f);
-	ItemCube3->m_transform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
-	ItemCube3->m_transform.scale = glm::vec3(0.3f, 0.1f, 0.5f);
-	this->m_vGameObj.push_back(ItemCube3);
-	ItemCube3->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
-	ItemCube3->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
-
-	CGameObject* ItemCube4 = new CItemCubes(ITEM_NONE);
-	ItemCube4->SetWorld(this);
-	ItemCube4->m_name = "ItemCube1";
-	ItemCube4->m_tag = "ItemCube";
-	ItemCube4->m_transform.position = glm::vec3(10.0f, 7.0f, 0.0f);
-	ItemCube4->m_transform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
-	ItemCube4->m_transform.scale = glm::vec3(0.3f, 0.1f, 0.5f);
-	this->m_vGameObj.push_back(ItemCube4);
-	ItemCube4->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
-	ItemCube4->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
-	
 	/** Configurate Race Course */
 	{
 		m_raceCourse = new CRaceCourse();
@@ -160,7 +113,7 @@ void CTestScene::ConfigurateScene()
 
 	/** Configurate Death Sensor */
 	{
-		CDeathSensor* sensorLeft = new CDeathSensor(CAM_LEFT);
+		/*CDeathSensor* sensorLeft = new CDeathSensor(CAM_LEFT);
 		sensorLeft->SetWorld(this);
 		m_vGameObj.push_back(sensorLeft);
 		m_deathSensors.push_back(sensorLeft);
@@ -178,27 +131,37 @@ void CTestScene::ConfigurateScene()
 		CDeathSensor* sensorBottom = new CDeathSensor(CAM_BOTTOM);
 		sensorBottom->SetWorld(this);
 		m_vGameObj.push_back(sensorBottom);
-		m_deathSensors.push_back(sensorBottom);
+		m_deathSensors.push_back(sensorBottom);*/
 	}
 
-	CGameObject* GravityWell1 = new CGravityWell(0.8f);
-	GravityWell1->SetWorld(this);
-	GravityWell1->m_name = "GravityWell1";
-	GravityWell1->m_transform.position = glm::vec3(9.0f, -6.0f, 0.0f);
-	Instantiate(GravityWell1);
 
-	LoadAllPlayers();
+
+	CGameObject* Player1 = new CSpaceShip(1);
+	Player1->SetWorld(this);
+	Player1->m_name = "Player1";
+	Player1->m_tag = "Player";
+	Player1->m_transform.scale = glm::vec3(0.65f, 0.65f, 1.0f);
+	Player1->m_transform.position = glm::vec3(-5.0f, 9.5f, 0.0f);
+	this->m_vGameObj.push_back(Player1);
+	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player1));
+	Player1->GetComponent<CSpriteRender>()->SetSprite("Triangle");
+	Player1->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
+	Player1->GetComponent<CRigiBody2D>()->GetBody()->GetFixtureList()->SetRestitution(0.3f);
+
+	//LoadAllPlayers();
+	LoadAllGravWell();
 	LoadAllBlocks();
 	LoadUserInterface();
+	LoadAllPowerUps();
 	/** Create a example text */
 	//CTextLabel* newTextLabel = new CTextLabel("FontName");
 	//m_vTextLabel.push_back(newTextLabel);
 	//newTextLabel->SetText("Whatever text here");
-	
+
 
 }
 
-void CTestScene::BeginPlay()
+void CLevel1::BeginPlay()
 {
 	__super::BeginPlay();
 
@@ -216,54 +179,49 @@ void CTestScene::BeginPlay()
 	}
 }
 
-void CTestScene::UpdateScene(float _tick)
+void CLevel1::UpdateScene(float _tick)
 {
 	__super::UpdateScene(_tick);
 	CheckCurrentGadget();
-	
+
 	// Make the camera to the first players position
 	if (CGameObject* firstPlayer = m_raceCourse->GetFirstPlayer())
 	{
-		if (m_mainCamera->m_cameraPosition != firstPlayer->m_transform.position)
-		{
-			glm::vec2 playerPos = { firstPlayer->m_transform.position.x, firstPlayer->m_transform.position.y };
-			glm::vec2 camPos = { m_mainCamera->m_cameraPosition.x, m_mainCamera->m_cameraPosition.y };
-			glm::vec2 direction = playerPos - camPos;
-			glm::vec2 moveAmount = direction * 0.1f;
-
-			m_mainCamera->m_cameraPosition += glm::vec3(moveAmount, 0.0f);
-		}
+		m_mainCamera->m_cameraPosition.x =
+			firstPlayer->m_transform.position.x;
+		m_mainCamera->m_cameraPosition.y =
+			firstPlayer->m_transform.position.y;
 	}
 
 	int aliveCount = 0;
-	for (auto player : m_vPlayers)
-	{
-		if (player->IsAlive())
-		{
-			aliveCount++;
-		}
-	}
-	if (aliveCount != 4)
-	{
-		float currentShrinkPercent = m_deathSensors[0]->GetShrinkPercentage();
-		for (auto deathSensor : m_deathSensors)
-		{
-			if(deathSensor->GetShrinkPercentage() > 0.65f)
-			{ 
-				deathSensor->SetShrinkPercentage(currentShrinkPercent - ((1.0f / 90.0f) * 0.65f * CTime::GetInstance()->GetDeltaTime()));
-			}
-			
-		}
-	}
+	//for (auto player : m_vPlayers)
+	//{
+	//	if (player->IsAlive())
+	//	{
+	//		aliveCount++;
+	//	}
+	//}
+	//if (aliveCount != 4)
+	//{
+	//	float currentShrinkPercent = m_deathSensors[0]->GetShrinkPercentage();
+	//	for (auto deathSensor : m_deathSensors)
+	//	{
+	//		if (deathSensor->GetShrinkPercentage() > 0.65f)
+	//		{
+	//			deathSensor->SetShrinkPercentage(currentShrinkPercent - ((1.0 / 90.0f) * 0.65f * CTime::GetInstance()->GetDeltaTime()));
+	//		}
+
+	//	}
+	//}
 
 	// Check the win condition
-	CheckWin();
+	//CheckWin();
 }
 
-void CTestScene::ResetScene()
+void CLevel1::ResetScene()
 {
 	__super::ResetScene();
-	
+
 	m_vPlayers.clear();
 	m_vPlayers.resize(0);
 
@@ -272,59 +230,164 @@ void CTestScene::ResetScene()
 
 }
 
-void CTestScene::LoadAllBlocks()
+void CLevel1::CreatePowerUp(Transform Transform)
 {
-	//Outer Ring------------------
-		//Bot Center
-		CreateBlocks(1, "BotCenter", "11Block", { {0.0f,-11.0f,0.0f},{0.0f,0.0f,0.0f},{0.5f,0.5f,0.5f} });
-		//Bot Left plus turn
-		CreateBlocks(1, "BotLeftTurn", "8Block", { { -17.0f,-8.5f,0.0f },{ 0.0f,0.0f,-45.0f },{ 0.5f,0.5f,0.5f } });
-		CreateBlocks(1, "BotLeft", "9Block", { { -10.0f,-11.0f,0.0f },{ 0.0f,0.0f,0.0f },{ 0.5f,0.5f,0.5f } });
-		//Bot Right plus turn
-		CreateBlocks(1, "BotRightTurn", "8Block", { { 17.0f,-8.5f,0.0f },{ 0.0f,0.0f,45.0f },{ 0.5f,0.5f,0.5f } });
-		CreateBlocks(1, "BotRight", "9Block", { { 10.0f,-11.0f,0.0f },{ 0.0f,0.0f,0.0f },{ 0.5f,0.5f,0.5f } });
+	CGameObject* ItemCube = new CItemCubes(ITEM_NONE);
+	ItemCube->SetWorld(this);
+	ItemCube->m_name = "ItemCube1";
+	ItemCube->m_tag = "ItemCube";
+	ItemCube->m_transform.position = Transform.position;
+	ItemCube->m_transform.rotation = Transform.rotation;
+	ItemCube->m_transform.scale = Transform.scale; //glm::vec3(0.3f, 0.1f, 0.5f);
+	this->m_vGameObj.push_back(ItemCube);
+	ItemCube->GetComponent<CSpriteRender>()->SetSprite("WoodBlock");
+	ItemCube->GetComponent<CRigiBody2D>()->CreateSensorCube(GetWorld(), b2_staticBody, true, true, 1.0f, 1.0f);
 
-		//Top Center
-		CreateBlocks(1, "TopCenter", "11Block", { { 0.0f,11.0f,0.0f },{ 0.0f,0.0f,0.0f },{ 0.5f,0.5f,0.5f } });
-		//Top Left plus turn
-		CreateBlocks(1, "TopLeftTurn", "8Block", { { -17.0f,8.5f,0.0f },{ 0.0f,0.0f,45.0f },{ 0.5f,0.5f,0.5f } });
-		CreateBlocks(1, "TopLeft", "9Block", { { -10.0f,11.0f,0.0f },{ 0.0f,0.0f,0.0f },{ 0.5f,0.5f,0.5f } });
-		//Top Right plus turn
-		CreateBlocks(1, "TopRightTurn", "8Block", { { 17.0f,8.5f,0.0f },{ 0.0f,0.0f,-45.0f },{ 0.5f,0.5f,0.5f } });
-		CreateBlocks(1, "TopRIght", "9Block", { { 10.0f,11.0f,0.0f },{ 0.0f,0.0f,0.0f },{ 0.5f,0.5f,0.5f } });
-
-		//Left Side
-		CreateBlocks(1, "LeftSide", "11Block", { { -19.5f,0.0f,0.0f },{ 0.0f,0.0f,90.0f },{0.55f,0.5f,0.5f } });
-		//Right Side
-		CreateBlocks(1, "RightSide", "11Block", { { 19.5f,0.0f,0.0f },{ 0.0f,0.0f,90.0f },{ 0.55f,0.5f,0.5f } });
-	//------------------------------
-		//Left Side
-		CreateBlocks(1, "LeftSide", "11Block", { { -9.75f,0.0f,0.0f },{ 0.0f,0.0f,90.0f },{ 0.54f,0.5f,0.5f } });
-		//Right Side
-		CreateBlocks(1, "RightSide", "11Block", { { 9.75f,0.0f,0.0f },{ 0.0f,0.0f,90.0f },{ 0.54f,0.5f,0.5f } });
-
-		//Bot Center
-		CreateBlocks(1, "BotCenter", "11Block", { { 0.0f,-5.5f,0.0f },{ 0.0f,0.0f,0.0f },{ 0.5f,0.5f,0.5f } });
-		//Bot Left plus turn
-		//CreateBlocks(1, "BotLeftTurn", "8Block", { { -8.5f,-4.25f,0.0f },{ 0.0f,0.0f,-45.0f },{ 0.5f,0.5f,0.5f } });
-		CreateBlocks(1, "BotLeft", "9Block", { { -5.0f,-5.5f,0.0f },{ 0.0f,0.0f,0.0f },{ 0.58f,0.5f,0.5f } });
-		//Bot Right plus turn
-		//CreateBlocks(1, "BotRightTurn", "8Block", { { 8.5f,-5.25f,0.0f },{ 0.0f,0.0f,45.0f },{ 0.5f,0.5f,0.5f } });
-		CreateBlocks(1, "BotRight", "9Block", { { 5.0f,-5.5f,0.0f },{ 0.0f,0.0f,0.0f },{ 0.58f,0.5f,0.5f } });
-
-		//Top Center
-		CreateBlocks(1, "TopCenter", "11Block", { { 0.0f,5.5f,0.0f },{ 0.0f,0.0f,0.0f },{ 0.5f,0.5f,0.5f } });
-		//Top Left plus turn
-		//CreateBlocks(1, "TopLeftTurn", "8Block", { { -8.5f,4.25f,0.0f },{ 0.0f,0.0f,45.0f },{ 0.5f,0.5f,0.5f } });
-		CreateBlocks(1, "TopLeft", "9Block", { { -5.0f,5.5f,0.0f },{ 0.0f,0.0f,0.0f },{ 0.58f,0.5f,0.5f } });
-		//Top Right plus turn
-		//CreateBlocks(1, "TopRightTurn", "8Block", { { 8.5f,4.25f,0.0f },{ 0.0f,0.0f,-45.0f },{ 0.5f,0.5f,0.5f } });
-		CreateBlocks(1, "TopRIght", "9Block", { { 5.0f,5.5f,0.0f },{ 0.0f,0.0f,0.0f },{ 0.58f,0.5f,0.5f } });
-
-		
 }
 
-void CTestScene::LoadAllPlayers()
+void CLevel1::LoadAllGravWell()
+{
+	CGameObject* GravityWell1 = new CGravityWell(0.8f);
+	GravityWell1->SetWorld(this);
+	GravityWell1->m_name = "GravityWell1";
+	GravityWell1->m_transform.position = glm::vec3(-16.0f, -5.5f, 0.0f);
+	GravityWell1->m_transform.scale = glm::vec3(0.13f, 0.13f, 0.0f);
+	Instantiate(GravityWell1);
+
+	CGameObject* GravityWell2 = new CGravityWell(0.8f);
+	GravityWell2->SetWorld(this);
+	GravityWell2->m_name = "GravityWell1";
+	GravityWell2->m_transform.position = glm::vec3(-12.0f, -18.0f, 0.0f);
+	GravityWell2->m_transform.scale = glm::vec3(0.15f, 0.15f, 0.0f);
+	Instantiate(GravityWell2);
+
+	CGameObject* GravityWell3 = new CGravityWell(0.6f);
+	GravityWell3->SetWorld(this);
+	GravityWell3->m_name = "GravityWell1";
+	GravityWell3->m_transform.position = glm::vec3(1.5f, -16.0f, 0.0f);
+	GravityWell3->m_transform.scale = glm::vec3(0.14f, 0.14f, 0.0f);
+	Instantiate(GravityWell3);
+}
+
+void CLevel1::LoadAllPowerUps()
+{
+	//start point
+	CreatePowerUp({ {0.0f, 9.5f, 0.0f},{0.0f,0.0f,0.0f},{0.4f, 0.12f, 0.5f} });
+	CreatePowerUp({ {0.0f, 8.2f, 0.0f},{0.0f,0.0f,0.0f},{0.4f, 0.12f, 0.5f} });
+	CreatePowerUp({ {0.0f, 6.8f, 0.0f},{0.0f,0.0f,0.0f},{0.4f, 0.12f, 0.5f} });
+	CreatePowerUp({ {0.0f, 5.5f, 0.0f},{0.0f,0.0f,0.0f},{0.4f, 0.12f, 0.5f} });
+	//On second turn on th right
+	CreatePowerUp({ {8.0f,-4.8f,0.0f},{0.0f,0.0f,0.0f},{0.4f, 0.12f, 0.5f} });
+	CreatePowerUp({ {6.5f,-4.8f,0.0f},{0.0f,0.0f,0.0f},{0.4f, 0.12f, 0.5f} });
+	CreatePowerUp({ {5.0f,-4.8f,0.0f},{0.0f,0.0f,0.0f},{0.4f, 0.12f, 0.5f} });
+	CreatePowerUp({ {3.5f,-4.8f,0.0f},{0.0f,0.0f,0.0f},{0.4f, 0.12f, 0.5f} });
+
+	//Bottem turn on the right
+	CreatePowerUp({ { 3.0f,-28.5f,0.0f},{0.0f,0.0f,0.0f},{0.4f, 0.12f, 0.5f} });
+	CreatePowerUp({ { 3.0f,-27.0f,0.0f},{0.0f,0.0f,0.0f},{0.4f, 0.12f, 0.5f} });
+	CreatePowerUp({ { 3.0f,-25.5f,0.0f},{0.0f,0.0f,0.0f},{0.4f, 0.12f, 0.5f} });
+	CreatePowerUp({ { 3.0f,-24.0f,0.0f},{0.0f,0.0f,0.0f},{0.4f, 0.12f, 0.5f} });
+
+	//Straight on left
+	CreatePowerUp({ { -28.8f,-15.0f,0.0f},{0.0f,0.0f,0.0f},{0.4f, 0.12f, 0.5f} });
+	CreatePowerUp({ { -27.3f,-15.0f,0.0f},{0.0f,0.0f,0.0f},{0.4f, 0.12f, 0.5f} });
+	CreatePowerUp({ { -25.8f,-15.0f,0.0f},{0.0f,0.0f,0.0f},{0.4f, 0.12f, 0.5f} });
+	CreatePowerUp({ { -24.3f,-15.0f,0.0f},{0.0f,0.0f,0.0f},{0.4f, 0.12f, 0.5f} });
+
+	//After hairpin
+	CreatePowerUp({ {-21.5f,-4.0f,0.0f},{0.0f,0.0f,0.0f},{0.4f, 0.12f, 0.5f}  });
+	CreatePowerUp({ {-20.25f,-4.0f,0.0f},{0.0f,0.0f,0.0f},{0.4f, 0.12f, 0.5f} });
+	CreatePowerUp({ {-18.9f,-4.0f,0.0f},{0.0f,0.0f,0.0f},{0.4f, 0.12f, 0.5f}  });
+	CreatePowerUp({ {-17.5f,-4.0f,0.0f},{0.0f,0.0f,0.0f},{0.4f, 0.12f, 0.5f}  });
+
+}
+
+void CLevel1::LoadAllBlocks()
+{
+	//Outer------------------
+	//Starting Lane
+	CreateBlocks(1, "TopOuterLeft", "6Block", { {-2.0f,11.0f,0.0f},{0.0f,0.0f,0.0f},{0.5f,0.5f,0.5f} });
+	CreateBlocks(1, "TopOuterRight", "11Block", { {5.5f,11.0f,0.0f},{0.0f,0.0f,0.0f},{0.5f,0.5f,0.5f} });
+
+	//First turn on the right
+	CreateBlocks(1, "OuterRight1", "9Block", { {13.0f,7.5f,0.0f},{0.0f,0.0f,-55.0f},{0.5f,0.5f,0.5f} });
+	CreateBlocks(1, "OuterRight2", "11Block", { {12.5f,-0.1f,0.0f},{0.0f,0.0f,55.0f},{0.5f,0.5f,0.5f} });
+	//Second turn on the right
+	CreateBlocks(1, "OuterRight3", "5Block", { {9.43f,-6.8f,0.0f},{0.0f,0.0f,90.0f},{0.5f,0.5f,0.5f} });
+	CreateBlocks(1, "OuterRight5", "7Block", { {9.1f,-16.7f,0.0f},{0.0f,0.0f,45.0f},{0.5f,0.5f,0.5f} });
+	CreateBlocks(1, "OuterRight4", "6Block", { {10.40f,-11.9f,0.0f},{0.0f,0.0f,110.0f},{0.5f,0.5f,0.5f} });
+
+	//Third turn on the right 
+	CreateBlocks(1, "OuterRight6", "8Block", { {8.1f,-22.4f,0.0f},{0.0f,0.0f,110.0f},{0.5f,0.5f,0.5f} });
+	CreateBlocks(1, "OuterRight7", "8Block", { {6.5f,-28.0f,0.0f},{0.0f,0.0f,35.0f},{0.5f,0.5f,0.5f} });
+
+	//Bottem turn on the right 
+	CreateBlocks(1, "OuterRight8", "11Block", { {-1.5f,-28.4f,0.0f},{0.0f,0.0f,-20.0f},{0.5f,0.5f,0.5f} });
+
+	//Bottem turn on the middle
+	CreateBlocks(1, "OuterRight9", "5Block", { {-9.0f,-25.68f,0.0f},{0.0f,0.0f,-20.0f},{0.5f,0.5f,0.5f} });
+	CreateBlocks(1, "OuterMiddle10", "10Block", { {-15.7f,-26.5f,0.0f},{0.0f,0.0f,20.0f},{0.5f,0.5f,0.5f} });
+
+	//HairPin
+	CreateBlocks(1, "OuterLeft15", "10Block", { {-26.7f,8.6f,0.0f},{0.0f,0.0f,45.0f},{0.5f,0.5f,0.5f} });
+	CreateBlocks(1, "OuterLeft16", "10Block", { {-19.5f,8.6f,0.0f},{0.0f,0.0f,-45.0f},{0.5f,0.5f,0.5f} });
+	CreateBlocks(1, "OuterLeft16", "1Block", { {-23.1f,12.2f,0.0f},{0.0f,0.0f,-45.0f},{0.5f,0.5f,0.5f} });
+
+	//Bottem turn on the left
+	CreateBlocks(1, "OuterLeft11", "11Block", { {-25.1f,-26.35f,0.0f},{0.0f,0.0f,-20.0f},{0.5f,0.5f,0.5f} });
+	CreateBlocks(1, "OuterLeft12", "11Block", { {-30.1f,-19.45f,0.0f},{0.0f,0.0f,90.0f},{0.5f,0.5f,0.5f} });
+	CreateBlocks(1, "OuterLeft13", "11Block", { {-30.1f,-8.45f,0.0f},{0.0f,0.0f,90.0f},{0.5f,0.5f,0.5f} });
+	CreateBlocks(1, "OuterLeft14", "10Block", { {-30.1f,0.45f,0.0f},{0.0f,0.0f,90.0f},{0.5f,0.5f,0.5f} });
+
+	//Straight after hairpin
+	CreateBlocks(1, "OuterLeft15", "11Block", { {-16.1f,-0.12f,0.0f},{0.0f,0.0f,90.0f},{0.5f,0.5f,0.5f} });
+
+	//turn in middle
+	CreateBlocks(1, "OuterMid16", "6Block", { {-21.0f,-12.0f,0.0f},{0.0f,0.0f,-45.0f},{0.5f,0.5f,0.5f} });
+	CreateBlocks(1, "OuterMid17", "6Block", { {-16.2f,-14.0f,0.0f},{0.0f,0.0f,0.0f},{0.5f,0.5f,0.5f} });
+	CreateBlocks(1, "OuterMid18", "11Block", { {-11.3f,-9.2f,0.0f},{0.0f,0.0f,65.0f},{0.5f,0.5f,0.5f} });
+	CreateBlocks(1, "OuterMid19", "9Block", { {-7.05f,-0.1f,0.0f},{0.0f,0.0f,65.0f},{0.52f,0.5f,0.5f} });
+	CreateBlocks(1, "OuterMid20", "1Block", { {-5.0f,4.0f,0.0f},{0.0f,0.0f,0.0f},{0.5f,0.5f,0.5f} });
+	CreateBlocks(1, "TopEnd21", "4Block", { {-7.0f,11.0f,0.0f},{0.0f,0.0f,0.0f},{0.5f,0.5f,0.5f} });
+
+
+	//Inner-----------------
+	//Starting Lane
+	CreateBlocks(1, "TopInnerLeft", "11Block", { {0.5f,4.0f,0.0f},{0.0f,0.0f,0.0f},{0.5f,0.5f,0.5f} });
+	CreateBlocks(1, "TopInnerRight", "8Block", { {3.5f,4.0f,0.0f},{0.0f,0.0f,0.0f},{0.5f,0.5f,0.5f} });
+
+	//First turn on the right
+	CreateBlocks(1, "InnerRight1", "9Block", { {4.55f,-0.8f,0.0f},{0.0f,0.0f,55.0f},{0.5f,0.5f,0.5f} });
+	CreateBlocks(1, "InnerRight2", "1Block", { {7.0f,3.0f,0.0f},{0.0f,0.0f,0.0f},{0.5f,0.5f,0.5f} });
+	CreateBlocks(1, "InnerRight3", "9Block", { {3.6f,-8.2f,0.0f},{0.0f,0.0f,110.0f},{0.5f,0.5f,0.5f} });
+
+	//Second turn on the right
+	CreateBlocks(1, "InnerRight4", "6Block", { {3.2f,-14.1f,0.0f},{0.0f,0.0f,45.0f},{0.5f,0.5f,0.5f} });
+
+	//Third turn on the right 
+	CreateBlocks(1, "InnerRight4", "7Block", { {2.4f,-19.0f,0.0f},{0.0f,0.0f,110.0f},{0.5f,0.5f,0.5f} });
+	CreateBlocks(1, "InnerRight4", "4Block", { {2.1f,-22.6f,0.0f},{0.0f,0.0f,0.0f},{0.5f,0.5f,0.5f} });
+
+	//Bottem turn on the right 
+	CreateBlocks(1, "InnerRight8", "11Block", { {-4.8f,-20.77f,0.0f},{0.0f,0.0f,-20.0f},{0.5f,0.5f,0.5f} });
+
+	//Bottem turn on the middle 
+	CreateBlocks(1, "InnerRight9", "3Block", { {-11.35f,-18.39f,0.0f},{0.0f,0.0f,-20.0f},{0.5f,0.5f,0.5f} });
+	CreateBlocks(1, "InnerMiddle10", "8Block", { {-16.1f,-19.25f,0.0f},{0.0f,0.0f,20.0f},{0.5f,0.5f,0.5f} });
+
+	//Bottem turn on the left 
+	CreateBlocks(1, "InnerLeft11", "4Block", { {-21.35f,-19.95f,0.0f},{0.0f,0.0f,-20.0f},{0.5f,0.5f,0.5f} });
+	CreateBlocks(1, "InnerLeft12", "11Block", { {-23.0f,-14.2f,0.0f},{0.0f,0.0f,90.0f},{0.5f,0.5f,0.5f} });
+	CreateBlocks(1, "InnerLeft13", "11Block", { {-23.0f,-3.2f,0.0f},{0.0f,0.0f,90.0f},{0.5f,0.5f,0.5f} });
+
+	//turn in middle
+	CreateBlocks(1, "InnerMid14", "11Block", { {-13.8f,-0.5f,0.0f},{0.0f,0.0f,65.0f},{0.5f,0.5f,0.5f} });
+	CreateBlocks(1, "InnerMid14", "8Block", { {-10.1f,7.5f,0.0f},{0.0f,0.0f,65.0f},{0.5f,0.5f,0.5f} });
+
+	//------------
+}
+
+void CLevel1::LoadAllPlayers()
 {
 	if (CSceneMgr::GetInstance()->P1)
 	{
@@ -403,7 +466,7 @@ void CTestScene::LoadAllPlayers()
 	}
 }
 
-void CTestScene::LoadUserInterface()
+void CLevel1::LoadUserInterface()
 {
 	// Player names
 	CTextLabel* Player1UI = new CTextLabel("SpaceFont");
@@ -465,7 +528,7 @@ void CTestScene::LoadUserInterface()
 	Player4Score->SetScale(0.4f);
 	Player4Score->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Player4Score);
-	
+
 	//Player 1 Current Gadget:
 	Player1Gadget = new CTextLabel("SpaceFont");
 	Player1Gadget->SetText("Gadget: ");
@@ -499,20 +562,20 @@ void CTestScene::LoadUserInterface()
 	m_vTextLabel.push_back(Player4Gadget);
 }
 
-void CTestScene::Reset()
+void CLevel1::Reset()
 {
-	if(m_vPlayers.empty())
+	if (m_vPlayers.empty())
 	{
 		LoadAllPlayers();
 		dynamic_cast<CSpaceShip*>(Player1)->iScore = 0;
 		dynamic_cast<CSpaceShip*>(Player2)->iScore = 0;
 		dynamic_cast<CSpaceShip*>(Player3)->iScore = 0;
 		dynamic_cast<CSpaceShip*>(Player4)->iScore = 0;
-		
+
 	}
 }
 
-void CTestScene::CheckWin()
+void CLevel1::CheckWin()
 {
 	int aliveCount = 0;
 	for (auto player : m_vPlayers)
@@ -561,7 +624,7 @@ void CTestScene::CheckWin()
 		// Load to the next
 		CSceneMgr::GetInstance()->LoadScene("Test Scene");
 	}
-	
+
 
 	/// Legacy Code
 	/*
@@ -570,7 +633,7 @@ void CTestScene::CheckWin()
 		IsGameWon = true;
 		Winner = m_vPlayers.at(0);
 		std::cout << Winner->m_name << " Has Won!" << std::endl;
-		
+
 		if (Winner == Player1)
 		{
 			Winner->iScore++;
@@ -596,12 +659,12 @@ void CTestScene::CheckWin()
 			Reset();
 		}
 
-		
+
 		//std::cout << Winner->iScore << std::endl;
 	}*/
 }
 
-void CTestScene::CheckCurrentGadget()
+void CLevel1::CheckCurrentGadget()
 {
 	if (CSceneMgr::GetInstance()->P1)
 	{
@@ -720,7 +783,7 @@ void CTestScene::CheckCurrentGadget()
 
 }
 
-void CTestScene::CreateBlocks(int iBlockID, std::string Name,  std::string SpriteName, Transform Transform,std::string Tag )
+void CLevel1::CreateBlocks(int iBlockID, std::string Name, std::string SpriteName, Transform Transform, std::string Tag)
 {
 	//std::shared_ptr<CBlocks>Blocks = std::make_shared<CBlocks>(iBlockID);
 	CBlocks* Blocks = new CBlocks(iBlockID);
@@ -734,51 +797,5 @@ void CTestScene::CreateBlocks(int iBlockID, std::string Name,  std::string Sprit
 	Blocks->m_transform.scale = Transform.scale;
 	this->m_vGameObj.push_back(std::move(Blocks));
 	Blocks->GetComponent<CSpriteRender>()->SetSprite(SpriteName);
-	Blocks->GetComponent<CRigiBody2D>()->CreateBody(GetWorld(), b2_staticBody);	
-}
-
-void CTestScene::CreatePlayers()
-{
-
-	CGameObject* Player1 = new CSpaceShip(1);
-	Player1->SetWorld(this);
-	Player1->m_name = "Player1";
-	Player1->m_tag = "Player";
-	Player1->m_transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
-	this->m_vGameObj.push_back(Player1);
-	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player1));
-	Player1->GetComponent<CSpriteRender>()->SetSprite("Triangle");
-	Player1->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
-	Player1->GetComponent<CRigiBody2D>()->GetBody()->GetFixtureList()->SetRestitution(0.3f);
-
-	CGameObject* Player2 = new CSpaceShip(2);
-	Player2->SetWorld(this);
-	Player2->m_name = "Player2";
-	Player2->m_tag = "Player";
-	Player2->m_transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
-	this->m_vGameObj.push_back(Player2);
-	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player2));
-	Player2->GetComponent<CSpriteRender>()->SetSprite("Triangle");
-	Player2->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
-	dynamic_cast<CSpaceShip*>(Player2)->bControllerInput = false;
-
-	CGameObject* Player3 = new CSpaceShip(3);
-	Player3->SetWorld(this);
-	Player3->m_name = "Player3";
-	Player3->m_tag = "Player";
-	Player3->m_transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
-	this->m_vGameObj.push_back(Player3);
-	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player3));
-	Player3->GetComponent<CSpriteRender>()->SetSprite("Triangle");
-	Player3->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
-
-	CGameObject* Player4 = new CSpaceShip(4);
-	Player4->SetWorld(this);
-	Player4->m_name = "Player4";
-	Player4->m_tag = "Player";
-	Player4->m_transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
-	this->m_vGameObj.push_back(Player4);
-	this->m_vPlayers.push_back(dynamic_cast<CSpaceShip*>(Player4));
-	Player4->GetComponent<CSpriteRender>()->SetSprite("Triangle");
-	Player4->GetComponent<CRigiBody2D>()->CreateBodyCircle(GetWorld(), b2_dynamicBody, true, true, 1.0f, 1.0f, 1);
+	Blocks->GetComponent<CRigiBody2D>()->CreateBody(GetWorld(), b2_staticBody);
 }

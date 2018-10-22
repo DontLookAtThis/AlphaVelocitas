@@ -76,9 +76,6 @@ void CScene::BeginPlay()
 void CScene::RenderScene()
 {
 	//m_cCubeMap->Render(m_MainCamera);
-
-
-	
 	if (!m_vGameObj.empty())
 	{
 		for (CGameObject* gameObject : m_vGameObj)

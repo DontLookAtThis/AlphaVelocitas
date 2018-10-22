@@ -65,6 +65,16 @@ void CMainMenu::ConfigurateScene()
 	this->m_vGameObj.push_back(Button2);
 	Button2->GetComponent<CSpriteRender>()->SetSprite("Block");
 
+	Button3 = new CBlocks(1);
+	Button3->SetWorld(this);
+	Button3->m_name = "BackGround";
+	Button3->m_tag = "BackGround";
+	Button3->m_transform.position = glm::vec3(0.0f, -6.0f, -1.0f);
+	Button3->m_transform.scale = glm::vec3(4.0f, 1.0f, 1.0f);
+	this->m_vGameObj.push_back(Button3);
+	Button3->GetComponent<CSpriteRender>()->SetSprite("Block");
+
+
 	Play = new CTextLabel("SpaceFont");
 	Play->SetText("Play - A");
 	glm::vec3 pos = glm::vec3(0.0f, 0.0f, -1.0f);

@@ -21,9 +21,12 @@
 #include "Game/GravityWellObj.h"
 #include "Engine/Debug.h"
 #include "Engine/Time.h"
+
 //Includes
 #include <memory>
 #include "Engine/Sound.h"
+
+
 void CTestScene::ConfigurateScene()
 {
 	__super::ConfigurateScene();
@@ -221,10 +224,15 @@ void CTestScene::UpdateScene(float _tick)
 	// Make the camera to the first players position
 	if (CGameObject* firstPlayer = m_raceCourse->GetFirstPlayer())
 	{
-		m_mainCamera->m_cameraPosition.x = 
-			firstPlayer->m_transform.position.x;
-		m_mainCamera->m_cameraPosition.y = 
-			firstPlayer->m_transform.position.y;
+		if (m_mainCamera->m_cameraPosition != firstPlayer->m_transform.position)
+		{
+			glm::vec2 playerPos = { firstPlayer->m_transform.position.x, firstPlayer->m_transform.position.y };
+			glm::vec2 camPos = { m_mainCamera->m_cameraPosition.x, m_mainCamera->m_cameraPosition.y };
+			glm::vec2 direction = playerPos - camPos;
+			glm::vec2 moveAmount = direction * 0.1f;
+
+			m_mainCamera->m_cameraPosition += glm::vec3(moveAmount, 0.0f);
+		}
 	}
 
 	int aliveCount = 0;
@@ -242,7 +250,7 @@ void CTestScene::UpdateScene(float _tick)
 		{
 			if(deathSensor->GetShrinkPercentage() > 0.65f)
 			{ 
-				deathSensor->SetShrinkPercentage(currentShrinkPercent - ((1.0 / 90.0f) * 0.65f * CTime::GetInstance()->GetDeltaTime()));
+				deathSensor->SetShrinkPercentage(currentShrinkPercent - ((1.0f / 90.0f) * 0.65f * CTime::GetInstance()->GetDeltaTime()));
 			}
 			
 		}

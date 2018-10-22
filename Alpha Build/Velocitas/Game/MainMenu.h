@@ -18,8 +18,8 @@ public:
 
 private:
 
-	CGameObject * Button1;
-	CGameObject * Button2;
+	CGameObject* Button1;
+	CGameObject* Button2;
 	CTextLabel* Play;
 	CTextLabel* Quit;
 	CTextLabel* Velocitas;

@@ -70,7 +70,6 @@ void CConnectionMenu::ConfigurateScene()
 	this->m_vGameObj.push_back(Player2);
 	Player2->GetComponent<CSpriteRender>()->SetSprite("Player2");
 	Player2->SetActive(false);
-	
 
 	Player3 = new CBlocks(1);
 	Player3->SetWorld(this);
@@ -124,11 +123,18 @@ void CConnectionMenu::ConfigurateScene()
 	m_vTextLabel.push_back(P4);
 
 	CTextLabel* Play = new CTextLabel("SpaceFont");
-	Play->SetText("Press Y to play");
+	Play->SetText("Press Y to Play");
 	Play->SetPosition({ pos.x + (util::SCR_WIDTH / 2) - 350.0f, pos.y + (util::SCR_HEIGHT / 2) + 300.0f });
 	Play->SetScale(1.0f);
 	Play->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Play);
+
+	CTextLabel* Connect = new CTextLabel("SpaceFont");
+	Connect->SetText("Press A to Connect");
+	Connect->SetPosition({ pos.x + (util::SCR_WIDTH / 2) - 200.0f, pos.y + (util::SCR_HEIGHT / 2) + 150.0f });
+	Connect->SetScale(0.5f);
+	Connect->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
+	m_vTextLabel.push_back(Connect);
 }
 
 void CConnectionMenu::BeginPlay()

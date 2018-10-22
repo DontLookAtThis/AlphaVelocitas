@@ -16,7 +16,7 @@ public:
 protected:
 
 	CGameObject* m_owner;
-	bool m_isActive;
+	bool m_isActive = true;
 
 // Membre Funciton
 public:

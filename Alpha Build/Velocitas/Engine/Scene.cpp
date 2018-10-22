@@ -76,24 +76,24 @@ void CScene::BeginPlay()
 void CScene::RenderScene()
 {
 	//m_cCubeMap->Render(m_MainCamera);
+
 	if (!m_vGameObj.empty())
 	{
 		for (CGameObject* gameObject : m_vGameObj)
 		{
-			// GameObject.render()
 			
 			for (CComponent* comp : gameObject->m_components)
 			{
-				if (CSpriteRender* spriteRenderer
-					= dynamic_cast<CSpriteRender*>(comp))
+				if (comp->IsActive())
 				{
-					spriteRenderer->Render(m_mainCamera);
-					//continue;
+					if (auto* spriteRenderer
+						= dynamic_cast<CSpriteRender*>(comp))
+					{
+						spriteRenderer->Render(m_mainCamera);
+						//continue;
+					}
 				}
 			}
-
-
-			
 		}
 	}
 

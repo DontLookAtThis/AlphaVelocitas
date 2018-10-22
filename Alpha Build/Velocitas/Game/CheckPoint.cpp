@@ -29,6 +29,9 @@ void CCheckPoint::BeginPlay()
 	b2World* world = m_Scene->GetWorld();
 	m_rigidBody->CreateBody(world, b2_staticBody, false, true);
 	m_rigidBody->GetBody()->GetFixtureList()->SetSensor(true);
+
+	// Set the sprite to invisible
+	m_spriteRender->SetActive(false);
 }
 
 void CCheckPoint::Update(float _tick)

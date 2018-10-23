@@ -28,12 +28,16 @@ CTextLabel::~CTextLabel()
 
 void CTextLabel::RenderTextLabel()
 {
-	m_textObj->SetText(m_text);
-	m_textObj->SetPosition(m_position);
-	m_textObj->SetScale(m_scale);
-	m_textObj->SetColor(m_color);
+	if (this->ControlsActive == false)
+	{
+		m_textObj->SetText(m_text);
+		m_textObj->SetPosition(m_position);
+		m_textObj->SetScale(m_scale);
+		m_textObj->SetColor(m_color);
 
-	m_textObj->Render();
+		m_textObj->Render();
+	}
+	
 }
 
 void CTextLabel::SetText(std::string _text)

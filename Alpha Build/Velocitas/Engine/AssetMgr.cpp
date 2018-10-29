@@ -75,6 +75,8 @@ void CAssetMgr::InitializeAssets()
 	CreateSprite("Box", "Resources/Sprites/Box.png");
 	//Font
 	CreateFont("SpaceFont", "Resources/Fonts/Space.ttf");
+	CreateFont("Taurus", "Resources/Fonts/taurus.otf"); 
+	CreateFont("Taurus-Bold", "Resources/Fonts/taurus-bold.otf");
 }
 
 

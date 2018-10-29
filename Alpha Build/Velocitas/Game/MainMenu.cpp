@@ -30,7 +30,7 @@ void CMainMenu::ConfigurateScene()
 
 	/** Configuration */
 
-	this->m_sceneName = "Test Scene";
+	this->m_sceneName = "MainMenu";
 
 	/** Create Camera Object */
 
@@ -75,36 +75,36 @@ void CMainMenu::ConfigurateScene()
 	Button3->GetComponent<CSpriteRender>()->SetSprite("Block");
 
 
-	Play = new CTextLabel("SpaceFont");
+	Play = new CTextLabel("Taurus");
 	Play->SetText("Play - X");
 	glm::vec3 pos = glm::vec3(0.0f, 0.0f, -1.0f);
 	pos *= util::PIXELUNIT;
-	Play->SetPosition({ pos.x + (util::SCR_WIDTH/2) - 130.0f, pos.y + (util::SCR_HEIGHT /2) - 25.0f});
-	Play->SetScale(0.7f);
+	Play->SetPosition({ pos.x + (util::SCR_WIDTH/2) - 145.0f, pos.y + (util::SCR_HEIGHT /2) - 15.0f});
+	Play->SetScale(0.9f);
 	Play->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Play);
 	Play->ControlsActive = false;
 
-	Quit = new CTextLabel("SpaceFont");
+	Quit = new CTextLabel("Taurus");
 	Quit->SetText("Quit - Y");
-	Quit->SetPosition({ pos.x + (util::SCR_WIDTH / 2) - 120.0f, pos.y + (util::SCR_HEIGHT / 2) - 145.0f });
-	Quit->SetScale(0.7f);
+	Quit->SetPosition({ pos.x + (util::SCR_WIDTH / 2) - 142.5f, pos.y + (util::SCR_HEIGHT / 2) - 135.0f });
+	Quit->SetScale(0.9f);
 	Quit->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Quit);
 	Quit->ControlsActive = false;
 
-	Velocitas = new CTextLabel("SpaceFont");
+	Velocitas = new CTextLabel("Taurus-Bold");
 	Velocitas->SetText("Velocitas");
-	Velocitas->SetPosition({ pos.x + (util::SCR_WIDTH / 2) - 450.0f, pos.y + (util::SCR_HEIGHT / 2) + 150.0f });
+	Velocitas->SetPosition({ pos.x + (util::SCR_WIDTH / 2) - 350.0f, pos.y + (util::SCR_HEIGHT / 2) + 200.0f });
 	Velocitas->SetScale(2.0f);
 	Velocitas->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Velocitas);
 	Velocitas->ControlsActive = false;
 
-	Controls = new CTextLabel("SpaceFont");
+	Controls = new CTextLabel("Taurus");
 	Controls->SetText("Controls - B");
-	Controls->SetPosition({ pos.x + (util::SCR_WIDTH / 2) - 152.5f, pos.y + (util::SCR_HEIGHT / 2) - 255.0f });
-	Controls->SetScale(0.5f);
+	Controls->SetPosition({ pos.x + (util::SCR_WIDTH / 2) - 142.5f, pos.y + (util::SCR_HEIGHT / 2) - 250.0f });
+	Controls->SetScale(0.6f);
 	Controls->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Controls);
 	Controls->ControlsActive = false;

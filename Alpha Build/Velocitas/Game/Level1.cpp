@@ -31,7 +31,7 @@ void CLevel1::ConfigurateScene()
 
 	/** Configuration */
 
-	this->m_sceneName = "Test Scene";
+	this->m_sceneName = "Level1";
 
 	/** Create Camera Object */
 
@@ -466,31 +466,31 @@ void CLevel1::LoadAllPlayers()
 void CLevel1::LoadUserInterface()
 {
 	// Player names
-	CTextLabel* Player1UI = new CTextLabel("SpaceFont");
+	CTextLabel* Player1UI = new CTextLabel("Taurus");
 	Player1UI->SetText("Player 1");
 	Player1UI->SetPosition(glm::vec2(0, util::SCR_HEIGHT - 35.0f));
-	Player1UI->SetScale(0.5f);
+	Player1UI->SetScale(0.7f);
 	Player1UI->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Player1UI);
 
-	CTextLabel* Player2UI = new CTextLabel("SpaceFont");
+	CTextLabel* Player2UI = new CTextLabel("Taurus");
 	Player2UI->SetText("Player 2");
 	Player2UI->SetPosition(glm::vec2(util::SCR_WIDTH - 300.0f, util::SCR_HEIGHT - 35.0f));
-	Player2UI->SetScale(0.5f);
+	Player2UI->SetScale(0.7f);
 	Player2UI->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Player2UI);
 
-	CTextLabel* Player3UI = new CTextLabel("SpaceFont");
+	CTextLabel* Player3UI = new CTextLabel("Taurus");
 	Player3UI->SetText("Player 3");
 	Player3UI->SetPosition(glm::vec2(0, 60.0f));
-	Player3UI->SetScale(0.5f);
+	Player3UI->SetScale(0.7f);
 	Player3UI->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Player3UI);
 
-	CTextLabel* Player4UI = new CTextLabel("SpaceFont");
+	CTextLabel* Player4UI = new CTextLabel("Taurus");
 	Player4UI->SetText("Player 4");
 	Player4UI->SetPosition(glm::vec2(util::SCR_WIDTH - 300.0f, 60.0f));
-	Player4UI->SetScale(0.5f);
+	Player4UI->SetScale(0.7f);
 	Player4UI->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Player4UI);
 

@@ -43,7 +43,7 @@ void CSceneMgr::InitializeScenes()
 	
 	if (!m_scenes.empty())
 	{
-		LoadScene("MainMenu");
+		LoadScene("Level1");
 	}
 	else
 	{

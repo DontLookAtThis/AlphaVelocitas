@@ -29,7 +29,7 @@ void CConnectionMenu::ConfigurateScene()
 
 	/** Configuration */
 
-	this->m_sceneName = "Test Scene";
+	this->m_sceneName = "ConnectionMenu";
 
 	/** Create Camera Object */
 
@@ -92,47 +92,47 @@ void CConnectionMenu::ConfigurateScene()
 	Player4->SetActive(false);
 
 	//TEXT
-	CTextLabel* P1 = new CTextLabel("SpaceFont");
+	CTextLabel* P1 = new CTextLabel("Taurus-Bold");
 	P1->SetText("P1");
 	glm::vec3 pos = glm::vec3(0.0f, 0.0f, -1.0f);
 	pos *= util::PIXELUNIT;
-	P1->SetPosition({ pos.x + (util::SCR_WIDTH / 2) - 520.0f, pos.y + (util::SCR_HEIGHT / 2) - 30.0f });
-	P1->SetScale(1.0f);
+	P1->SetPosition({ pos.x + (util::SCR_WIDTH / 2) - 540.0f, pos.y + (util::SCR_HEIGHT / 2) - 30.0f });
+	P1->SetScale(1.5f);
 	P1->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(P1);
 
-	CTextLabel* P2 = new CTextLabel("SpaceFont");
+	CTextLabel* P2 = new CTextLabel("Taurus-Bold");
 	P2->SetText("P2");
-	P2->SetPosition({ pos.x + (util::SCR_WIDTH / 2) - 200.0f, pos.y + (util::SCR_HEIGHT / 2) - 30.0f });
-	P2->SetScale(1.0f);
+	P2->SetPosition({ pos.x + (util::SCR_WIDTH / 2) - 220.0f, pos.y + (util::SCR_HEIGHT / 2) - 30.0f });
+	P2->SetScale(1.5f);
 	P2->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(P2);
 
-	CTextLabel* P3 = new CTextLabel("SpaceFont");
+	CTextLabel* P3 = new CTextLabel("Taurus-Bold");
 	P3->SetText("P3");
-	P3->SetPosition({ pos.x + (util::SCR_WIDTH / 2) + 120.0f, pos.y + (util::SCR_HEIGHT / 2) - 30.0f });
-	P3->SetScale(1.0f);
+	P3->SetPosition({ pos.x + (util::SCR_WIDTH / 2) + 140.0f, pos.y + (util::SCR_HEIGHT / 2) - 30.0f });
+	P3->SetScale(1.5f);
 	P3->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(P3);
 
-	CTextLabel* P4 = new CTextLabel("SpaceFont");
+	CTextLabel* P4 = new CTextLabel("Taurus-Bold");
 	P4->SetText("P4");
-	P4->SetPosition({ pos.x + (util::SCR_WIDTH / 2) + 420.0f, pos.y + (util::SCR_HEIGHT / 2) - 30.0f });
-	P4->SetScale(1.0f);
+	P4->SetPosition({ pos.x + (util::SCR_WIDTH / 2) + 440.0f, pos.y + (util::SCR_HEIGHT / 2) - 30.0f });
+	P4->SetScale(1.5f);
 	P4->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(P4);
 
-	CTextLabel* Play = new CTextLabel("SpaceFont");
+	CTextLabel* Play = new CTextLabel("Taurus-Bold");
 	Play->SetText("Press Y to Play");
-	Play->SetPosition({ pos.x + (util::SCR_WIDTH / 2) - 350.0f, pos.y + (util::SCR_HEIGHT / 2) + 300.0f });
-	Play->SetScale(1.0f);
+	Play->SetPosition({ pos.x + (util::SCR_WIDTH / 2) - 450.0f, pos.y + (util::SCR_HEIGHT / 2) + 300.0f });
+	Play->SetScale(1.5f);
 	Play->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Play);
 
-	CTextLabel* Connect = new CTextLabel("SpaceFont");
+	CTextLabel* Connect = new CTextLabel("Taurus-Bold");
 	Connect->SetText("Press A to Connect");
-	Connect->SetPosition({ pos.x + (util::SCR_WIDTH / 2) - 200.0f, pos.y + (util::SCR_HEIGHT / 2) + 150.0f });
-	Connect->SetScale(0.5f);
+	Connect->SetPosition({ pos.x + (util::SCR_WIDTH / 2) - 300.0f, pos.y + (util::SCR_HEIGHT / 2) + 150.0f });
+	Connect->SetScale(0.8f);
 	Connect->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Connect);
 }

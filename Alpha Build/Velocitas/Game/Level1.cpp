@@ -475,7 +475,7 @@ void CLevel1::LoadUserInterface()
 
 	CTextLabel* Player2UI = new CTextLabel("Taurus");
 	Player2UI->SetText("Player 2");
-	Player2UI->SetPosition(glm::vec2(util::SCR_WIDTH - 300.0f, util::SCR_HEIGHT - 35.0f));
+	Player2UI->SetPosition(glm::vec2(util::SCR_WIDTH - 400.0f, util::SCR_HEIGHT - 35.0f));
 	Player2UI->SetScale(0.7f);
 	Player2UI->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Player2UI);
@@ -489,72 +489,72 @@ void CLevel1::LoadUserInterface()
 
 	CTextLabel* Player4UI = new CTextLabel("Taurus");
 	Player4UI->SetText("Player 4");
-	Player4UI->SetPosition(glm::vec2(util::SCR_WIDTH - 300.0f, 60.0f));
+	Player4UI->SetPosition(glm::vec2(util::SCR_WIDTH - 400.0f, 60.0f));
 	Player4UI->SetScale(0.7f);
 	Player4UI->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Player4UI);
 
 	//Player 1 score:
-	Player1Score = new CTextLabel("SpaceFont");
+	Player1Score = new CTextLabel("Taurus");
 	Player1Score->SetText("Score: " + ToString(CSceneMgr::GetInstance()->m_playerOneScore));
 	Player1Score->SetPosition(glm::vec2(0, util::SCR_HEIGHT - 65.0f));
-	Player1Score->SetScale(0.4f);
+	Player1Score->SetScale(0.6f);
 	Player1Score->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Player1Score);
 
 	//Player 2 Score:
-	Player2Score = new CTextLabel("SpaceFont");
+	Player2Score = new CTextLabel("Taurus");
 	Player2Score->SetText("Score: " + ToString(CSceneMgr::GetInstance()->m_playerTwoScore));
-	Player2Score->SetPosition(glm::vec2(util::SCR_WIDTH - 300.0f, util::SCR_HEIGHT - 65.0f));
-	Player2Score->SetScale(0.4f);
+	Player2Score->SetPosition(glm::vec2(util::SCR_WIDTH - 400.0f, util::SCR_HEIGHT - 65.0f));
+	Player2Score->SetScale(0.6f);
 	Player2Score->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Player2Score);
 
 	//Player 3 Score:
-	Player3Score = new CTextLabel("SpaceFont");
+	Player3Score = new CTextLabel("Taurus");
 	Player3Score->SetText("Score: " + ToString(CSceneMgr::GetInstance()->m_playerThreeScore));
 	Player3Score->SetPosition(glm::vec2(0.0f, 30.0f));
-	Player3Score->SetScale(0.4f);
+	Player3Score->SetScale(0.6f);
 	Player3Score->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Player3Score);
 
 	//Player 4 Score:
-	Player4Score = new CTextLabel("SpaceFont");
+	Player4Score = new CTextLabel("Taurus");
 	Player4Score->SetText("Score: " + ToString(CSceneMgr::GetInstance()->m_playerFourScore));
-	Player4Score->SetPosition(glm::vec2(util::SCR_WIDTH - 300.0f, 30.0f));
-	Player4Score->SetScale(0.4f);
+	Player4Score->SetPosition(glm::vec2(util::SCR_WIDTH - 400.0f, 30.0f));
+	Player4Score->SetScale(0.6f);
 	Player4Score->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Player4Score);
 
 	//Player 1 Current Gadget:
-	Player1Gadget = new CTextLabel("SpaceFont");
+	Player1Gadget = new CTextLabel("Taurus-Bold");
 	Player1Gadget->SetText("Gadget: ");
 	Player1Gadget->SetPosition(glm::vec2(0, util::SCR_HEIGHT - 90.0f));
-	Player1Gadget->SetScale(0.35f);
+	Player1Gadget->SetScale(0.5f);
 	Player1Gadget->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Player1Gadget);
 
 	//Player 2 Current Gadget:
-	Player2Gadget = new CTextLabel("SpaceFont");
+	Player2Gadget = new CTextLabel("Taurus-Bold");
 	Player2Gadget->SetText("Gadget: ");
-	Player2Gadget->SetPosition(glm::vec2(util::SCR_WIDTH - 300.0f, util::SCR_HEIGHT - 90.0f));
-	Player2Gadget->SetScale(0.35f);
+	Player2Gadget->SetPosition(glm::vec2(util::SCR_WIDTH - 400.0f, util::SCR_HEIGHT - 90.0f));
+	Player2Gadget->SetScale(0.5f);
 	Player2Gadget->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Player2Gadget);
 
 	//Player 3 Current Gadget:
-	Player3Gadget = new CTextLabel("SpaceFont");
+	Player3Gadget = new CTextLabel("Taurus-Bold");
 	Player3Gadget->SetText("Gadget: ");
-	Player3Gadget->SetPosition(glm::vec2(0.0f, 5.0f));
-	Player3Gadget->SetScale(0.35f);
+	Player3Gadget->SetPosition(glm::vec2(0.0f, 6.0f));
+	Player3Gadget->SetScale(0.5f);
 	Player3Gadget->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Player3Gadget);
 
 	//Player 4 Current Gadget:
-	Player4Gadget = new CTextLabel("SpaceFont");
+	Player4Gadget = new CTextLabel("Taurus-Bold");
 	Player4Gadget->SetText("Gadget: ");
-	Player4Gadget->SetPosition(glm::vec2(util::SCR_WIDTH - 300.0f, 5.0f));
-	Player4Gadget->SetScale(0.35f);
+	Player4Gadget->SetPosition(glm::vec2(util::SCR_WIDTH - 400.0f, 6.0f));
+	Player4Gadget->SetScale(0.5f);
 	Player4Gadget->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(Player4Gadget);
 }
@@ -669,18 +669,22 @@ void CLevel1::CheckCurrentGadget()
 		{
 			if (dynamic_cast<CSpaceShip*>(Player1)->CurrentItem == ItemState::ITEM_GRAPPLINGHOOK)
 			{
-				Gadget = "Hook";
+				Player1Gadget->SetColor(glm::vec3(0.0f, 1.0f, 1.0f));
+				Gadget = "Grapple Hook";
 			}
 			else if (dynamic_cast<CSpaceShip*>(Player1)->CurrentItem == ItemState::ITEM_GRAVITYWELL)
 			{
-				Gadget = "Grav Well";
+				Player1Gadget->SetColor(glm::vec3(1.0f, 1.0f, 1.0f)); 
+				Gadget = "Gravity Well";
 			}
 			else if (dynamic_cast<CSpaceShip*>(Player1)->CurrentItem == ItemState::ITEM_RAILGUN)
 			{
+				Player1Gadget->SetColor(glm::vec3(1.0f, 0.0f, 0.0f));
 				Gadget = "Rail Gun";
 			}
 			else if (dynamic_cast<CSpaceShip*>(Player1)->CurrentItem == ItemState::ITEM_DROPBOX)
 			{
+				Player1Gadget->SetColor(glm::vec3(1.0f, 1.0f, 0.0f));
 				Gadget = "Drop Box";
 			}
 
@@ -688,6 +692,7 @@ void CLevel1::CheckCurrentGadget()
 		}
 		else
 		{
+			Player1Gadget->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 			Player1Gadget->SetText("Gadget: ");
 		}
 	}
@@ -697,18 +702,22 @@ void CLevel1::CheckCurrentGadget()
 		{
 			if (dynamic_cast<CSpaceShip*>(Player2)->CurrentItem == ItemState::ITEM_GRAPPLINGHOOK)
 			{
-				Gadget = "Hook";
+				Player2Gadget->SetColor(glm::vec3(0.0f, 1.0f, 1.0f));
+				Gadget = "Grapple Hook";
 			}
 			else if (dynamic_cast<CSpaceShip*>(Player2)->CurrentItem == ItemState::ITEM_GRAVITYWELL)
 			{
-				Gadget = "Grav Well";
+				Player2Gadget->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
+				Gadget = "Gravity Well";
 			}
 			else if (dynamic_cast<CSpaceShip*>(Player2)->CurrentItem == ItemState::ITEM_RAILGUN)
 			{
+				Player2Gadget->SetColor(glm::vec3(1.0f, 0.0f, 0.0f));
 				Gadget = "Rail Gun";
 			}
 			else if (dynamic_cast<CSpaceShip*>(Player2)->CurrentItem == ItemState::ITEM_DROPBOX)
 			{
+				Player2Gadget->SetColor(glm::vec3(1.0f, 1.0f, 0.0f));
 				Gadget = "Drop Box";
 			}
 
@@ -716,6 +725,7 @@ void CLevel1::CheckCurrentGadget()
 		}
 		else
 		{
+			Player2Gadget->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 			Player2Gadget->SetText("Gadget: ");
 		}
 
@@ -726,18 +736,22 @@ void CLevel1::CheckCurrentGadget()
 		{
 			if (dynamic_cast<CSpaceShip*>(Player3)->CurrentItem == ItemState::ITEM_GRAPPLINGHOOK)
 			{
-				Gadget = "Hook";
+				Player3Gadget->SetColor(glm::vec3(0.0f, 1.0f, 1.0f));
+				Gadget = "Grapple Hook";
 			}
 			else if (dynamic_cast<CSpaceShip*>(Player3)->CurrentItem == ItemState::ITEM_GRAVITYWELL)
 			{
-				Gadget = "Grav Well";
+				Player3Gadget->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
+				Gadget = "Gravity Well";
 			}
 			else if (dynamic_cast<CSpaceShip*>(Player3)->CurrentItem == ItemState::ITEM_RAILGUN)
 			{
+				Player3Gadget->SetColor(glm::vec3(1.0f, 0.0f, 0.0f));
 				Gadget = "Rail Gun";
 			}
 			else if (dynamic_cast<CSpaceShip*>(Player3)->CurrentItem == ItemState::ITEM_DROPBOX)
 			{
+				Player3Gadget->SetColor(glm::vec3(1.0f, 1.0f, 0.0f));
 				Gadget = "Drop Box";
 			}
 
@@ -745,6 +759,7 @@ void CLevel1::CheckCurrentGadget()
 		}
 		else
 		{
+			Player3Gadget->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 			Player3Gadget->SetText("Gadget: ");
 		}
 
@@ -755,24 +770,29 @@ void CLevel1::CheckCurrentGadget()
 		{
 			if (dynamic_cast<CSpaceShip*>(Player4)->CurrentItem == ItemState::ITEM_GRAPPLINGHOOK)
 			{
-				Gadget = "Hook";
+				Player4Gadget->SetColor(glm::vec3(0.0f, 1.0f, 1.0f));
+				Gadget = "Grapple Hook";
 			}
 			else if (dynamic_cast<CSpaceShip*>(Player4)->CurrentItem == ItemState::ITEM_GRAVITYWELL)
 			{
-				Gadget = "Grav Well";
+				Player4Gadget->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
+				Gadget = "Gravity Well";
 			}
 			else if (dynamic_cast<CSpaceShip*>(Player4)->CurrentItem == ItemState::ITEM_RAILGUN)
 			{
+				Player4Gadget->SetColor(glm::vec3(1.0f, 0.0f, 0.0f));
 				Gadget = "Rail Gun";
 			}
 			else if (dynamic_cast<CSpaceShip*>(Player4)->CurrentItem == ItemState::ITEM_DROPBOX)
 			{
+				Player4Gadget->SetColor(glm::vec3(1.0f, 1.0f, 0.0f));
 				Gadget = "Drop Box";
 			}
 			Player4Gadget->SetText("Gadget: " + Gadget);
 		}
 		else
 		{
+			Player4Gadget->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 			Player4Gadget->SetText("Gadget: ");
 		}
 	}

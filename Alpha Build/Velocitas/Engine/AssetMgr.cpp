@@ -58,6 +58,8 @@ void CAssetMgr::InitializeAssets()
 
 	CreateSprite("Gate", "Resources/Sprites/gate.png");
 	CreateSprite("Collectable", "Resources/Sprites/collectable.png");
+	CreateSprite("RailGun", "Resources/Sprites/RailGun.png");
+	CreateSprite("GrappleHook", "Resources/Sprites/GrappleHook.png");
 	CreateSprite("Background", "Resources/Sprites/space.jpg");
 	//Block Sprite
 	CreateSprite("1Block", "Resources/Sprites/Block.png");

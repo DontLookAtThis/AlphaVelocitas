@@ -11,7 +11,7 @@ CGrapplingHook::CGrapplingHook(b2Vec2 _Direction, CGameObject* User)
 	m_spriteRenderer = CreateComponent<CSpriteRender>();
 	m_spriteRope = CreateComponent<CSpriteRender>();
 	m_spriteRenderer->SetSprite("Block");
-	m_spriteRope->SetSprite("WoodBlock");
+	m_spriteRope->SetSprite("GrappleHook");
 	m_rigidBody = CreateComponent<CRigiBody2D>();
 	m_v2Direction = _Direction;
 	m_user = User;

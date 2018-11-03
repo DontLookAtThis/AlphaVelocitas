@@ -14,7 +14,7 @@ CRailgunShot::CRailgunShot(b2Vec2 _Direction, CGameObject* User)
 	m_transform = User->m_transform;
 	this->m_transform.scale = glm::vec3(0.2f, 0.2f, 0.2f);
 	m_spriteRenderer = CreateComponent<CSpriteRender>();
-	m_spriteRenderer->SetSprite("Block");
+	m_spriteRenderer->SetSprite("RailGun");
 	m_rigidBody = CreateComponent<CRigiBody2D>();
 	m_v2Direction = _Direction;
 	m_user = User;

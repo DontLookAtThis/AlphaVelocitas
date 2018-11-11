@@ -18,7 +18,7 @@ CDropBox::CDropBox( CGameObject* User, glm::vec3 _pos)
 	m_spriteRenderer->SetSprite("Box");
 	m_RigidBody = CreateComponent<CRigiBody2D>();
 	m_User = User;
-	m_RigidBody->CreateBody(User->m_Scene->GetWorld(), b2_dynamicBody, true, true, 10.0f, 0.0f);
+	m_RigidBody->CreateBody(User->m_Scene->GetWorld(), b2_dynamicBody, true, true, 1.0f, 0.0f);
 	m_tag = "DropBox";
 	bHit = false;
 }

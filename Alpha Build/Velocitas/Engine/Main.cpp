@@ -23,6 +23,9 @@ void Update();
 
 int main(int argc, char **argv)
 {
+	// Hide the console app for the release
+	FreeConsole();
+
 	// Set up random
 	srand((unsigned int)time(NULL));
 
@@ -89,7 +92,7 @@ void InititializeProgram()
 void Render()
 {
 	// Set Clear Screen Color
-	glClearColor(0.0, 1.0, 0.0, 1.0); // Make the background color GREEN
+	glClearColor(0.0, 0.0, 0.0, 0.0); // Make the background color GREEN
 	p_SceneMgr->RenderCurrentScene();
 
 	//g_FPSLabel->RenderTextLabel();

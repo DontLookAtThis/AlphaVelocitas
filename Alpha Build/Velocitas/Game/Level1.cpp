@@ -196,7 +196,7 @@ void CLevel1::UpdateScene(float _tick)
 			aliveCount++;
 		}
 	}
-	if (aliveCount != 4)
+	if (aliveCount <= 2)
 	{
 		float currentShrinkPercent = m_deathSensors[0]->GetShrinkPercentage();
 		for (auto deathSensor : m_deathSensors)

@@ -38,12 +38,12 @@ void CGameOver::ConfigurateScene()
 	PressButtonToGoBack->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_vTextLabel.push_back(PressButtonToGoBack);
 
-	/*CTextLabel* WinnerText = new CTextLabel("SpaceFont");
-	WinnerText->SetText("Congradulations" + Winner->m_name);
-	WinnerText->SetPosition(glm::vec2((util::SCR_WIDTH / 4) + 180.0f, (util::SCR_HEIGHT / 2) - 50.0f));
-	WinnerText->SetScale(1.0f);
-	WinnerText->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
-	m_vTextLabel.push_back(WinnerText);*/
+	//CTextLabel* WinnerText = new CTextLabel("SpaceFont");
+	//WinnerText->SetText("Congradulations" + FinalWinner->Winner->m_name);
+	//WinnerText->SetPosition(glm::vec2((util::SCR_WIDTH / 4) + 180.0f, (util::SCR_HEIGHT / 2) - 50.0f));
+	//WinnerText->SetScale(1.0f);
+	//WinnerText->SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
+	//m_vTextLabel.push_back(WinnerText);
 }
 
 void CGameOver::BeginPlay()

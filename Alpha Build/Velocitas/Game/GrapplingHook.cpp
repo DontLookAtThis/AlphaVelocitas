@@ -7,10 +7,10 @@
 CGrapplingHook::CGrapplingHook(b2Vec2 _Direction, CGameObject* User)
 {
 	m_transform = User->m_transform;
-	this->m_transform.scale = glm::vec3(0.1f, 0.1f, 0.1f);
+	this->m_transform.scale = glm::vec3(0.5f, 0.5f, 0.5f);
 	m_spriteRenderer = CreateComponent<CSpriteRender>();
 	m_spriteRope = CreateComponent<CSpriteRender>();
-	m_spriteRenderer->SetSprite("Block");
+	m_spriteRenderer->SetSprite("GrappleHook");
 	m_spriteRope->SetSprite("GrappleHook");
 	m_rigidBody = CreateComponent<CRigiBody2D>();
 	m_v2Direction = _Direction;
@@ -29,7 +29,7 @@ CGrapplingHook::~CGrapplingHook()
 void CGrapplingHook::BeginPlay()
 {
 	__super::BeginPlay();
-	m_v2Direction *= 2.0f;
+	m_v2Direction *= 8.0f;
 	Get2DBody()->GetBody()->ApplyLinearImpulseToCenter(m_v2Direction, true);
 
 }

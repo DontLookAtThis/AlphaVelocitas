@@ -34,7 +34,7 @@ void CSceneMgr::InitializeScenes()
 {
 	/** Create scenes that is going to build in the game */
 	CreateNewScene("MainMenu", new CMainMenu());
-	CreateNewScene("Test Scene", new CTestScene());
+	//CreateNewScene("Test Scene", new CTestScene());
 	CreateNewScene("Level1", new CLevel1());
 	CreateNewScene("GameOver Scene", new CGameOver());
 	CreateNewScene("ConnectionScene", new CConnectionMenu());
@@ -43,7 +43,7 @@ void CSceneMgr::InitializeScenes()
 	
 	if (!m_scenes.empty())
 	{
-		LoadScene("Level1");
+		LoadScene("MainMenu");
 	}
 	else
 	{
@@ -101,6 +101,7 @@ void CSceneMgr::ResetScore()
 	m_playerTwoScore = 0;
 	m_playerThreeScore = 0;
 	m_playerFourScore = 0;
+	m_finalWinner = "";
 }
 
 CSceneMgr::CSceneMgr()

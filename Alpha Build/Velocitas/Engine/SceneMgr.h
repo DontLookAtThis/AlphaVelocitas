@@ -1,11 +1,11 @@
-#ifndef _SCENEMGR_H
-#define _SCENEMGR_H
+#pragma once
 
 // Global Include
 #include "Utility.h"
 
 // Forawrd Declare
 class CScene;
+class CSpaceShip;
 
 class CSceneMgr
 {
@@ -58,12 +58,10 @@ public:
 	int m_playerThreeScore = 0;
 	int m_playerFourScore = 0;
 
-
-
 	bool P1;
 	bool P2;
 	bool P3;
 	bool P4;
-};
 
-#endif // !_SCENEMGR_H
+	std::string m_finalWinner;
+};

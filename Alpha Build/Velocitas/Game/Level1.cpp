@@ -613,6 +613,7 @@ void CLevel1::CheckWin()
 
 		if (Winner->iScore >= 3)
 		{
+			CSceneMgr::GetInstance()->m_finalWinner = Winner->m_name;
 			CSceneMgr::GetInstance()->LoadScene("GameOver Scene");
 			return;
 		}
